@@ -1,6 +1,6 @@
 **Website TIMUS (timusco.com)**
 
-Trang tĩnh một trang, song ngữ Việt Anh (nút VI / EN, hoặc thêm `?lang=en` vào đường dẫn). Không có bảng giá, chỉ "Liên hệ báo giá". Phụ trách: chat TIMUS - WEBSITE CÔNG TY. Không sửa repo huytim.com từ đây.
+Trang tĩnh một trang, song ngữ Việt Anh (nút VI / EN, hoặc thêm `?lang=en` vào đường dẫn). Không có bảng giá, chỉ "Liên hệ báo giá".
 
 **File**
 - `index.html`: toàn bộ nội dung, mỗi câu có hai bản `data-l="vi"` và `data-l="en"`.
@@ -31,7 +31,3 @@ Chỉ thêm các bản ghi dưới đây. Không xoá hay sửa bản ghi MX, TX
 | www | CNAME | dinhhuy1405.github.io |
 
 Nếu Squarespace đang có sẵn bản ghi A hoặc CNAME `www` mặc định (trang đỗ tên miền của Squarespace) thì xoá các bản ghi web đó trước, giữ nguyên bản ghi email. DNS thường chạy sau vài phút đến vài giờ.
-
-**Còn chờ Huy**
-- Đã tạo info@timusco.com chưa; nếu có thì đổi email trên trang.
-- Muốn link ngược từ huytim.com sang timusco.com thì giao chat DEV - LANDING PAGE.
