@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TIMUS CO., LTD | Vận hành thương mại điện tử cho thương hiệu Việt</title>
-<meta name="description" content="TIMUS là công ty thương mại điện tử tại Đà Nẵng: nghiên cứu và phát triển sản phẩm, tìm nhà máy, mở và vận hành gian hàng tại Việt Nam và Mỹ (TikTok Shop, Shopee, Lazada, Shopify, Amazon).">
+<meta name="description" content="TIMUS là công ty thương mại điện tử tại Đà Nẵng: nghiên cứu và phát triển sản phẩm, tìm nhà máy, bán hàng trên mọi nền tảng thương mại điện tử tại Việt Nam và Mỹ, dashboard báo cáo, website và hệ thống quản lý kết nối các sàn.">
 <link rel="canonical" href="https://timusco.com/">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -17,7 +17,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=3">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"TIMUS CO., LTD","url":"https://timusco.com/","logo":"https://timusco.com/assets/apple-touch-icon.png","email":"huy@timusco.com","address":{"@type":"PostalAddress","addressLocality":"Da Nang","addressCountry":"VN"},"description":"E-commerce operations, product research, sourcing and technology for Vietnamese brands in Vietnam and the United States."}
+</script>
 <script>
   (function () {
     var q = new URLSearchParams(location.search).get('lang');
@@ -34,19 +37,22 @@
 <header class="top">
   <div class="wrap top-in">
     <a href="#" class="brand" aria-label="TIMUS">
-      <img src="assets/timus-mark.png" alt="" width="44" height="27">
+      <img src="assets/timus-mark.webp" alt="" width="44" height="27">
       <span>TIMUS</span>
     </a>
-    <nav class="nav" aria-label="Menu">
+    <nav class="nav" id="nav" aria-label="Menu">
       <a href="#dich-vu"><span data-l="vi">Dịch vụ</span><span data-l="en">Services</span></a>
       <a href="#cach-lam"><span data-l="vi">Cách làm việc</span><span data-l="en">How we work</span></a>
       <a href="#ve-timus"><span data-l="vi">Về TIMUS</span><span data-l="en">About</span></a>
+      <a href="#hoi-dap"><span data-l="vi">Hỏi đáp</span><span data-l="en">FAQ</span></a>
       <a href="#lien-he"><span data-l="vi">Liên hệ</span><span data-l="en">Contact</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Ngôn ngữ / Language">
       <button type="button" data-set="vi">VI</button>
       <button type="button" data-set="en">EN</button>
     </div>
+    <a class="btn btn-gold btn-sm top-cta" href="#lien-he"><span data-l="vi">Liên hệ báo giá</span><span data-l="en">Get a quote</span></a>
+    <button type="button" class="burger" aria-label="Menu" aria-controls="nav" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -64,8 +70,8 @@
         <span data-l="en">E-commerce operations for Vietnamese brands</span>
       </h1>
       <p class="lead">
-        <span data-l="vi">Từ chọn sản phẩm, tìm nhà máy, đến mở gian hàng và vận hành hằng ngày trên các sàn tại Việt Nam và Mỹ. Doanh nghiệp chọn đúng khâu mình cần, TIMUS làm và báo cáo rõ từng tháng.</span>
-        <span data-l="en">From product selection and factory sourcing to store setup and daily operations on marketplaces in Vietnam and the United States. Brands pick the stages they need; TIMUS runs them and reports every month.</span>
+        <span data-l="vi">Bán hàng trên tất cả các nền tảng thương mại điện tử tại Việt Nam và Mỹ, cùng nghiên cứu sản phẩm, phân tích thị trường, tìm nhà máy và các giải pháp công nghệ: dashboard báo cáo, website, hệ thống quản lý kết nối các sàn. Doanh nghiệp chọn đúng khâu mình cần, TIMUS làm và báo cáo rõ từng tháng.</span>
+        <span data-l="en">Selling on every e-commerce platform in Vietnam and the United States, backed by product research, market analysis, factory sourcing and technology: reporting dashboards, websites and multichannel management systems. Brands pick the stages they need; TIMUS runs them and reports every month.</span>
       </p>
       <div class="cta">
         <a class="btn btn-gold" href="https://zalo.me/0796796492" target="_blank" rel="noopener">
@@ -76,15 +82,16 @@
         </a>
       </div>
     </div>
-    <img class="hero-logo" src="assets/timus-logo.jpg" alt="Logo TIMUS" width="450" height="380">
+    <img class="hero-logo reveal" src="assets/timus-logo.webp" alt="Logo TIMUS" width="900" height="760">
   </div>
 </section>
 
 <section class="strip">
   <div class="wrap strip-in">
-    <div><b>Việt Nam</b><span>TikTok Shop · Shopee · Lazada</span></div>
-    <div><b data-l="vi">Mỹ</b><b data-l="en">United States</b><span>TikTok Shop US · Shopify · Amazon</span></div>
+    <div><b>Việt Nam</b><span>Shopee · TikTok Shop · Lazada · Tiki</span></div>
+    <div><b data-l="vi">Mỹ</b><b data-l="en">United States</b><span>Amazon · TikTok Shop · Walmart · eBay · Shopify</span></div>
     <div><b data-l="vi">Nguồn hàng</b><b data-l="en">Sourcing</b><span data-l="vi">Nhà máy Việt Nam và Trung Quốc</span><span data-l="en">Factories in Vietnam and China</span></div>
+    <div><b data-l="vi">Công nghệ</b><b data-l="en">Technology</b><span data-l="vi">Dashboard · Website · Kết nối các sàn</span><span data-l="en">Dashboards · Websites · Multichannel</span></div>
   </div>
 </section>
 
@@ -96,58 +103,94 @@
       <span data-l="en">Each stage is a separate scope with a fixed fee. Start with research, or go straight to operations if your product is ready.</span>
     </p>
 
-    <div class="svc">
+    <div class="svc reveal">
       <article class="card">
         <span class="num">01</span>
-        <h3><span data-l="vi">Phát triển sản phẩm và nguồn hàng</span><span data-l="en">Product development and sourcing</span></h3>
+        <h3><span data-l="vi">Nghiên cứu sản phẩm và phân tích thị trường</span><span data-l="en">Product research and market analysis</span></h3>
         <ul data-l="vi">
+          <li>Nghiên cứu ngách, đối thủ, khung giá, lời lãi dự kiến và số lượng lô đầu.</li>
+          <li>Phân tích thị trường Việt Nam và Mỹ theo số liệu bán hàng thực tế trên các sàn.</li>
           <li>Phân tích năng lực doanh nghiệp: công thức, nhà xưởng, kho, nguyên liệu sẵn có, để chọn sản phẩm làm được và bán được.</li>
-          <li>Nghiên cứu ngách, đối thủ, khung giá, lời lãi dự kiến và số lượng lô đầu. Báo cáo kèm bộ dữ liệu.</li>
-          <li>Tìm và so sánh nhà máy, nhà cung cấp tại Trung Quốc và Việt Nam: giá, số lượng tối thiểu, quy cách, thời gian sản xuất.</li>
-          <li>Làm lô mẫu, thử nhu cầu trên sàn trước khi làm lô lớn.</li>
+          <li>Báo cáo kèm bộ dữ liệu để doanh nghiệp tự xem lại.</li>
         </ul>
         <ul data-l="en">
+          <li>Niche, competitor and price research with projected margin and first order quantity.</li>
+          <li>Vietnam and US market analysis based on real marketplace sales data.</li>
           <li>Assess what your company already has (formulas, factory, warehouse, raw materials) to pick products you can make and sell.</li>
-          <li>Niche, competitor and price research with projected margin and first order quantity. Report delivered with the dataset.</li>
-          <li>Find and compare factories and suppliers in China and Vietnam: unit cost, MOQ, specs, lead time.</li>
-          <li>Run a sample batch and test demand on marketplaces before scaling.</li>
+          <li>Reports delivered with the full dataset.</li>
         </ul>
       </article>
 
       <article class="card">
         <span class="num">02</span>
+        <h3><span data-l="vi">Phát triển sản phẩm và nguồn hàng</span><span data-l="en">Product development and sourcing</span></h3>
+        <ul data-l="vi">
+          <li>Tìm và so sánh nhà máy, nhà cung cấp tại Trung Quốc và Việt Nam: giá, số lượng tối thiểu, quy cách, thời gian sản xuất.</li>
+          <li>Phát triển mẫu mã, quy cách, bao bì cho từng thị trường.</li>
+          <li>Làm lô mẫu, thử nhu cầu trên sàn trước khi làm lô lớn.</li>
+        </ul>
+        <ul data-l="en">
+          <li>Find and compare factories and suppliers in China and Vietnam: unit cost, MOQ, specs, lead time.</li>
+          <li>Develop product specs and packaging for each market.</li>
+          <li>Run a sample batch and test demand on marketplaces before scaling.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="num">03</span>
         <h3><span data-l="vi">Bán hàng tại Mỹ</span><span data-l="en">Selling in the United States</span></h3>
         <ul data-l="vi">
+          <li>Bán trên tất cả các sàn và nền tảng thương mại điện tử lớn tại Mỹ, cùng website bán hàng riêng.</li>
           <li>Thiết lập gian hàng: mở kênh, đăng sản phẩm, nội dung trang, kết nối kho.</li>
           <li>Vận hành và quản lý sàn: quản trị gian hàng, quảng cáo, creator, chăm sóc khách, báo cáo tháng.</li>
           <li>Gói thử nghiệm thị trường Mỹ: 1 kênh, 1 đến 2 sản phẩm, 3 tháng.</li>
         </ul>
         <ul data-l="en">
+          <li>Sell on every major US marketplace and e-commerce platform, plus your own online store.</li>
           <li>Store setup: channel opening, product listings, store content, warehouse connection.</li>
           <li>Marketplace management: store operations, ads, creators, customer service, monthly reports.</li>
           <li>US market test: 1 channel, 1 to 2 products, 3 months.</li>
         </ul>
-        <p class="tags">TikTok Shop US · Shopify · Amazon</p>
+        <p class="tags">Amazon · TikTok Shop US · Walmart · eBay · Etsy · Shopify <span data-l="vi">và các nền tảng khác</span><span data-l="en">and more</span></p>
       </article>
 
       <article class="card">
-        <span class="num">03</span>
+        <span class="num">04</span>
         <h3><span data-l="vi">Bán hàng tại Việt Nam</span><span data-l="en">Selling in Vietnam</span></h3>
         <ul data-l="vi">
+          <li>Bán trên tất cả các sàn và nền tảng thương mại điện tử tại Việt Nam, cùng website bán hàng riêng.</li>
           <li>Thiết lập gian hàng, gồm trong tháng vận hành đầu tiên.</li>
           <li>Vận hành sàn: quản trị gian hàng, quảng cáo, KOC, chăm sóc khách, công cụ chỉnh sửa video, báo cáo tháng.</li>
           <li>Mở thêm sàn khi sàn đầu đã chạy ổn.</li>
         </ul>
         <ul data-l="en">
+          <li>Sell on every e-commerce marketplace and platform in Vietnam, plus your own online store.</li>
           <li>Store setup, included in the first month of operations.</li>
           <li>Marketplace operations: store management, ads, KOCs, customer service, video editing tools, monthly reports.</li>
           <li>Add more marketplaces once the first one is running well.</li>
         </ul>
-        <p class="tags">TikTok Shop · Shopee · Lazada</p>
+        <p class="tags">Shopee · TikTok Shop · Lazada · Tiki · Website <span data-l="vi">và các nền tảng khác</span><span data-l="en">and more</span></p>
       </article>
 
       <article class="card">
-        <span class="num">04</span>
+        <span class="num">05</span>
+        <h3><span data-l="vi">Công nghệ cho thương mại điện tử</span><span data-l="en">E-commerce technology</span></h3>
+        <ul data-l="vi">
+          <li>Dashboard báo cáo: doanh thu, lời lãi, tồn kho, quảng cáo của mọi sàn trên một trang.</li>
+          <li>Hệ thống quản lý kết nối các sàn: đồng bộ sản phẩm, đơn hàng, tồn kho giữa sàn, website và kho.</li>
+          <li>Xây dựng website công ty và website bán hàng.</li>
+          <li>Công cụ phân tích dữ liệu và tự động hoá việc vận hành hằng ngày.</li>
+        </ul>
+        <ul data-l="en">
+          <li>Reporting dashboards: revenue, margin, inventory and ads across every channel in one place.</li>
+          <li>Multichannel management systems: sync products, orders and inventory between marketplaces, website and warehouse.</li>
+          <li>Company websites and online stores.</li>
+          <li>Data analysis tools and automation for daily operations.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="num">06</span>
         <h3><span data-l="vi">Hậu cần và đưa hàng đi</span><span data-l="en">Logistics and fulfillment</span></h3>
         <ul data-l="vi">
           <li>Bao bì, tem nhãn theo yêu cầu của sàn và thị trường.</li>
@@ -168,7 +211,7 @@
       </article>
     </div>
 
-    <div class="included">
+    <div class="included reveal">
       <div>
         <h3><span data-l="vi">Gồm trong mọi gói vận hành</span><span data-l="en">Included with every operations plan</span></h3>
         <p data-l="vi">Trang theo dõi riêng cho từng doanh nghiệp: doanh thu, lời lãi, tồn kho, thị trường. Báo cáo và đối soát gửi hằng tháng trước ngày 05.</p>
@@ -187,7 +230,7 @@
 <section id="cach-lam" class="sec sec-alt">
   <div class="wrap">
     <h2><span data-l="vi">Cách TIMUS làm việc</span><span data-l="en">How we work</span></h2>
-    <ol class="steps">
+    <ol class="steps reveal">
       <li>
         <b><span data-l="vi">Nghiên cứu trước</span><span data-l="en">Research first</span></b>
         <p data-l="vi">Nghiên cứu sản phẩm và thị trường. Hai bên cùng quyết định trước khi bỏ tiền làm hàng.</p>
@@ -213,11 +256,11 @@
 </section>
 
 <section id="ve-timus" class="sec">
-  <div class="wrap about">
+  <div class="wrap about reveal">
     <div>
       <h2><span data-l="vi">Về TIMUS</span><span data-l="en">About TIMUS</span></h2>
-      <p data-l="vi">TIMUS CO., LTD là công ty thương mại điện tử có trụ sở tại Đà Nẵng, Việt Nam. Chúng tôi giúp doanh nghiệp và thương hiệu Việt đưa sản phẩm lên sàn, trong nước và tại Mỹ, với một đội ngũ lo từ sản phẩm, nguồn hàng đến vận hành.</p>
-      <p data-l="en">TIMUS CO., LTD is an e-commerce company based in Da Nang, Vietnam. We help Vietnamese businesses and brands sell on marketplaces at home and in the United States, with one team covering product, sourcing and operations.</p>
+      <p data-l="vi">TIMUS CO., LTD là công ty thương mại điện tử có trụ sở tại Đà Nẵng, Việt Nam. Chúng tôi giúp doanh nghiệp và thương hiệu Việt đưa sản phẩm lên sàn, trong nước và tại Mỹ, với một đội ngũ lo từ sản phẩm, nguồn hàng, vận hành đến công nghệ.</p>
+      <p data-l="en">TIMUS CO., LTD is an e-commerce company based in Da Nang, Vietnam. We help Vietnamese businesses and brands sell on marketplaces at home and in the United States, with one team covering product, sourcing, operations and technology.</p>
       <p class="muted" data-l="vi">TIMUS chỉ làm thương mại điện tử, không liên quan đến các công ty khác cùng tên Timus.</p>
       <p class="muted" data-l="en">TIMUS works only in e-commerce and is not affiliated with other companies using the Timus name.</p>
     </div>
@@ -231,6 +274,44 @@
   </div>
 </section>
 
+<section id="hoi-dap" class="sec sec-alt">
+  <div class="wrap faq">
+    <h2 class="reveal"><span data-l="vi">Câu hỏi thường gặp</span><span data-l="en">Frequently asked questions</span></h2>
+    <div class="qa-list reveal">
+      <details class="qa">
+        <summary><span data-l="vi">Chi phí được tính thế nào?</span><span data-l="en">How is pricing calculated?</span></summary>
+        <p data-l="vi">Mỗi khâu có một mức phí cố định, doanh nghiệp chỉ trả cho khâu mình chọn. TIMUS gửi báo giá theo phạm vi sau buổi trao đổi đầu. Chi phí bên thứ ba như vận chuyển, kho, phí sàn, quảng cáo doanh nghiệp trả theo thực tế, TIMUS không cộng thêm.</p>
+        <p data-l="en">Each stage has a fixed fee and you only pay for the stages you choose. We send a scoped quote after a first call. Third party costs such as shipping, warehousing, marketplace fees and ads are paid at actual cost with no markup.</p>
+      </details>
+      <details class="qa">
+        <summary><span data-l="vi">Chưa có sản phẩm để bán online thì bắt đầu từ đâu?</span><span data-l="en">We do not have a product for online sales yet. Where do we start?</span></summary>
+        <p data-l="vi">Bắt đầu từ khâu nghiên cứu. TIMUS xem năng lực sẵn có của doanh nghiệp, phân tích thị trường và đề xuất 1 đến 2 sản phẩm để thử trước. Hai bên cùng quyết định rồi mới bỏ tiền làm hàng.</p>
+        <p data-l="en">Start with research. We look at what your company can already do, analyse the market and propose 1 to 2 products to test first. We decide together before any money goes into inventory.</p>
+      </details>
+      <details class="qa">
+        <summary><span data-l="vi">Bao lâu thì có đơn hàng đầu tiên?</span><span data-l="en">How soon do first orders come in?</span></summary>
+        <p data-l="vi">Khi gian hàng đã mở và hàng đã sẵn sàng, đơn đầu thường có trong tháng vận hành đầu tiên. TIMUS không cam kết con số doanh thu; kết quả được báo cáo bằng số liệu thật hằng tháng.</p>
+        <p data-l="en">Once the store is live and stock is ready, first orders usually come within the first month of operations. We do not promise revenue figures; results are reported with real data every month.</p>
+      </details>
+      <details class="qa">
+        <summary><span data-l="vi">Hợp đồng vận hành kéo dài bao lâu?</span><span data-l="en">How long is an operations contract?</span></summary>
+        <p data-l="vi">Hợp đồng vận hành tối thiểu 6 tháng, vì gian hàng cần thời gian để có dữ liệu và tối ưu. Với thị trường Mỹ có gói thử nghiệm 3 tháng cho 1 kênh và 1 đến 2 sản phẩm.</p>
+        <p data-l="en">Operations contracts run for at least 6 months, since a store needs time to gather data and improve. For the US there is a 3 month test plan covering 1 channel and 1 to 2 products.</p>
+      </details>
+      <details class="qa">
+        <summary><span data-l="vi">Doanh nghiệp theo dõi kết quả bằng cách nào?</span><span data-l="en">How do we track results?</span></summary>
+        <p data-l="vi">Mỗi doanh nghiệp có một trang theo dõi riêng để xem doanh thu, lời lãi, tồn kho và thị trường. Báo cáo và đối soát gửi hằng tháng trước ngày 05.</p>
+        <p data-l="en">Each brand gets a private dashboard showing revenue, margin, inventory and market data. The monthly report and reconciliation arrive before the 5th.</p>
+      </details>
+      <details class="qa">
+        <summary><span data-l="vi">Chỉ cần một phần việc, ví dụ dashboard hoặc website, có được không?</span><span data-l="en">Can we hire TIMUS for just one piece, such as a dashboard or a website?</span></summary>
+        <p data-l="vi">Được. Các dịch vụ tách rời nhau, doanh nghiệp có thể chỉ làm nghiên cứu sản phẩm, chỉ làm dashboard báo cáo, website hoặc hệ thống kết nối các sàn mà không cần ký vận hành.</p>
+        <p data-l="en">Yes. Services are separate, so you can take only product research, a reporting dashboard, a website or a multichannel system without an operations contract.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="lien-he" class="sec contact">
   <div class="wrap">
     <h2><span data-l="vi">Liên hệ</span><span data-l="en">Contact</span></h2>
@@ -238,7 +319,7 @@
       <span data-l="vi">Cho TIMUS biết sản phẩm, thị trường muốn bán và khâu đang cần hỗ trợ. Chúng tôi trả lời và gửi báo giá theo phạm vi.</span>
       <span data-l="en">Tell us about your product, target market and the stage you need help with. We will reply with a scoped quote.</span>
     </p>
-    <div class="contact-grid">
+    <div class="contact-grid reveal">
       <a class="c-item" href="https://zalo.me/0796796492" target="_blank" rel="noopener">
         <span class="label">Zalo</span>
         <span class="val">0796 796 492</span>
@@ -257,6 +338,8 @@
 
 </main>
 
+<a class="fab" href="https://zalo.me/0796796492" target="_blank" rel="noopener" aria-label="Zalo">Zalo</a>
+
 <footer class="foot">
   <div class="wrap foot-in">
     <span>© 2026 TIMUS CO., LTD</span>
@@ -274,6 +357,23 @@
       try { localStorage.setItem('timus-lang', l); } catch (e) {}
     });
   });
+
+  var burger = document.querySelector('.burger'), head = document.querySelector('.top');
+  burger.addEventListener('click', function () {
+    var open = head.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('.nav a').forEach(function (a) {
+    a.addEventListener('click', function () { head.classList.remove('open'); burger.setAttribute('aria-expanded', false); });
+  });
+
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('anim');
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  }
 </script>
 </body>
 </html>
