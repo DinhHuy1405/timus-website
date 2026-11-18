@@ -16,7 +16,7 @@ Trong app: preview `timus-web` (cổng 8131, khai báo ở `Desktop/Huy Tim/.cla
 2. Đẩy thư mục này lên nhánh `main`, bật Settings > Pages > Deploy from branch `main` / root, điền Custom domain `timusco.com`, bật Enforce HTTPS khi GitHub cấp xong chứng chỉ.
 
 **Trỏ DNS timusco.com (Google Workspace / Squarespace Domains > DNS > Custom records)**
-Chỉ thêm các bản ghi dưới đây. Không xoá hay sửa bản ghi MX, TXT (SPF, DKIM, xác minh Google) của email huy@timusco.com.
+Chỉ thêm các bản ghi dưới đây. Không xoá hay sửa bản ghi MX, TXT (SPF, DKIM, xác minh Google) của email info@timusco.com.
 
 | Host | Loại | Giá trị |
 |---|---|---|
