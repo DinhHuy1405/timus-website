@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TIMUS CO., LTD | Vận hành thương mại điện tử và trợ lý AI cho doanh nghiệp Việt</title>
-<meta name="description" content="TIMUS là công ty thương mại điện tử và công nghệ tại Đà Nẵng: bán hàng trên các sàn tại Việt Nam và Mỹ, nghiên cứu sản phẩm, tìm nhà máy, trợ lý AI làm thay việc lặp lại cho đội ngũ, dashboard báo cáo, website và hệ thống kết nối các sàn.">
+<meta name="description" content="TIMUS là công ty công nghệ và thương mại điện tử tại Đà Nẵng: bán hàng trên các sàn tại Việt Nam và Mỹ, nghiên cứu sản phẩm, tìm nhà máy, trợ lý AI làm thay việc lặp lại cho đội ngũ, dashboard báo cáo, website và hệ thống kết nối các sàn.">
 <link rel="canonical" href="https://timusco.com/">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -433,10 +433,10 @@
   <div class="wrap about reveal">
     <div>
       <h2><span data-l="vi">Về TIMUS</span><span data-l="en">About TIMUS</span></h2>
-      <p data-l="vi">TIMUS CO., LTD là công ty thương mại điện tử có trụ sở tại Đà Nẵng, Việt Nam. Chúng tôi giúp doanh nghiệp và thương hiệu Việt đưa sản phẩm lên sàn, trong nước và tại Mỹ, với một đội ngũ lo từ sản phẩm, nguồn hàng, vận hành đến công nghệ và trợ lý AI cho doanh nghiệp.</p>
-      <p data-l="en">TIMUS CO., LTD is an e-commerce company based in Da Nang, Vietnam. We help Vietnamese businesses and brands sell on marketplaces at home and in the United States, with one team covering product, sourcing, operations, technology and AI assistants for businesses.</p>
-      <p class="muted" data-l="vi">TIMUS chỉ làm thương mại điện tử, không liên quan đến các công ty khác cùng tên Timus.</p>
-      <p class="muted" data-l="en">TIMUS works only in e-commerce and is not affiliated with other companies using the Timus name.</p>
+      <p data-l="vi">TIMUS CO., LTD là công ty công nghệ và thương mại điện tử có trụ sở tại Đà Nẵng, Việt Nam. Chúng tôi giúp doanh nghiệp và thương hiệu Việt bán hàng trên sàn, trong nước và tại Mỹ, và triển khai trợ lý AI, dashboard báo cáo, hệ thống kết nối cho đội ngũ của doanh nghiệp.</p>
+      <p data-l="en">TIMUS CO., LTD is a technology and e-commerce company based in Da Nang, Vietnam. We help Vietnamese businesses and brands sell on marketplaces at home and in the United States, and deploy AI assistants, reporting dashboards and connected systems for their teams.</p>
+      <p class="muted" data-l="vi">TIMUS làm thương mại điện tử và công nghệ cho doanh nghiệp, không liên quan đến các công ty khác cùng tên Timus.</p>
+      <p class="muted" data-l="en">TIMUS works in e-commerce and business technology and is not affiliated with other companies using the Timus name.</p>
     </div>
     <div class="founder">
       <p class="label"><span data-l="vi">Người sáng lập</span><span data-l="en">Founder</span></p>
@@ -701,23 +701,28 @@
   /* nền động màu vàng ở phần đầu */
   var c = document.getElementById('heroFx');
   if (c && c.getContext) {
-    var x = c.getContext('2d'), hero = c.parentElement, W, H, D = Math.min(window.devicePixelRatio || 1, 2), P = [], on = true;
+    var x = c.getContext('2d'), hero = c.parentElement, W, H, D = Math.min(window.devicePixelRatio || 1, 2), R = [], on = true, L, ANG = -0.56;
     var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function mk(first) {
+      var wide = Math.random() < .3;
+      var len = (wide ? .45 + Math.random() * .4 : .2 + Math.random() * .45) * L;
+      return { u: first ? (Math.random() * 2 - 1) * L : -L - len, v: (Math.random() * 2 - 1) * L * .62, len: len,
+        w: wide ? 26 + Math.random() * 54 : 1 + Math.random() * 2.2, sp: (wide ? .18 : .32) + Math.random() * .4,
+        a: wide ? .05 + Math.random() * .08 : .22 + Math.random() * .3 };
+    }
     function size() {
-      W = hero.clientWidth; H = hero.clientHeight; c.width = W * D; c.height = H * D; x.setTransform(D, 0, 0, D, 0, 0);
-      var n = Math.round(Math.min(72, W * H / 15000)); P = [];
-      for (var i = 0; i < n; i++) P.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4, r: Math.random() * 1.6 + .6 });
+      W = hero.clientWidth; H = hero.clientHeight; c.width = W * D; c.height = H * D; L = Math.sqrt(W * W + H * H) / 2 + 60;
+      var n = W < 700 ? 14 : 26; R = []; for (var i = 0; i < n; i++) R.push(mk(true));
     }
     function frame() {
-      x.clearRect(0, 0, W, H);
-      for (var i = 0; i < P.length; i++) {
-        var p = P[i]; p.x += p.vx; p.y += p.vy;
-        if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20; if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20;
-        for (var j = i + 1; j < P.length; j++) {
-          var q = P[j], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
-          if (d2 < 19600) { x.strokeStyle = 'rgba(212,168,98,' + ((1 - Math.sqrt(d2) / 140) * .26).toFixed(3) + ')'; x.lineWidth = 1; x.beginPath(); x.moveTo(p.x, p.y); x.lineTo(q.x, q.y); x.stroke(); }
-        }
-        x.fillStyle = 'rgba(227,189,126,.7)'; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 6.2832); x.fill();
+      x.setTransform(D, 0, 0, D, 0, 0); x.clearRect(0, 0, W, H);
+      x.translate(W / 2, H / 2); x.rotate(ANG);
+      for (var i = 0; i < R.length; i++) {
+        var r = R[i]; r.u += r.sp; if (r.u > L) R[i] = r = mk(false);
+        var g = x.createLinearGradient(r.u, 0, r.u + r.len, 0);
+        g.addColorStop(0, 'rgba(212,168,98,0)'); g.addColorStop(.55, 'rgba(212,168,98,' + r.a + ')');
+        g.addColorStop(.85, 'rgba(240,210,150,' + (r.a * 1.25).toFixed(3) + ')'); g.addColorStop(1, 'rgba(212,168,98,0)');
+        x.fillStyle = g; x.fillRect(r.u, r.v - r.w / 2, r.len, r.w);
       }
     }
     function loop() { if (on && !document.hidden) frame(); requestAnimationFrame(loop); }
