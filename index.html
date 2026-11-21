@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"TIMUS CO., LTD","url":"https://timusco.com/","logo":"https://timusco.com/assets/apple-touch-icon.png","email":"info@timusco.com","address":{"@type":"PostalAddress","addressLocality":"Da Nang","addressCountry":"VN"},"description":"E-commerce operations, product research, sourcing, AI assistants for business teams, reporting dashboards and multichannel systems for Vietnamese brands in Vietnam and the United States.","knowsAbout":["E-commerce operations","AI agents for business","Reporting dashboards","Multichannel e-commerce systems"]}
 </script>
@@ -707,12 +707,12 @@
       var wide = Math.random() < .3;
       var len = (wide ? .45 + Math.random() * .4 : .2 + Math.random() * .45) * L;
       return { u: first ? (Math.random() * 2 - 1) * L : -L - len, v: (Math.random() * 2 - 1) * L * .62, len: len,
-        w: wide ? 26 + Math.random() * 54 : 1 + Math.random() * 2.2, sp: (wide ? .18 : .32) + Math.random() * .4,
-        a: wide ? .05 + Math.random() * .08 : .22 + Math.random() * .3 };
+        w: wide ? 26 + Math.random() * 54 : 1 + Math.random() * 2.2, wide: wide, sp: wide ? .7 + Math.random() * .9 : 1.8 + Math.random() * 3.2,
+        a: wide ? .06 + Math.random() * .09 : .3 + Math.random() * .35 };
     }
     function size() {
       W = hero.clientWidth; H = hero.clientHeight; c.width = W * D; c.height = H * D; L = Math.sqrt(W * W + H * H) / 2 + 60;
-      var n = W < 700 ? 14 : 26; R = []; for (var i = 0; i < n; i++) R.push(mk(true));
+      var n = W < 700 ? 18 : 34; R = []; for (var i = 0; i < n; i++) R.push(mk(true));
     }
     function frame() {
       x.setTransform(D, 0, 0, D, 0, 0); x.clearRect(0, 0, W, H);
@@ -723,6 +723,7 @@
         g.addColorStop(0, 'rgba(212,168,98,0)'); g.addColorStop(.55, 'rgba(212,168,98,' + r.a + ')');
         g.addColorStop(.85, 'rgba(240,210,150,' + (r.a * 1.25).toFixed(3) + ')'); g.addColorStop(1, 'rgba(212,168,98,0)');
         x.fillStyle = g; x.fillRect(r.u, r.v - r.w / 2, r.len, r.w);
+        if (!r.wide) { var hx = r.u + r.len * .9, hg = x.createRadialGradient(hx, r.v, 0, hx, r.v, 9); hg.addColorStop(0, 'rgba(255,236,190,' + Math.min(1, r.a * 1.8).toFixed(3) + ')'); hg.addColorStop(1, 'rgba(255,236,190,0)'); x.fillStyle = hg; x.fillRect(hx - 9, r.v - 9, 18, 18); }
       }
     }
     function loop() { if (on && !document.hidden) frame(); requestAnimationFrame(loop); }
