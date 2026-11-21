@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"TIMUS CO., LTD","url":"https://timusco.com/","logo":"https://timusco.com/assets/apple-touch-icon.png","email":"info@timusco.com","address":{"@type":"PostalAddress","addressLocality":"Da Nang","addressCountry":"VN"},"description":"E-commerce operations, product research, sourcing, AI assistants for business teams, reporting dashboards and multichannel systems for Vietnamese brands in Vietnam and the United States.","knowsAbout":["E-commerce operations","AI agents for business","Reporting dashboards","Multichannel e-commerce systems"]}
 </script>
@@ -112,12 +112,18 @@
   </div>
 </section>
 
-<section class="strip">
-  <div class="wrap strip-in">
-    <div><b>Việt Nam</b><span>Shopee · TikTok Shop · Lazada · Tiki</span></div>
-    <div><b data-l="vi">Mỹ</b><b data-l="en">United States</b><span>Amazon · TikTok Shop · Walmart · eBay · Shopify</span></div>
-    <div><b data-l="vi">Nguồn hàng</b><b data-l="en">Sourcing</b><span data-l="vi">Nhà máy Việt Nam và Trung Quốc</span><span data-l="en">Factories in Vietnam and China</span></div>
-    <a class="strip-a" href="#cong-nghe"><b data-l="vi">Công nghệ →</b><b data-l="en">Technology →</b><span data-l="vi">Trợ lý AI · Dashboard · Kết nối các sàn</span><span data-l="en">AI assistants · Dashboards · Multichannel</span></a>
+<section class="strip logos" aria-label="Các sàn TIMUS đang làm việc">
+  <div class="lg-track" id="lgTrack">
+    <div class="lg-grp">
+        <img src="assets/san/shopee.png" alt="Shopee" height="34">
+        <img src="assets/san/tiktokshop.png" alt="TikTok Shop" height="34">
+        <img src="assets/san/lazada.svg" alt="Lazada" height="34">
+        <img src="assets/san/amazon.png" alt="Amazon" height="34">
+        <img src="assets/san/walmart.svg" alt="Walmart" height="34">
+        <img src="assets/san/ebay.svg" alt="eBay" height="34">
+        <img src="assets/san/shopify.png" alt="Shopify" height="34">
+        <img src="assets/san/etsy.png" alt="Etsy" height="34">
+    </div>
   </div>
 </section>
 
@@ -734,6 +740,23 @@
       requestAnimationFrame(loop);
     }
   }
+})();
+</script>
+<script>
+(function () {
+  var t = document.getElementById('lgTrack'); if (!t) return; var g = t.querySelector('.lg-grp');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { t.style.animation = 'none'; t.parentElement.style.overflowX = 'auto'; return; }
+  var base = [].slice.call(g.children).map(function (n) { return n.cloneNode(true); });
+  function build() {
+    [].slice.call(t.querySelectorAll('.lg-grp[aria-hidden]')).forEach(function (x) { x.remove(); });
+    g.innerHTML = ''; base.forEach(function (n) { g.appendChild(n.cloneNode(true)); });
+    var guard = 0;
+    while (g.offsetWidth < innerWidth * 1.2 && guard++ < 10) base.forEach(function (n) { var k = n.cloneNode(true); k.alt = ''; g.appendChild(k); });
+    var c = g.cloneNode(true); c.setAttribute('aria-hidden', 'true'); t.appendChild(c);
+    t.style.animationDuration = Math.max(24, Math.round(g.offsetWidth / 60)) + 's';
+  }
+  build(); addEventListener('load', build);
+  var to; addEventListener('resize', function () { clearTimeout(to); to = setTimeout(build, 200); });
 })();
 </script>
 </body>
