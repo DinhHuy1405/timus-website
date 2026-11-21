@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="/style.css?v=9">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"TIMUS CO., LTD","url":"https://timusco.com/","logo":"https://timusco.com/assets/apple-touch-icon.png","email":"info@timusco.com","address":{"@type":"PostalAddress","addressLocality":"Da Nang","addressCountry":"VN"},"description":"E-commerce operations, product research, sourcing, AI assistants for business teams, reporting dashboards and multichannel systems for Vietnamese brands in Vietnam and the United States.","knowsAbout":["E-commerce operations","AI agents for business","Reporting dashboards","Multichannel e-commerce systems"]}
 </script>
@@ -37,16 +37,15 @@
 <header class="top">
   <div class="wrap top-in">
     <a href="#" class="brand" aria-label="TIMUS">
-      <img src="assets/timus-mark.webp" alt="" width="44" height="27">
+      <img src="/assets/timus-mark.webp" alt="" width="44" height="27">
       <span>TIMUS</span>
     </a>
     <nav class="nav" id="nav" aria-label="Menu">
-      <a href="#dich-vu"><span data-l="vi">Dịch vụ</span><span data-l="en">Services</span></a>
       <a href="#cong-nghe"><span data-l="vi">Công nghệ</span><span data-l="en">Technology</span></a>
+      <a href="#thuong-mai-dien-tu"><span data-l="vi">Thương mại điện tử</span><span data-l="en">E-commerce</span></a>
       <a href="#cach-lam"><span data-l="vi">Cách làm việc</span><span data-l="en">How we work</span></a>
       <a href="#dao-tao"><span data-l="vi">Đào tạo</span><span data-l="en">Training</span></a>
       <a href="#ve-timus"><span data-l="vi">Về TIMUS</span><span data-l="en">About</span></a>
-      <a href="#hoi-dap"><span data-l="vi">Hỏi đáp</span><span data-l="en">FAQ</span></a>
       <a href="#lien-he"><span data-l="vi">Liên hệ</span><span data-l="en">Contact</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Ngôn ngữ / Language">
@@ -93,21 +92,21 @@
   <div class="wrap">
     <p class="who-h"><span data-l="vi">Bạn đang cần gì?</span><span data-l="en">What do you need?</span></p>
     <div class="who-g">
-      <button type="button" class="who-b" data-aud="ban">
-        <b><span data-l="vi">Bán hàng trên sàn</span><span data-l="en">Sell on marketplaces</span></b>
-        <span class="who-d"><span data-l="vi">Đưa sản phẩm lên sàn tại Việt Nam và Mỹ, TIMUS lo từ nghiên cứu đến vận hành.</span><span data-l="en">Get your products onto marketplaces in Vietnam and the US, from research to operations.</span></span>
-        <i aria-hidden="true">→</i>
-      </button>
-      <button type="button" class="who-b" data-aud="tech">
+      <a class="who-b" href="#cong-nghe">
         <b><span data-l="vi">Bớt việc lặp lại cho đội ngũ</span><span data-l="en">Cut repetitive work</span></b>
         <span class="who-d"><span data-l="vi">Trợ lý AI, dashboard và hệ thống kết nối cho doanh nghiệp đã có đội ngũ.</span><span data-l="en">AI assistants, dashboards and connected systems for companies with their own teams.</span></span>
         <i aria-hidden="true">→</i>
-      </button>
-      <button type="button" class="who-b" data-aud="hoc">
+      </a>
+      <a class="who-b" href="#thuong-mai-dien-tu">
+        <b><span data-l="vi">Bán hàng trên sàn</span><span data-l="en">Sell on marketplaces</span></b>
+        <span class="who-d"><span data-l="vi">Đưa sản phẩm lên sàn tại Việt Nam và Mỹ, TIMUS lo từ nghiên cứu đến vận hành.</span><span data-l="en">Get your products onto marketplaces in Vietnam and the US, from research to operations.</span></span>
+        <i aria-hidden="true">→</i>
+      </a>
+      <a class="who-b" href="#dao-tao">
         <b><span data-l="vi">Học tự bán hàng</span><span data-l="en">Learn to sell yourself</span></b>
         <span class="who-d"><span data-l="vi">Mentor 1 kèm 1 cho cá nhân, do Huy Tim phụ trách.</span><span data-l="en">One on one mentoring for individuals, run by Huy Tim.</span></span>
         <i aria-hidden="true">→</i>
-      </button>
+      </a>
     </div>
   </div>
 </section>
@@ -127,246 +126,80 @@
   </div>
 </section>
 
-<section id="dich-vu" class="sec light">
+<!-- SVC:START -->
+<section id="cong-nghe" class="sec tech">
   <div class="wrap">
-    <h2><span data-l="vi">Dịch vụ</span><span data-l="en">Services</span></h2>
-    <p class="sub">
-      <span data-l="vi">Mỗi khâu là một phần việc riêng với mức phí cố định. Doanh nghiệp có thể bắt đầu từ nghiên cứu, hoặc vào thẳng khâu vận hành nếu đã có sản phẩm.</span>
-      <span data-l="en">Each stage is a separate scope with a fixed fee. Start with research, or go straight to operations if your product is ready.</span>
-    </p>
-
-    <div class="md reveal" data-tabs data-hover role="tablist">
-      <button type="button" class="md-b on" data-tab="s1" role="tab" aria-selected="true" style="grid-row:1"><span class="num">01</span><span class="md-t"><span data-l="vi">Nghiên cứu sản phẩm và phân tích thị trường</span><span data-l="en">Product research and market analysis</span></span></button>
-      <div class="md-p on" data-panel="s1" role="tabpanel">
-        <h3><span data-l="vi">Nghiên cứu sản phẩm và phân tích thị trường</span><span data-l="en">Product research and market analysis</span></h3>
-        <ul data-l="vi">
-          <li>Nghiên cứu ngách, đối thủ, khung giá, lời lãi dự kiến và số lượng lô đầu.</li>
-          <li>Phân tích thị trường Việt Nam và Mỹ theo số liệu bán hàng thực tế trên các sàn.</li>
-          <li>Phân tích năng lực doanh nghiệp: công thức, nhà xưởng, kho, nguyên liệu sẵn có, để chọn sản phẩm làm được và bán được.</li>
-          <li>Báo cáo kèm bộ dữ liệu để doanh nghiệp tự xem lại.</li>
-        </ul>
-        <ul data-l="en">
-          <li>Niche, competitor and price research with projected margin and first order quantity.</li>
-          <li>Vietnam and US market analysis based on real marketplace sales data.</li>
-          <li>Assess what your company already has (formulas, factory, warehouse, raw materials) to pick products you can make and sell.</li>
-          <li>Reports delivered with the full dataset.</li>
-        </ul>
-      </div>
-      <button type="button" class="md-b" data-tab="s2" role="tab" aria-selected="false" style="grid-row:2"><span class="num">02</span><span class="md-t"><span data-l="vi">Phát triển sản phẩm và nguồn hàng</span><span data-l="en">Product development and sourcing</span></span></button>
-      <div class="md-p" data-panel="s2" role="tabpanel">
-        <h3><span data-l="vi">Phát triển sản phẩm và nguồn hàng</span><span data-l="en">Product development and sourcing</span></h3>
-        <ul data-l="vi">
-          <li>Tìm và so sánh nhà máy, nhà cung cấp tại Trung Quốc và Việt Nam: giá, số lượng tối thiểu, quy cách, thời gian sản xuất.</li>
-          <li>Phát triển mẫu mã, quy cách, bao bì cho từng thị trường.</li>
-          <li>Làm lô mẫu, thử nhu cầu trên sàn trước khi làm lô lớn.</li>
-        </ul>
-        <ul data-l="en">
-          <li>Find and compare factories and suppliers in China and Vietnam: unit cost, MOQ, specs, lead time.</li>
-          <li>Develop product specs and packaging for each market.</li>
-          <li>Run a sample batch and test demand on marketplaces before scaling.</li>
-        </ul>
-      </div>
-      <button type="button" class="md-b" data-tab="s3" role="tab" aria-selected="false" style="grid-row:3"><span class="num">03</span><span class="md-t"><span data-l="vi">Bán hàng tại Mỹ</span><span data-l="en">Selling in the United States</span></span></button>
-      <div class="md-p" data-panel="s3" role="tabpanel">
-        <h3><span data-l="vi">Bán hàng tại Mỹ</span><span data-l="en">Selling in the United States</span></h3>
-        <ul data-l="vi">
-          <li>Bán trên tất cả các sàn và nền tảng thương mại điện tử lớn tại Mỹ, cùng website bán hàng riêng.</li>
-          <li>Thiết lập gian hàng: mở kênh, đăng sản phẩm, nội dung trang, kết nối kho.</li>
-          <li>Vận hành và quản lý sàn: quản trị gian hàng, quảng cáo, creator, chăm sóc khách, báo cáo tháng.</li>
-          <li>Gói thử nghiệm thị trường Mỹ: 1 kênh, 1 đến 2 sản phẩm, 3 tháng.</li>
-        </ul>
-        <ul data-l="en">
-          <li>Sell on every major US marketplace and e-commerce platform, plus your own online store.</li>
-          <li>Store setup: channel opening, product listings, store content, warehouse connection.</li>
-          <li>Marketplace management: store operations, ads, creators, customer service, monthly reports.</li>
-          <li>US market test: 1 channel, 1 to 2 products, 3 months.</li>
-        </ul>
-        <p class="tags">Amazon · TikTok Shop US · Walmart · eBay · Etsy · Shopify <span data-l="vi">và các nền tảng khác</span><span data-l="en">and more</span></p>
-      </div>
-      <button type="button" class="md-b" data-tab="s4" role="tab" aria-selected="false" style="grid-row:4"><span class="num">04</span><span class="md-t"><span data-l="vi">Bán hàng tại Việt Nam</span><span data-l="en">Selling in Vietnam</span></span></button>
-      <div class="md-p" data-panel="s4" role="tabpanel">
-        <h3><span data-l="vi">Bán hàng tại Việt Nam</span><span data-l="en">Selling in Vietnam</span></h3>
-        <ul data-l="vi">
-          <li>Bán trên tất cả các sàn và nền tảng thương mại điện tử tại Việt Nam, cùng website bán hàng riêng.</li>
-          <li>Thiết lập gian hàng, gồm trong tháng vận hành đầu tiên.</li>
-          <li>Vận hành sàn: quản trị gian hàng, quảng cáo, KOC, chăm sóc khách, công cụ chỉnh sửa video, báo cáo tháng.</li>
-          <li>Mở thêm sàn khi sàn đầu đã chạy ổn.</li>
-        </ul>
-        <ul data-l="en">
-          <li>Sell on every e-commerce marketplace and platform in Vietnam, plus your own online store.</li>
-          <li>Store setup, included in the first month of operations.</li>
-          <li>Marketplace operations: store management, ads, KOCs, customer service, video editing tools, monthly reports.</li>
-          <li>Add more marketplaces once the first one is running well.</li>
-        </ul>
-        <p class="tags">Shopee · TikTok Shop · Lazada · Tiki · Website <span data-l="vi">và các nền tảng khác</span><span data-l="en">and more</span></p>
-      </div>
-      <button type="button" class="md-b" data-tab="s5" role="tab" aria-selected="false" style="grid-row:5"><span class="num">05</span><span class="md-t"><span data-l="vi">Công nghệ cho doanh nghiệp</span><span data-l="en">Technology for businesses</span></span></button>
-      <div class="md-p" data-panel="s5" role="tabpanel">
-        <h3><span data-l="vi">Công nghệ cho doanh nghiệp</span><span data-l="en">Technology for businesses</span></h3>
-        <ul data-l="vi">
-          <li>Trợ lý AI làm thay việc lặp lại trên máy tính cho từng phòng ban.</li>
-          <li>Dashboard báo cáo doanh thu, lời lãi, tồn kho, quảng cáo của mọi sàn trên một trang.</li>
-          <li>Hệ thống kết nối sàn, website và kho; website công ty và website bán hàng.</li>
-        </ul>
-        <ul data-l="en">
-          <li>AI assistants that take over repetitive computer work for each department.</li>
-          <li>Reporting dashboards for revenue, margin, inventory and ads across every channel.</li>
-          <li>Systems connecting marketplaces, website and warehouse; company websites and online stores.</li>
-        </ul>
-        <p class="tags"><a class="link" href="#cong-nghe"><span data-l="vi">Xem dịch vụ công nghệ →</span><span data-l="en">See our technology services →</span></a></p>
-      </div>
-      <button type="button" class="md-b" data-tab="s6" role="tab" aria-selected="false" style="grid-row:6"><span class="num">06</span><span class="md-t"><span data-l="vi">Hậu cần và đưa hàng đi</span><span data-l="en">Logistics and fulfillment</span></span></button>
-      <div class="md-p" data-panel="s6" role="tabpanel">
-        <h3><span data-l="vi">Hậu cần và đưa hàng đi</span><span data-l="en">Logistics and fulfillment</span></h3>
-        <ul data-l="vi">
-          <li>Bao bì, tem nhãn theo yêu cầu của sàn và thị trường.</li>
-          <li>Phối hợp giấy tờ xuất nhập khẩu và vận chuyển.</li>
-          <li>Nhận hàng và vận hành kho tại Mỹ, kết nối các sàn.</li>
-          <li>Tìm và kết nối đơn vị chuyên môn tại Mỹ về pháp lý, thuế, đăng ký công ty, đứng tên nhập khẩu; TIMUS phối hợp hồ sơ và theo dõi tiến độ thay doanh nghiệp.</li>
-          <li>Vận hành chuyên sâu theo nhu cầu riêng.</li>
-        </ul>
-        <ul data-l="en">
-          <li>Packaging and labels that meet marketplace and market requirements.</li>
-          <li>Coordination of export and import paperwork and shipping.</li>
-          <li>Receiving and 3PL warehouse operations in the US, connected to marketplaces.</li>
-          <li>Find and connect you with US specialists for legal, tax, company registration and importer of record; TIMUS coordinates the paperwork and follows up on your behalf.</li>
-          <li>Custom operations on request.</li>
-        </ul>
-        <p class="note" data-l="vi">Ý kiến chuyên môn về pháp lý và thuế do đơn vị đối tác đưa ra.</p>
-        <p class="note" data-l="en">Legal and tax opinions are given by our partner specialists.</p>
-      </div>
+    <p class="eyebrow"><span data-l="vi">Dành cho doanh nghiệp có đội ngũ</span><span data-l="en">For companies with their own teams</span></p>
+    <h2><span data-l="vi">Công nghệ cho doanh nghiệp</span><span data-l="en">Technology for businesses</span></h2>
+    <p class="sub"><span data-l="vi">Trợ lý AI làm thay việc lặp lại, dashboard gom số liệu về một chỗ, và hệ thống nối các sàn, website, kho với nhau. Mỗi dịch vụ có một trang riêng.</span><span data-l="en">AI assistants that take over repetitive work, dashboards that bring your numbers together, and systems that connect marketplaces, website and warehouse. Each service has its own page.</span></p>
+    <div class="sgrid two reveal">
+      <a class="scard" href="/tro-ly-ai/">
+        <span class="num">01</span>
+        <h3><span data-l="vi">Trợ lý AI cho đội ngũ</span><span data-l="en">AI assistants for your team</span></h3>
+        <p data-l="vi">Dạy trợ lý làm thay việc lặp lại trên máy tính cho từng phòng ban. Người trong đội vẫn là người duyệt và quyết định.</p><p data-l="en">Teach an assistant to take over repetitive computer work for each department. Your people still review and decide.</p>
+        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
+      </a>
+      <a class="scard" href="/dashboard-ket-noi-website/">
+        <span class="num">02</span>
+        <h3><span data-l="vi">Dashboard, kết nối sàn và website</span><span data-l="en">Dashboards, marketplace sync and websites</span></h3>
+        <p data-l="vi">Số liệu mọi sàn trên một trang, đồng bộ sản phẩm, đơn hàng, tồn kho giữa các hệ thống, và website công ty, website bán hàng.</p><p data-l="en">Every channel on one page, products, orders and inventory in sync across systems, plus company websites and online stores.</p>
+        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
+      </a>
     </div>
+  </div>
+</section>
 
+<section id="thuong-mai-dien-tu" class="sec light">
+  <div class="wrap">
+    <p class="eyebrow"><span data-l="vi">Dành cho doanh nghiệp muốn bán hàng trên sàn</span><span data-l="en">For companies that want to sell on marketplaces</span></p>
+    <h2><span data-l="vi">Thương mại điện tử</span><span data-l="en">E-commerce</span></h2>
+    <p class="sub"><span data-l="vi">Từ nghiên cứu sản phẩm đến khi gian hàng có đơn và được vận hành hằng tháng, tại Việt Nam và Mỹ. Doanh nghiệp chọn đúng khâu mình cần, mỗi khâu là một phần việc riêng.</span><span data-l="en">From product research to a store with orders that is run every month, in Vietnam and the United States. Pick only the stages you need; each one is a separate scope.</span></p>
+    <div class="sgrid reveal">
+      <a class="scard" href="/nghien-cuu-san-pham/">
+        <span class="num">01</span>
+        <h3><span data-l="vi">Nghiên cứu sản phẩm và phân tích thị trường</span><span data-l="en">Product research and market analysis</span></h3>
+        <p data-l="vi">Biết sản phẩm nào có nhu cầu, giá bán, lời lãi dự kiến và lô đầu nên nhập bao nhiêu, trước khi bỏ tiền làm hàng.</p><p data-l="en">Know which product has demand, at what price and margin, and how big the first order should be, before money goes into inventory.</p>
+        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
+      </a>
+      <a class="scard" href="/nguon-hang/">
+        <span class="num">02</span>
+        <h3><span data-l="vi">Phát triển sản phẩm và nguồn hàng</span><span data-l="en">Product development and sourcing</span></h3>
+        <p data-l="vi">Tìm và so sánh nhà máy tại Việt Nam, Trung Quốc; phát triển mẫu, bao bì và làm lô thử trước khi làm lô lớn.</p><p data-l="en">Find and compare factories in Vietnam and China; develop samples and packaging and run a test batch before scaling.</p>
+        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
+      </a>
+      <a class="scard" href="/ban-hang-tai-my/">
+        <span class="num">03</span>
+        <h3><span data-l="vi">Bán hàng tại Mỹ</span><span data-l="en">Selling in the United States</span></h3>
+        <p data-l="vi">Mở gian hàng và vận hành trên Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify. Có gói thử nghiệm 3 tháng.</p><p data-l="en">Store setup and operations on Amazon, TikTok Shop US, Walmart, eBay, Etsy and Shopify, with a 3 month test plan.</p>
+        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
+      </a>
+      <a class="scard" href="/ban-hang-tai-viet-nam/">
+        <span class="num">04</span>
+        <h3><span data-l="vi">Bán hàng tại Việt Nam</span><span data-l="en">Selling in Vietnam</span></h3>
+        <p data-l="vi">Mở gian hàng và vận hành trên Shopee, TikTok Shop, Lazada, Tiki: quảng cáo, KOC, chăm sóc khách, báo cáo tháng.</p><p data-l="en">Store setup and operations on Shopee, TikTok Shop, Lazada and Tiki: ads, KOCs, customer service and monthly reports.</p>
+        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
+      </a>
+      <a class="scard" href="/hau-can/">
+        <span class="num">05</span>
+        <h3><span data-l="vi">Hậu cần và đưa hàng đi</span><span data-l="en">Logistics and fulfillment</span></h3>
+        <p data-l="vi">Bao bì, tem nhãn, phối hợp giấy tờ xuất nhập khẩu, vận chuyển, và kho tại Mỹ kết nối các sàn.</p><p data-l="en">Packaging, labels, export and import paperwork, shipping, and a US warehouse connected to marketplaces.</p>
+        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
+      </a>
+    </div>
     <div class="included reveal">
       <div>
         <h3><span data-l="vi">Gồm trong mọi gói vận hành</span><span data-l="en">Included with every operations plan</span></h3>
-        <p data-l="vi">Trang theo dõi riêng cho từng doanh nghiệp: doanh thu, lời lãi, tồn kho, thị trường. Báo cáo và đối soát gửi hằng tháng trước ngày 05.</p>
-        <p data-l="en">A private dashboard for each brand: revenue, margin, inventory and market data. Monthly report and reconciliation before the 5th.</p>
+        <p data-l="vi">Trang theo dõi riêng cho từng doanh nghiệp: doanh thu, lời lãi, tồn kho, thị trường. Báo cáo và đối soát gửi hằng tháng trước ngày 05.</p><p data-l="en">A private dashboard for each brand: revenue, margin, inventory and market data. Monthly report and reconciliation before the 5th.</p>
       </div>
       <div>
         <h3><span data-l="vi">Chi phí</span><span data-l="en">Pricing</span></h3>
-        <p data-l="vi">Báo giá theo phạm vi từng doanh nghiệp, gửi sau buổi trao đổi đầu. Chi phí bên thứ ba (vận chuyển, kho, thuế, phí sàn, quảng cáo, hàng mẫu) doanh nghiệp trả theo thực tế, TIMUS không cộng phí.</p>
-        <p data-l="en">Quoted per scope after a first call. Third party costs (shipping, warehousing, duties, marketplace fees, ads, samples) are paid at actual cost with no markup from TIMUS.</p>
+        <p data-l="vi">Báo giá theo phạm vi từng doanh nghiệp, gửi sau buổi trao đổi đầu. Chi phí bên thứ ba (vận chuyển, kho, thuế, phí sàn, quảng cáo, hàng mẫu) doanh nghiệp trả theo thực tế, TIMUS không cộng phí.</p><p data-l="en">Quoted per scope after a first call. Third party costs (shipping, warehousing, duties, marketplace fees, ads, samples) are paid at actual cost with no markup from TIMUS.</p>
         <a class="link" href="#lien-he"><span data-l="vi">Liên hệ báo giá</span><span data-l="en">Get a quote</span> →</a>
       </div>
     </div>
   </div>
 </section>
-
-<section id="cong-nghe" class="sec tech">
-  <div class="wrap">
-    <p class="eyebrow"><span data-l="vi">Dành cho doanh nghiệp có đội ngũ</span><span data-l="en">For companies with their own teams</span></p>
-    <h2><span data-l="vi">Công nghệ cho doanh nghiệp</span><span data-l="en">Technology for businesses</span></h2>
-    <p class="sub">
-      <span data-l="vi">Nhân viên bán hàng, marketing, kế toán, kho mỗi ngày mất hàng giờ cho việc lặp lại: chép số giữa các phần mềm, làm báo cáo, trả lời câu hỏi quen thuộc, xuất ảnh nhiều cỡ. TIMUS khảo sát từng vị trí, rồi dựng trợ lý AI làm thay những việc đó trên chính phần mềm doanh nghiệp đang dùng. Người trong đội vẫn là người duyệt và quyết định.</span>
-      <span data-l="en">Sales, marketing, accounting and warehouse staff lose hours every day to repetitive work: copying numbers between tools, building reports, answering the same questions, exporting images in many sizes. TIMUS surveys each role, then builds AI assistants that do this work inside the software your team already uses. Your people still review and decide.</span>
-    </p>
-
-    <div class="svc reveal">
-      <article class="card">
-        <span class="num">AI</span>
-        <h3><span data-l="vi">Trợ lý AI cho đội ngũ</span><span data-l="en">AI assistants for your team</span></h3>
-        <ul data-l="vi">
-          <li>Mỗi việc lặp lại được dạy cho trợ lý một lần và lưu thành một skill, nhân viên gọi tên là trợ lý làm lại đúng các bước.</li>
-          <li>Trợ lý làm việc qua kết nối với Google Sheets, Google Drive, Canva; trang web và phần mềm không có kết nối thì trợ lý thao tác trên màn hình như người.</li>
-          <li>Chạy khi được gọi hoặc theo lịch: báo cáo mỗi sáng, kiểm quảng cáo, quét giá.</li>
-          <li>Mọi việc gửi ra ngoài, sửa giá, sửa đơn đều dừng chờ người duyệt.</li>
-        </ul>
-        <ul data-l="en">
-          <li>Each repetitive task is taught to the assistant once and saved as a skill; staff call it by name and the assistant repeats the exact steps.</li>
-          <li>The assistant works through connections to Google Sheets, Google Drive and Canva; for websites and software without a connection, it operates the screen the way a person does.</li>
-          <li>Runs on request or on a schedule: morning reports, ad checks, price scans.</li>
-          <li>Anything sent outside, any price or order change, waits for a person to approve.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <span class="num">02</span>
-        <h3><span data-l="vi">Dashboard báo cáo</span><span data-l="en">Reporting dashboards</span></h3>
-        <p class="c-p" data-l="vi">Doanh thu, lời lãi, tồn kho, quảng cáo của mọi sàn trên một trang, cập nhật theo lịch; mỗi doanh nghiệp một trang riêng.</p>
-        <p class="c-p" data-l="en">Revenue, margin, inventory and ads from every channel on one page, updated on a schedule; a private page for each company.</p>
-      </article>
-      <article class="card">
-        <span class="num">03</span>
-        <h3><span data-l="vi">Kết nối sàn, website và kho</span><span data-l="en">Marketplace, website and warehouse sync</span></h3>
-        <p class="c-p" data-l="vi">Đồng bộ sản phẩm, đơn hàng, tồn kho giữa các sàn, website, kho và phần mềm kế toán, bớt nhập tay hai lần.</p>
-        <p class="c-p" data-l="en">Sync products, orders and inventory between marketplaces, website, warehouse and accounting software, so nothing is entered twice.</p>
-      </article>
-      <article class="card">
-        <span class="num">04</span>
-        <h3><span data-l="vi">Website</span><span data-l="en">Websites</span></h3>
-        <p class="c-p" data-l="vi">Website công ty và website bán hàng, song ngữ khi cần, gắn với dashboard và kết nối sàn.</p>
-        <p class="c-p" data-l="en">Company websites and online stores, bilingual when needed, tied into your dashboard and marketplace sync.</p>
-      </article>
-    </div>
-
-    <h3 class="t-h"><span data-l="vi">Trợ lý AI làm được gì cho từng phòng ban</span><span data-l="en">What an AI assistant does for each department</span></h3>
-    <div class="tabs reveal" data-tabs data-hover>
-      <div class="tab-row" role="tablist">
-        <button type="button" class="tab on" data-tab="d0" role="tab" aria-selected="true"><span data-l="vi">Marketing</span><span data-l="en">Marketing</span></button>
-        <button type="button" class="tab" data-tab="d1" role="tab" aria-selected="false"><span data-l="vi">Thương mại điện tử</span><span data-l="en">E-commerce</span></button>
-        <button type="button" class="tab" data-tab="d2" role="tab" aria-selected="false"><span data-l="vi">Chăm sóc khách hàng</span><span data-l="en">Customer service</span></button>
-        <button type="button" class="tab" data-tab="d3" role="tab" aria-selected="false"><span data-l="vi">Thiết kế, nội dung</span><span data-l="en">Design and content</span></button>
-        <button type="button" class="tab" data-tab="d4" role="tab" aria-selected="false"><span data-l="vi">Kế toán</span><span data-l="en">Accounting</span></button>
-        <button type="button" class="tab" data-tab="d5" role="tab" aria-selected="false"><span data-l="vi">Kho vận, nhân sự</span><span data-l="en">Warehouse and HR</span></button>
-      </div>
-      <div class="tab-p dept-p on" data-panel="d0" role="tabpanel">
-        <ul data-l="vi"><li>Lấy chỉ số Facebook, TikTok, YouTube, sàn vào bảng báo cáo mỗi sáng.</li><li>Lên ý tưởng, lịch nội dung, caption nháp.</li></ul>
-        <ul data-l="en"><li>Pull Facebook, TikTok, YouTube and marketplace metrics into the report every morning.</li><li>Draft content ideas, calendars and captions.</li></ul>
-      </div>
-      <div class="tab-p dept-p" data-panel="d1" role="tabpanel">
-        <ul data-l="vi"><li>Quét gian hàng bán dưới giá, theo dõi giá và chương trình của đối thủ.</li><li>Chép đơn từ các sàn sang bảng tính, phần mềm kế toán.</li></ul>
-        <ul data-l="en"><li>Scan for sellers below your price, track competitor prices and promotions.</li><li>Copy orders from marketplaces into spreadsheets and accounting software.</li></ul>
-      </div>
-      <div class="tab-p dept-p" data-panel="d2" role="tabpanel">
-        <ul data-l="vi"><li>Soạn sẵn câu trả lời tin nhắn và đánh giá theo kịch bản đã duyệt, người đọc lại rồi gửi.</li><li>Gom câu khách hay hỏi thành bộ câu trả lời mẫu.</li></ul>
-        <ul data-l="en"><li>Draft replies to messages and reviews from approved scripts for a person to check and send.</li><li>Turn frequent questions into a reply library.</li></ul>
-      </div>
-      <div class="tab-p dept-p" data-panel="d3" role="tabpanel">
-        <ul data-l="vi"><li>Viết brief thiết kế từ nội dung bài.</li><li>Tách nền, đổi nền, xuất ảnh đủ cỡ cho từng kênh.</li></ul>
-        <ul data-l="en"><li>Write design briefs from post content.</li><li>Remove and change backgrounds, export images in every channel size.</li></ul>
-      </div>
-      <div class="tab-p dept-p" data-panel="d4" role="tabpanel">
-        <ul data-l="vi"><li>Đối chiếu tiền về và phí sàn với đơn hàng.</li><li>Gom chứng từ, lập bảng tổng hợp cuối tháng.</li></ul>
-        <ul data-l="en"><li>Reconcile payouts and marketplace fees against orders.</li><li>Collect documents and build month end summaries.</li></ul>
-      </div>
-      <div class="tab-p dept-p" data-panel="d5" role="tabpanel">
-        <ul data-l="vi"><li>Theo dõi tồn kho, nhắc nhập hàng.</li><li>Tổng hợp chấm công, hồ sơ ứng viên vào một bảng.</li></ul>
-        <ul data-l="en"><li>Track stock and flag reorders.</li><li>Compile timesheets and candidate files into one sheet.</li></ul>
-      </div>
-    </div>
-
-    <p class="t-link"><a class="link" href="#cach-lam" data-proc="ai"><span data-l="vi">Xem cách triển khai trợ lý AI, 5 bước →</span><span data-l="en">See how we deploy AI assistants, 5 steps →</span></a></p>
-
-    <div class="t-two reveal">
-      <div>
-        <h3 class="t-h"><span data-l="vi">Nguyên tắc an toàn</span><span data-l="en">Safety rules</span></h3>
-        <ul class="safe" data-l="vi">
-          <li>Trợ lý không biết mật khẩu; tài khoản, dữ liệu và bảng tính vẫn đứng tên doanh nghiệp.</li>
-          <li>Ưu tiên quyền chỉ xem; việc gửi ra ngoài, sửa giá, sửa đơn luôn chờ người duyệt.</li>
-          <li>Không chép thông tin khách hàng ra ngoài hệ thống của doanh nghiệp.</li>
-          <li>Mỗi trợ lý có hướng dẫn và cách tắt, đội ngũ tự quản lý sau bàn giao.</li>
-        </ul>
-        <ul class="safe" data-l="en">
-          <li>The assistant never holds passwords; accounts, data and spreadsheets stay in your company's name.</li>
-          <li>View-only access first; sending, price or order changes always wait for approval.</li>
-          <li>Customer data never leaves your company's systems.</li>
-          <li>Every assistant comes with a guide and an off switch; your team manages it after handover.</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="t-h"><span data-l="vi">Làm việc trên công cụ doanh nghiệp đang dùng</span><span data-l="en">Works with the tools you already use</span></h3>
-        <p class="tools">Shopee · TikTok Shop · Lazada · Pancake · Zalo · Google Sheets · Google Drive · Canva · MISA · Meta · TikTok Ads · Photoshop</p>
-      </div>
-    </div>
-
-    <div class="cta t-cta">
-      <a class="btn btn-gold" href="https://zalo.me/0796796492" target="_blank" rel="noopener"><span data-l="vi">Đặt lịch khảo sát</span><span data-l="en">Book a survey</span></a>
-      <a class="btn btn-line" href="mailto:info@timusco.com?subject=TIMUS%20-%20Tro%20ly%20AI%20cho%20doanh%20nghiep"><span data-l="vi">Gửi email</span><span data-l="en">Email us</span></a>
-    </div>
-    <p class="note" data-l="vi">Báo giá sau buổi khảo sát. Phần mềm, tài khoản bên thứ ba doanh nghiệp trả theo thực tế, TIMUS không cộng phí.</p>
-    <p class="note" data-l="en">Quoted after the survey. Third party software and accounts are paid at actual cost with no markup.</p>
-  </div>
-</section>
+<!-- SVC:END -->
 
 <section id="cach-lam" class="sec sec-alt light">
   <div class="wrap">
@@ -503,66 +336,24 @@
 <section id="hoi-dap" class="sec sec-alt light">
   <div class="wrap faq">
     <h2 class="reveal"><span data-l="vi">Câu hỏi thường gặp</span><span data-l="en">Frequently asked questions</span></h2>
-    <div class="tabs reveal" data-tabs id="faqTabs">
-      <div class="tab-row" role="tablist">
-        <button type="button" class="tab on" data-tab="ops" role="tab" aria-selected="true"><span data-l="vi">Vận hành sàn</span><span data-l="en">Marketplace operations</span></button>
-        <button type="button" class="tab" data-tab="ai" role="tab" aria-selected="false"><span data-l="vi">Trợ lý AI</span><span data-l="en">AI assistants</span></button>
-      </div>
-      <div class="tab-p qa-list on" data-panel="ops" role="tabpanel">
-        <details class="qa">
+    <div class="qa-list reveal">
+      <details class="qa">
         <summary><span data-l="vi">Chi phí được tính thế nào?</span><span data-l="en">How is pricing calculated?</span></summary>
         <p data-l="vi">Mỗi khâu có một mức phí cố định, doanh nghiệp chỉ trả cho khâu mình chọn. TIMUS gửi báo giá theo phạm vi sau buổi trao đổi đầu. Chi phí bên thứ ba như vận chuyển, kho, phí sàn, quảng cáo doanh nghiệp trả theo thực tế, TIMUS không cộng thêm.</p>
         <p data-l="en">Each stage has a fixed fee and you only pay for the stages you choose. We send a scoped quote after a first call. Third party costs such as shipping, warehousing, marketplace fees and ads are paid at actual cost with no markup.</p>
       </details>
-        <details class="qa">
-        <summary><span data-l="vi">Chưa có sản phẩm để bán online thì bắt đầu từ đâu?</span><span data-l="en">We do not have a product for online sales yet. Where do we start?</span></summary>
-        <p data-l="vi">Bắt đầu từ khâu nghiên cứu. TIMUS xem năng lực sẵn có của doanh nghiệp, phân tích thị trường và đề xuất 1 đến 2 sản phẩm để thử trước. Hai bên cùng quyết định rồi mới bỏ tiền làm hàng.</p>
-        <p data-l="en">Start with research. We look at what your company can already do, analyse the market and propose 1 to 2 products to test first. We decide together before any money goes into inventory.</p>
-      </details>
-        <details class="qa">
-        <summary><span data-l="vi">Bao lâu thì có đơn hàng đầu tiên?</span><span data-l="en">How soon do first orders come in?</span></summary>
-        <p data-l="vi">Khi gian hàng đã mở và hàng đã sẵn sàng, đơn đầu thường có trong tháng vận hành đầu tiên. TIMUS không cam kết con số doanh thu; kết quả được báo cáo bằng số liệu thật hằng tháng.</p>
-        <p data-l="en">Once the store is live and stock is ready, first orders usually come within the first month of operations. We do not promise revenue figures; results are reported with real data every month.</p>
-      </details>
-        <details class="qa">
-        <summary><span data-l="vi">Hợp đồng vận hành kéo dài bao lâu?</span><span data-l="en">How long is an operations contract?</span></summary>
-        <p data-l="vi">Hợp đồng vận hành tối thiểu 6 tháng, vì gian hàng cần thời gian để có dữ liệu và tối ưu. Với thị trường Mỹ có gói thử nghiệm 3 tháng cho 1 kênh và 1 đến 2 sản phẩm.</p>
-        <p data-l="en">Operations contracts run for at least 6 months, since a store needs time to gather data and improve. For the US there is a 3 month test plan covering 1 channel and 1 to 2 products.</p>
-      </details>
-        <details class="qa">
+      <details class="qa">
         <summary><span data-l="vi">Doanh nghiệp theo dõi kết quả bằng cách nào?</span><span data-l="en">How do we track results?</span></summary>
         <p data-l="vi">Mỗi doanh nghiệp có một trang theo dõi riêng để xem doanh thu, lời lãi, tồn kho và thị trường. Báo cáo và đối soát gửi hằng tháng trước ngày 05.</p>
         <p data-l="en">Each brand gets a private dashboard showing revenue, margin, inventory and market data. The monthly report and reconciliation arrive before the 5th.</p>
       </details>
-        <details class="qa">
+      <details class="qa">
         <summary><span data-l="vi">Chỉ cần một phần việc, ví dụ dashboard hoặc website, có được không?</span><span data-l="en">Can we hire TIMUS for just one piece, such as a dashboard or a website?</span></summary>
         <p data-l="vi">Được. Các dịch vụ tách rời nhau, doanh nghiệp có thể chỉ làm nghiên cứu sản phẩm, chỉ làm dashboard báo cáo, website hoặc hệ thống kết nối các sàn mà không cần ký vận hành.</p>
         <p data-l="en">Yes. Services are separate, so you can take only product research, a reporting dashboard, a website or a multichannel system without an operations contract.</p>
       </details>
-      </div>
-      <div class="tab-p qa-list" data-panel="ai" role="tabpanel">
-        <details class="qa">
-        <summary><span data-l="vi">Trợ lý AI khác chatbot ở chỗ nào?</span><span data-l="en">How is an AI assistant different from a chatbot?</span></summary>
-        <p data-l="vi">Chatbot chỉ trả lời câu hỏi. Trợ lý AI của TIMUS làm việc trên phần mềm của doanh nghiệp: lấy số, ghi bảng tính, soạn nháp, xuất file, theo đúng các bước đội đang làm, và dừng chờ người duyệt ở những chỗ quan trọng.</p>
-        <p data-l="en">A chatbot only answers questions. A TIMUS assistant works inside your software: it pulls numbers, fills spreadsheets, drafts replies and exports files following your team's own steps, and stops for approval where it matters.</p>
-      </details>
-        <details class="qa">
-        <summary><span data-l="vi">Dữ liệu của doanh nghiệp có an toàn không?</span><span data-l="en">Is our data safe?</span></summary>
-        <p data-l="vi">Trợ lý không giữ mật khẩu, ưu tiên quyền chỉ xem, không chép thông tin khách hàng ra ngoài. Mọi tài khoản và dữ liệu vẫn đứng tên doanh nghiệp; doanh nghiệp quyết định loại dữ liệu nào trợ lý được đọc.</p>
-        <p data-l="en">The assistant holds no passwords, uses view-only access where possible and never copies customer data out. Accounts and data stay in your name, and you decide which data it may read.</p>
-      </details>
-        <details class="qa">
-        <summary><span data-l="vi">Cần chuẩn bị gì để bắt đầu?</span><span data-l="en">What do we need to start?</span></summary>
-        <p data-l="vi">Một người phụ trách phía doanh nghiệp, mỗi nhân viên dành khoảng 15 phút điền phiếu khảo sát, và máy tính có trình duyệt Chrome. TIMUS hướng dẫn cài phần còn lại.</p>
-        <p data-l="en">One point of contact, about 15 minutes per staff member for the survey form, and computers with Chrome. TIMUS guides the rest of the setup.</p>
-      </details>
-        <details class="qa">
-        <summary><span data-l="vi">Bao lâu thì dùng được?</span><span data-l="en">How soon can we use it?</span></summary>
-        <p data-l="vi">Trợ lý đầu tiên thường chạy thử trong 2 đến 3 tuần sau khảo sát. TIMUS đo số giờ tiết kiệm thực tế sau 5 ngày chạy song song, không hứa trước con số.</p>
-        <p data-l="en">The first assistant usually runs on trial within 2 to 3 weeks of the survey. We measure real hours saved after 5 days side by side and do not promise numbers upfront.</p>
-      </details>
-      </div>
     </div>
+    <p class="t-link"><span data-l="vi">Câu hỏi riêng của từng dịch vụ nằm ở trang dịch vụ đó.</span><span data-l="en">Questions about a specific service are answered on that service page.</span></p>
   </div>
 </section>
 
@@ -592,11 +383,6 @@
 
 </main>
 
-<div class="aud-bar" id="audBar" hidden>
-  <span><span data-l="vi">Đang xem:</span><span data-l="en">Viewing:</span> <b id="audName"></b></span>
-  <button type="button" id="audReset"><span data-l="vi">Xem tất cả</span><span data-l="en">Show all</span></button>
-</div>
-
 <a class="fab" href="https://zalo.me/0796796492" target="_blank" rel="noopener" aria-label="Zalo">Zalo</a>
 
 <footer class="foot">
@@ -607,157 +393,6 @@
   </div>
 </footer>
 
-<script>
-  document.querySelectorAll('.lang button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var l = b.getAttribute('data-set');
-      document.documentElement.setAttribute('data-lang', l);
-      document.documentElement.lang = l;
-      try { localStorage.setItem('timus-lang', l); } catch (e) {}
-    });
-  });
-
-  var burger = document.querySelector('.burger'), head = document.querySelector('.top');
-  burger.addEventListener('click', function () {
-    var open = head.classList.toggle('open');
-    burger.setAttribute('aria-expanded', open);
-  });
-  document.querySelectorAll('.nav a').forEach(function (a) {
-    a.addEventListener('click', function () { head.classList.remove('open'); burger.setAttribute('aria-expanded', false); });
-  });
-
-  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.classList.add('anim');
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-  }
-</script>
-
-<script>
-(function () {
-  var canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  /* tab, danh sách chi tiết */
-  document.querySelectorAll('[data-tabs]').forEach(function (box) {
-    var bs = [].slice.call(box.querySelectorAll('[data-tab]')), ps = [].slice.call(box.querySelectorAll('[data-panel]'));
-    function act(id) {
-      bs.forEach(function (b) { var on = b.getAttribute('data-tab') === id; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
-      ps.forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-panel') === id); });
-    }
-    box._act = act;
-    bs.forEach(function (b) {
-      b.addEventListener('click', function () { act(b.getAttribute('data-tab')); });
-      if (canHover && box.hasAttribute('data-hover')) b.addEventListener('mouseenter', function () { act(b.getAttribute('data-tab')); });
-    });
-  });
-
-  /* các bước: rê chuột hiện mô tả */
-  document.querySelectorAll('[data-steps]').forEach(function (w) {
-    var lis = [].slice.call(w.querySelectorAll('li')), d = w.querySelector('.step-desc');
-    function act(li) {
-      lis.forEach(function (x) { x.classList.toggle('on', x === li); });
-      d.innerHTML = '';
-      [].forEach.call(li.querySelectorAll('p'), function (p) { d.appendChild(p.cloneNode(true)); });
-    }
-    lis.forEach(function (li) {
-      li.tabIndex = 0;
-      li.addEventListener('mouseenter', function () { act(li); });
-      li.addEventListener('focus', function () { act(li); });
-      li.addEventListener('click', function () { act(li); });
-    });
-    act(lis[0]);
-  });
-
-  /* chọn nhóm khách */
-  var AUD = {
-    ban: { go: 'dich-vu', dim: ['cong-nghe', 'dao-tao'], tab: 'ops' },
-    tech: { go: 'cong-nghe', dim: ['dich-vu', 'dao-tao'], tab: 'ai' },
-    hoc: { go: 'dao-tao', dim: ['dich-vu', 'cong-nghe', 'cach-lam'], tab: null }
-  };
-  var bar = document.getElementById('audBar'), nameEl = document.getElementById('audName');
-  var doors = [].slice.call(document.querySelectorAll('.who-b'));
-  function setTab(id, t) { var x = document.getElementById(id); if (x && x._act && t) x._act(t); }
-  function setAud(k) {
-    document.querySelectorAll('section.dim').forEach(function (x) { x.classList.remove('dim'); });
-    doors.forEach(function (d) { d.classList.toggle('on', d.getAttribute('data-aud') === k); });
-    if (!k) { bar.hidden = true; return; }
-    var a = AUD[k];
-    a.dim.forEach(function (id) { document.getElementById(id).classList.add('dim'); });
-    setTab('procTabs', a.tab); setTab('faqTabs', a.tab);
-    nameEl.innerHTML = document.querySelector('.who-b[data-aud="' + k + '"] b').innerHTML;
-    bar.hidden = false;
-    document.getElementById(a.go).scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-  doors.forEach(function (d) { d.addEventListener('click', function () { setAud(d.getAttribute('data-aud')); }); });
-  document.getElementById('audReset').addEventListener('click', function () { setAud(null); });
-  document.querySelectorAll('[data-proc]').forEach(function (a) { a.addEventListener('click', function () { setTab('procTabs', a.getAttribute('data-proc')); }); });
-
-  /* menu sáng mục đang xem */
-  var links = [].slice.call(document.querySelectorAll('.nav a')).filter(function (a) { return a.getAttribute('href').charAt(0) === '#'; });
-  var secs = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
-  function spy() {
-    var cur = -1, best = -1e9;
-    secs.forEach(function (sec, i) { if (!sec) return; var t = sec.getBoundingClientRect().top - 140; if (t <= 0 && t > best) { best = t; cur = i; } });
-    links.forEach(function (a, i) { a.classList.toggle('cur', i === cur); });
-  }
-  addEventListener('scroll', spy, { passive: true }); spy();
-
-  /* nền động màu vàng ở phần đầu */
-  var c = document.getElementById('heroFx');
-  if (c && c.getContext) {
-    var x = c.getContext('2d'), hero = c.parentElement, W, H, D = Math.min(window.devicePixelRatio || 1, 2), R = [], on = true, L, ANG = -0.56;
-    var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function mk(first) {
-      var wide = Math.random() < .3;
-      var len = (wide ? .45 + Math.random() * .4 : .2 + Math.random() * .45) * L;
-      return { u: first ? (Math.random() * 2 - 1) * L : -L - len, v: (Math.random() * 2 - 1) * L * .62, len: len,
-        w: wide ? 26 + Math.random() * 54 : 1 + Math.random() * 2.2, wide: wide, sp: wide ? .7 + Math.random() * .9 : 1.8 + Math.random() * 3.2,
-        a: wide ? .06 + Math.random() * .09 : .3 + Math.random() * .35 };
-    }
-    function size() {
-      W = hero.clientWidth; H = hero.clientHeight; c.width = W * D; c.height = H * D; L = Math.sqrt(W * W + H * H) / 2 + 60;
-      var n = W < 700 ? 18 : 34; R = []; for (var i = 0; i < n; i++) R.push(mk(true));
-    }
-    function frame() {
-      x.setTransform(D, 0, 0, D, 0, 0); x.clearRect(0, 0, W, H);
-      x.translate(W / 2, H / 2); x.rotate(ANG);
-      for (var i = 0; i < R.length; i++) {
-        var r = R[i]; r.u += r.sp; if (r.u > L) R[i] = r = mk(false);
-        var g = x.createLinearGradient(r.u, 0, r.u + r.len, 0);
-        g.addColorStop(0, 'rgba(212,168,98,0)'); g.addColorStop(.55, 'rgba(212,168,98,' + r.a + ')');
-        g.addColorStop(.85, 'rgba(240,210,150,' + (r.a * 1.25).toFixed(3) + ')'); g.addColorStop(1, 'rgba(212,168,98,0)');
-        x.fillStyle = g; x.fillRect(r.u, r.v - r.w / 2, r.len, r.w);
-        if (!r.wide) { var hx = r.u + r.len * .9, hg = x.createRadialGradient(hx, r.v, 0, hx, r.v, 9); hg.addColorStop(0, 'rgba(255,236,190,' + Math.min(1, r.a * 1.8).toFixed(3) + ')'); hg.addColorStop(1, 'rgba(255,236,190,0)'); x.fillStyle = hg; x.fillRect(hx - 9, r.v - 9, 18, 18); }
-      }
-    }
-    function loop() { if (on && !document.hidden) frame(); requestAnimationFrame(loop); }
-    size(); frame();
-    var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { size(); frame(); }, 150); });
-    if (!still) {
-      addEventListener('scroll', function () { on = hero.getBoundingClientRect().bottom > 0; }, { passive: true });
-      requestAnimationFrame(loop);
-    }
-  }
-})();
-</script>
-<script>
-(function () {
-  var t = document.getElementById('lgTrack'); if (!t) return; var g = t.querySelector('.lg-grp');
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { t.style.animation = 'none'; t.parentElement.style.overflowX = 'auto'; return; }
-  var base = [].slice.call(g.children).map(function (n) { return n.cloneNode(true); });
-  function build() {
-    [].slice.call(t.querySelectorAll('.lg-grp[aria-hidden]')).forEach(function (x) { x.remove(); });
-    g.innerHTML = ''; base.forEach(function (n) { g.appendChild(n.cloneNode(true)); });
-    var guard = 0;
-    while (g.offsetWidth < innerWidth * 1.2 && guard++ < 10) base.forEach(function (n) { var k = n.cloneNode(true); k.alt = ''; g.appendChild(k); });
-    var c = g.cloneNode(true); c.setAttribute('aria-hidden', 'true'); t.appendChild(c);
-    t.style.animationDuration = Math.max(24, Math.round(g.offsetWidth / 60)) + 's';
-  }
-  build(); addEventListener('load', build);
-  var to; addEventListener('resize', function () { clearTimeout(to); to = setTimeout(build, 200); });
-})();
-</script>
+<script src="/assets/site.js?v=1"></script>
 </body>
 </html>

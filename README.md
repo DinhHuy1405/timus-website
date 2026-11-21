@@ -31,3 +31,9 @@ Chỉ thêm các bản ghi dưới đây. Không xoá hay sửa bản ghi MX, TX
 | www | CNAME | dinhhuy1405.github.io |
 
 Nếu Squarespace đang có sẵn bản ghi A hoặc CNAME `www` mặc định (trang đỗ tên miền của Squarespace) thì xoá các bản ghi web đó trước, giữ nguyên bản ghi email. DNS thường chạy sau vài phút đến vài giờ.
+
+## Trang dịch vụ (từ 21/11/2026)
+
+Trang chủ chỉ giữ phần chung. Mỗi dịch vụ có một trang riêng: `tro-ly-ai/`, `dashboard-ket-noi-website/`, `nghien-cuu-san-pham/`, `nguon-hang/`, `ban-hang-tai-my/`, `ban-hang-tai-viet-nam/`, `hau-can/`.
+
+Chữ của các trang dịch vụ, menu và hai khối thẻ dịch vụ trên trang chủ nằm trong `tools/build.py`. Sửa ở đó rồi chạy `python3 tools/build.py` từ thư mục gốc, không sửa tay các file `index.html` của trang dịch vụ. Mã tương tác dùng chung nằm ở `assets/site.js`.
