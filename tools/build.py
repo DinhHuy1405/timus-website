@@ -8,11 +8,13 @@ Chạy từ thư mục gốc của repo:  python3 tools/build.py
 Sửa chữ của trang dịch vụ thì sửa trong file này rồi chạy lại, không sửa tay file index.html của từng trang.
 Mỗi câu là một cặp (tiếng Việt, tiếng Anh).
 """
-import json, os, re
+import json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import home_parts
 
 SITE = 'https://timusco.com'
-CSS_V = '12'
-JS_V = '4'
+CSS_V = '15'
+JS_V = '6'
 ZALO = 'https://zalo.me/0796796492'
 MAIL = 'info@timusco.com'
 
@@ -668,66 +670,9 @@ def page(p):
     return ''.join(out)
 
 
-SERVICES = [
-    {'id': 'logistics', 'vid': 'logistics', 't': ('Logistics', 'Logistics'),
-     's': ('Nguồn hàng từ nhà máy Việt Nam, Trung Quốc và đưa hàng sang Mỹ.', 'Sourcing from factories in Vietnam and China, and getting goods to the United States.'),
-     'b': [('Tìm và so sánh nhà máy, làm mẫu, bao bì và lô thử trước khi làm lô lớn.', 'Find and compare factories, then samples, packaging and a test batch before scaling.'),
-           ('Bao bì, tem nhãn, phối hợp giấy tờ xuất nhập khẩu và vận chuyển.', 'Packaging, labels and coordination of export, import and shipping.'),
-           ('Nhận hàng và vận hành kho tại Mỹ, kết nối các sàn để giao đơn.', 'Receiving and warehouse operations in the US, connected to marketplaces for fulfilment.')],
-     'links': ['nguon-hang', 'hau-can']},
-    {'id': 'thuong-mai-dien-tu', 'vid': 'ecommerce', 't': ('E-commerce', 'E-commerce'),
-     's': ('Mở gian hàng và vận hành hằng tháng trên các sàn tại Việt Nam và Mỹ.', 'Store setup and monthly operations on marketplaces in Vietnam and the United States.'),
-     'b': [('Việt Nam: Shopee, TikTok Shop, Lazada, Tiki.', 'Vietnam: Shopee, TikTok Shop, Lazada, Tiki.'),
-           ('Mỹ: Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify.', 'United States: Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify.'),
-           ('Mở gian hàng, đăng sản phẩm, quảng cáo, KOC và creator, chăm sóc người mua.', 'Store setup, listings, ads, KOCs and creators, customer service.'),
-           ('Báo cáo và đối soát hằng tháng trên trang theo dõi riêng.', 'Monthly reports and reconciliation on a private dashboard.')],
-     'links': ['ban-hang-tai-viet-nam', 'ban-hang-tai-my']},
-    {'id': 'cong-nghe', 'vid': 'technology', 't': ('Technology', 'Technology'),
-     's': ('Hệ thống website, nghiên cứu sản phẩm, phân tích dữ liệu và hệ thống AI agents tự động cho doanh nghiệp.', 'Website systems, product research, data analysis and automated AI agent systems for businesses.'),
-     'b': [('Hệ thống website: website công ty, website bán hàng, kết nối với sàn và kho.', 'Website systems: company websites and online stores, connected to marketplaces and warehouse.'),
-           ('Nghiên cứu sản phẩm: ngách, đối thủ, khung giá, lời lãi dự kiến theo số liệu bán hàng thực tế trên sàn.', 'Product research: niches, competitors, price ranges and projected margin from real marketplace sales data.'),
-           ('Phân tích dữ liệu: dashboard doanh thu, lời lãi, tồn kho, quảng cáo của mọi sàn trên một trang.', 'Data analysis: dashboards for revenue, margin, inventory and ads across every channel.'),
-           ('Hệ thống AI agents tự động: làm thay việc lặp lại cho từng phòng ban, người trong đội vẫn duyệt và quyết định.', 'Automated AI agent systems: they take over repetitive work for each department while your people review and decide.')],
-     'links': ['dashboard-ket-noi-website', 'nghien-cuu-san-pham', 'tro-ly-ai']},
-]
-
-
 def home_blocks():
     by = {p['slug']: p for p in PAGES}
-    left, right = [], []
-    for i, sv in enumerate(SERVICES, 1):
-        on = ' on' if i == 1 else ''
-        links = ''.join(f'<a class="link" href="/{sl}/">{L(by[sl]["title"])} →</a>' for sl in sv['links'])
-        left.append(f'''      <div class="sv-i" id="{sv['id']}">
-        <button type="button" class="sv-b{on}" data-tab="{sv['id']}" role="tab" aria-selected="{'true' if i == 1 else 'false'}">
-          <span class="sv-n">0{i}</span>
-          <span class="sv-h"><b>{L(sv['t'])}</b><span class="sv-s">{L(sv['s'])}</span></span>
-          <i class="sv-x" aria-hidden="true"></i>
-        </button>
-        <div class="sv-d{on}" data-panel="{sv['id']}" role="tabpanel">
-          {UL(sv['b'], 'safe')}
-          <p class="sv-links">{links}</p>
-        </div>
-      </div>''')
-        right.append(f'''        <video class="sv-v{on}" data-panel="{sv['id']}" src="/assets/video/{sv['vid']}.mp4" poster="/assets/video/{sv['vid']}.jpg" muted playsinline preload="{'auto' if i == 1 else 'none'}" width="1200" height="900" aria-label="{sv['t'][0]}"></video>''')
-    return f'''<section id="dich-vu" class="sec light sv-sec">
-  <div class="wrap">
-    <p class="eyebrow">Logistics, E-Commerce &amp; Technology</p>
-    <h2>{L(('Ba mảng dịch vụ của TIMUS', 'Three TIMUS service lines'))}</h2>
-    <div class="sv" data-tabs>
-      <div class="sv-l" role="tablist">
-{chr(10).join(left)}
-      </div>
-      <div class="sv-r">
-        <div class="sv-stage">
-{chr(10).join(right)}
-        </div>
-        <p class="sv-cap">{L(('Hình mô phỏng, toạ độ minh hoạ.', 'Illustrative animation; locations are indicative.'))}</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+    return home_parts.services(by, P) + f'''
 <section class="sec sec-alt light">
   <div class="wrap">
     <div class="included reveal" style="margin-top:0">
@@ -754,6 +699,8 @@ def main():
     s = open('index.html').read()
     a, b = s.index('<!-- SVC:START -->'), s.index('<!-- SVC:END -->')
     s = s[:a] + '<!-- SVC:START -->\n' + home_blocks() + s[b:]
+    a, b = s.index('<!-- HERO:START -->'), s.index('<!-- HERO:END -->')
+    s = s[:a] + '<!-- HERO:START -->\n' + home_parts.hero() + '\n' + s[b:]
     h1, h2 = s.index('<header class="top">'), s.index('</header>') + len('</header>')
     s = s[:h1] + header(home=True) + s[h2:]
     open('index.html', 'w').write(s)

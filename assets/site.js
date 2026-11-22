@@ -60,7 +60,32 @@
       li.addEventListener('click', function () { act(li); });
     });
     act(lis[0]);
+    w._act = act; w._lis = lis;
   });
+
+  /* quy trình: khi cuộn tới thì các bước sáng lần lượt, một lần */
+  all('#cach-lam [data-steps]').forEach(function (w) {
+    if (!w._lis || !('IntersectionObserver' in window)) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { w._lis.forEach(function (li) { li.classList.add('done'); }); return; }
+    var ran = false, touched = false;
+    w._lis.forEach(function (li) { ['mouseenter', 'click', 'focus'].forEach(function (ev) { li.addEventListener(ev, function (e) { if (e.isTrusted) touched = true; }); }); });
+    var io2 = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting || ran || !w.classList.contains('on') && w.hasAttribute('data-panel')) return;
+        ran = true; io2.disconnect();
+        w._lis.forEach(function (li, i) {
+          setTimeout(function () { li.classList.add('done'); if (!touched) w._act(li); }, 400 + i * 1500);
+        });
+      });
+    }, { threshold: .5 });
+    io2.observe(w);
+  });
+
+  /* minh hoạ trong thẻ dịch vụ: chỉ chạy khi nhìn thấy */
+  if ('IntersectionObserver' in window) {
+    var ioR = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('run', e.isIntersecting); }); }, { threshold: .15 });
+    all('[data-run]').forEach(function (el) { ioR.observe(el); });
+  } else all('[data-run]').forEach(function (el) { el.classList.add('run'); });
 
   /* menu sáng mục đang xem (chỉ với liên kết trong trang) */
   var links = all('.nav a').filter(function (a) { return a.getAttribute('href').charAt(0) === '#'; });
@@ -115,33 +140,71 @@
     }
   }
 
-  /* ba mảng dịch vụ: video tự chuyển lần lượt; bấm đề mục nào thì ra video mảng đó và dừng tự chuyển */
-  var sv = doc.querySelector('.sv');
+  /* phần đầu trang: các mảng dịch vụ tự chạy lần lượt; bấm tab nào thì ra phần đó và dừng tự chuyển.
+     Tổng quan và Technology là cụm giao diện động (.sv-live); Logistics, E-commerce là video. */
+  var sv = doc.querySelector('[data-svc]');
   if (sv) {
-    var vids = all('.sv-v', sv), svBtns = all('.sv-b', sv), svSeen = false, svAuto = true;
+    var vids = all('.sv-v', sv), svBtns = all('[data-tab]', sv), svSeen = false, svAuto = true, svT = 0;
     var svIds = svBtns.map(function (b) { return b.getAttribute('data-tab'); });
-    var svCur = function () { for (var i = 0; i < vids.length; i++) if (vids[i].classList.contains('on')) return i; return 0; };
-    var svPlay = function (restart) {
-      vids.forEach(function (v) {
-        if (v.classList.contains('on') && svSeen) {
-          if (restart) { try { v.currentTime = 0; } catch (e) {} }
-          v.loop = !svAuto;
-          var p = v.play(); if (p && p.catch) p.catch(function () {});
-        } else v.pause();
+    var isVid = function (v) { return v.tagName === 'VIDEO'; };
+    var durOf = function (v) { return (isVid(v) && v.duration && isFinite(v.duration)) ? v.duration : (parseFloat(v.getAttribute('data-dur')) || 12); };
+    var svNext = function (i) { svGo(svIds[(i + 1) % svIds.length], true); };
+    var svBar = function () {
+      var cur = vids.filter(function (v) { return v.classList.contains('on'); })[0];
+      svBtns.forEach(function (b) {
+        b.classList.remove('go', 'hold');
+        if (!b.classList.contains('on')) return;
+        if (!svAuto) { b.classList.add('hold'); return; }
+        b.style.setProperty('--dur', durOf(cur).toFixed(2) + 's'); void b.offsetWidth; if (svSeen) b.classList.add('go');
       });
     };
-    var svGo = function (id, restart) { sv._act(id); svPlay(restart); };
+    var liveRun = function (v, restart) {
+      if (restart || !v.classList.contains('run')) { v.classList.remove('run'); void v.offsetWidth; v.classList.add('run'); }
+      clearTimeout(svT);
+      if (svAuto) svT = setTimeout(function () { if (svAuto && v.classList.contains('on') && svSeen) svNext(vids.indexOf(v)); }, durOf(v) * 1000);
+    };
+    var svPlay = function (restart) {
+      vids.forEach(function (v) {
+        var on = v.classList.contains('on') && svSeen;
+        if (isVid(v)) {
+          if (on) { if (restart) { try { v.currentTime = 0; } catch (e) {} } v.loop = !svAuto; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          else v.pause();
+        } else if (on) liveRun(v, restart);
+        else v.classList.remove('run');
+      });
+      svBar();
+    };
+    var svGo = function (id, restart) { clearTimeout(svT); sv._act(id); svPlay(restart); };
     vids.forEach(function (v, i) {
-      v.addEventListener('ended', function () { if (svAuto && v.classList.contains('on')) svGo(svIds[(i + 1) % svIds.length], true); });
-      v.addEventListener('error', function () { if (svAuto && v.classList.contains('on')) setTimeout(function () { svGo(svIds[(i + 1) % svIds.length], true); }, 4000); });
+      if (!isVid(v)) return;
+      v.addEventListener('ended', function () { if (svAuto && v.classList.contains('on')) svNext(i); });
+      v.addEventListener('loadedmetadata', function () { if (v.classList.contains('on')) svBar(); });
+      v.addEventListener('error', function () { if (svAuto && v.classList.contains('on')) setTimeout(function () { svNext(i); }, 4000); });
     });
     svBtns.forEach(function (b) {
       b.addEventListener('click', function () { svAuto = false; svGo(b.getAttribute('data-tab'), true); });
     });
-    var svVis = function () { var r = sv.getBoundingClientRect(); var s = r.top < innerHeight * .9 && r.bottom > innerHeight * .1; if (s !== svSeen) { svSeen = s; svPlay(false); } };
+    var svVis = function () {
+      var r = sv.getBoundingClientRect(); var s = r.top < innerHeight * .8 && r.bottom > innerHeight * .25;
+      if (s !== svSeen) { svSeen = s; clearTimeout(svT); svPlay(s); }
+    };
     addEventListener('scroll', svVis, { passive: true }); addEventListener('resize', svVis); svVis();
     var svHash = function () { var id = location.hash.slice(1); if (id && svIds.indexOf(id) >= 0) { svAuto = false; svGo(id, true); } };
     addEventListener('hashchange', svHash); svHash();
+
+    /* cụm giao diện động: co theo khung, nghiêng theo chuột */
+    var stage = sv.querySelector('.sv-stage'), txs = all('.tx', sv);
+    if (stage && txs.length) {
+      var fit = function () { txs.forEach(function (tx) { tx.style.setProperty('--k', (stage.clientWidth / 640).toFixed(4)); }); };
+      fit(); addEventListener('resize', fit); addEventListener('load', fit);
+      if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        stage.addEventListener('mousemove', function (e) {
+          var r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+          all('.tx-w', sv).forEach(function (w) { w.style.transform = 'rotateX(' + (9 - y * 10).toFixed(2) + 'deg) rotateY(' + (-11 + x * 14).toFixed(2) + 'deg)'; });
+        });
+        stage.addEventListener('mouseleave', function () { all('.tx-w', sv).forEach(function (w) { w.style.transform = ''; }); });
+      }
+    }
   }
 
   /* dải logo sàn chạy ngang */
