@@ -197,7 +197,7 @@
     var host3d = doc.getElementById('hx3d');
     if (host3d && matchMedia('(min-width: 901px)').matches && window.WebGLRenderingContext) {
       var go3d = function () {
-        import('/assets/scene3d.js?v=3').then(function (m) {
+        import('/assets/scene3d.js?v=4').then(function (m) {
           sv3d = m.mount(host3d);
           if (sv3d) { var b = svBtns.filter(function (x) { return x.classList.contains('on'); })[0]; if (b) sv3d.show(b.getAttribute('data-tab')); }
         }).catch(function () {});

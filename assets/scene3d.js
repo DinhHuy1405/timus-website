@@ -100,7 +100,7 @@ async function logistics() {
   put(root, prep(boat, 3), -8.9, 0, 1.6, Math.PI / 2); put(root, prep(ship, 6), 1.2, 0, 1.6, Math.PI / 2);
   for (const o of [ship, boat]) o.traverse((m) => { if (m.isMesh) { m.material = m.material.clone(); m.material.transparent = true; } });
   const sy = ship.position.y, by = boat.position.y, T = 13;
-  return { root, T, cam: [11.5, 29], labels: [[['Trung Quốc', 'China'], -12.5 * .78, 5.2, -2.2], [['Việt Nam', 'Vietnam'], -3.2 * .78, 4.6, -2.6], [['Kho tại Mỹ', 'US warehouse'], 11.5 * .78, 5.4, -2.2]],
+  return { root, T, cam: [11, 28.5], labels: [[['Trung Quốc', 'China'], -12.5 * .78, 5.2, -2.2], [['Việt Nam', 'Vietnam'], -3.2 * .78, 4.6, -2.6], [['Kho tại Mỹ', 'US warehouse'], 11.5 * .78, 5.4, -2.2]],
     update(t) {
       /* 0–3,5s: tàu nhỏ Trung Quốc → Việt Nam; 3–4,5s: xe tải ra cảng; 4,5–9,8s: tàu container Việt Nam → Mỹ; 9,8–12s: xe giao hàng rời kho */
       const u1 = ease((t - .4) / 3); boat.position.x = -8.9 + 1.6 * u1; boat.position.y = by + Math.sin(t * 2.6) * .04;
@@ -141,7 +141,7 @@ async function ecommerce() {
   put(root, prep(b2, 1.2), -4.6, TOP, 3.2, .4); put(root, prep(pile, 2.4), -2.2, TOP, -2.6); put(root, prep(c1, 2.6), 2.2, TOP, -2.8, Math.PI / 2);
   put(root, prep(van, 3.4), 7.4, TOP, 1.2, Math.PI / 2);
   const vx = van.position.x, by = boxes[0].position.y, T = 12;
-  return { root, T, cam: [10.5, 24], labels: [[['Gian hàng trên sàn', 'Marketplace store'], -6.9, 8.4, -.6], [['Đóng gói, giao đơn', 'Packing and delivery'], 2.4, 4.2, 1.2]],
+  return { root, T, cam: [9.4, 20.8, 3.3], labels: [[['Gian hàng trên sàn', 'Marketplace store'], -6.9, 8.4, -.6], [['Đóng gói, giao đơn', 'Packing and delivery'], 2.4, 4.2, 1.2]],
     update(t) {
       scr.userData.draw(t);
       boxes.forEach((o, k) => { const u = ((t / 6) + k / 4) % 1; o.position.x = -4.2 + 9.2 * u; const s = Math.min(1, u * 8, (1 - u) * 8); o.scale.setScalar(b1.scale.x * Math.max(.01, s)); o.position.y = by; o.rotation.y = k * .7; });
@@ -192,7 +192,7 @@ async function technology() {
     dashed(root, [new THREE.Vector3(1.4, TOP + .06, 2.2), new THREE.Vector3(tg.x, TOP + .06, tg.z)]); return { g, cv };
   });
   const T = 12;
-  return { root, T, cam: [10.5, 24], labels: [[['Website', 'Websites'], -7.2, 5.7, -.9], [['Phân tích dữ liệu', 'Data analysis'], 0, 7.7, -3.4], [['Nghiên cứu sản phẩm', 'Product research'], 6.6, 4.9, .6], [['AI agents', 'AI agents'], 1.4, 5.2, 2.2]],
+  return { root, T, cam: [9.6, 20.6, 3.2], labels: [[['Website', 'Websites'], -7.2, 5.7, -.9], [['Phân tích dữ liệu', 'Data analysis'], 0, 7.7, -3.4], [['Nghiên cứu sản phẩm', 'Product research'], 6.6, 4.9, .6], [['AI agents', 'AI agents'], 1.4, 5.2, 2.2]],
     update(t) {
       ds.userData.draw(t);
       ring.position.set(6.6, TOP + 1.3 + .8 * Math.sin(t * 1.6), .6);
@@ -235,7 +235,7 @@ export function mount(host) {
     if (want !== id) return;
     const s = scenes[id]; if (!s) { cur = null; host.classList.remove('on'); return; }
     if (cur) scene.remove(cur.root);
-    cur = s; scene.add(s.root); labels(s.labels); t0 = performance.now(); ctl.reset(); cam.position.set(0, s.cam[0], s.cam[1]); ctl.target.set(0, 2.2, 0); ctl.update(); size(); host.classList.add('on');
+    cur = s; scene.add(s.root); labels(s.labels); t0 = performance.now(); ctl.reset(); cam.position.set(0, s.cam[0], s.cam[1]); ctl.target.set(0, s.cam[2] || 2.2, 0); ctl.update(); size(); host.classList.add('on');
   }
   new IntersectionObserver((es) => { seen = es[0].isIntersecting; }).observe(host);
   (function tick() {

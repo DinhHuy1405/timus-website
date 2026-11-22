@@ -706,3 +706,7 @@ img.hx-logo { display: block; width: 86%; max-width: 460px; height: auto; margin
 @media (max-width: 900px) { .hx-3d { display: none; } }
 .hero.hx { overflow: clip; }
 .hx-t { scroll-margin-top: 620px; }
+
+/* v17: khung 3D rộng hơn, tràn ra mép phải màn hình để mô hình to và rõ hơn */
+.hx-3d { left: -10%; right: calc(-1 * clamp(20px, (100vw - 1072px) / 2 - 12px, 300px)); aspect-ratio: 16 / 10; }
+.hero.hx > .wrap:last-of-type { position: relative; z-index: 2; }
