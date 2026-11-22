@@ -485,3 +485,8 @@ a.who-b { display: block; text-decoration: none; }
   .sv-n { padding-top: 8px; }
   .sv-d { padding: 0 8px 22px 46px; }
 }
+
+/* v12: video màu tự nhiên trên nền trắng, mục dịch vụ nền trắng */
+.sv-stage { background: #fff; -webkit-mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #000 70%, transparent 100%); mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #000 70%, transparent 100%); }
+.sv-l { border-top-color: #E3DFD5; } .sv-i { border-bottom-color: #E3DFD5; }
+@media (min-width: 901px) { .sv-l { min-height: 600px; } }

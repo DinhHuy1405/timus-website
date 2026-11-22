@@ -11,8 +11,8 @@ Mỗi câu là một cặp (tiếng Việt, tiếng Anh).
 import json, os, re
 
 SITE = 'https://timusco.com'
-CSS_V = '11'
-JS_V = '3'
+CSS_V = '12'
+JS_V = '4'
 ZALO = 'https://zalo.me/0796796492'
 MAIL = 'info@timusco.com'
 
@@ -166,7 +166,7 @@ PAGES = [
     },
     # ================= THƯƠNG MẠI ĐIỆN TỬ =================
     {
-        'slug': 'nghien-cuu-san-pham', 'group': 'tmdt', 'num': '01',
+        'slug': 'nghien-cuu-san-pham', 'group': 'tech', 'num': '03',
         'title': ('Nghiên cứu sản phẩm và phân tích thị trường', 'Product research and market analysis'),
         'short': ('Biết sản phẩm nào có nhu cầu, giá bán, lời lãi dự kiến và lô đầu nên nhập bao nhiêu, trước khi bỏ tiền làm hàng.',
                   'Know which product has demand, at what price and margin, and how big the first order should be, before money goes into inventory.'),
@@ -261,7 +261,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Nguon hang',
     },
     {
-        'slug': 'ban-hang-tai-my', 'group': 'tmdt', 'num': '03',
+        'slug': 'ban-hang-tai-my', 'group': 'tmdt', 'num': '02',
         'title': ('Bán hàng tại Mỹ', 'Selling in the United States'),
         'short': ('Mở gian hàng và vận hành trên Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify. Có gói thử nghiệm 3 tháng.',
                   'Store setup and operations on Amazon, TikTok Shop US, Walmart, eBay, Etsy and Shopify, with a 3 month test plan.'),
@@ -304,7 +304,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Ban hang tai My',
     },
     {
-        'slug': 'ban-hang-tai-viet-nam', 'group': 'tmdt', 'num': '02',
+        'slug': 'ban-hang-tai-viet-nam', 'group': 'tmdt', 'num': '01',
         'title': ('Bán hàng tại Việt Nam', 'Selling in Vietnam'),
         'short': ('Mở gian hàng và vận hành trên Shopee, TikTok Shop, Lazada, Tiki: quảng cáo, KOC, chăm sóc khách, báo cáo tháng.',
                   'Store setup and operations on Shopee, TikTok Shop, Lazada and Tiki: ads, KOCs, customer service and monthly reports.'),
@@ -676,18 +676,19 @@ SERVICES = [
            ('Nhận hàng và vận hành kho tại Mỹ, kết nối các sàn để giao đơn.', 'Receiving and warehouse operations in the US, connected to marketplaces for fulfilment.')],
      'links': ['nguon-hang', 'hau-can']},
     {'id': 'thuong-mai-dien-tu', 'vid': 'ecommerce', 't': ('E-commerce', 'E-commerce'),
-     's': ('Bán hàng trên các sàn tại Việt Nam và Mỹ, từ nghiên cứu sản phẩm đến vận hành hằng tháng.', 'Selling on marketplaces in Vietnam and the United States, from product research to monthly operations.'),
-     'b': [('Nghiên cứu sản phẩm và thị trường trước khi bỏ tiền làm hàng.', 'Product and market research before money goes into inventory.'),
-           ('Việt Nam: Shopee, TikTok Shop, Lazada, Tiki.', 'Vietnam: Shopee, TikTok Shop, Lazada, Tiki.'),
+     's': ('Mở gian hàng và vận hành hằng tháng trên các sàn tại Việt Nam và Mỹ.', 'Store setup and monthly operations on marketplaces in Vietnam and the United States.'),
+     'b': [('Việt Nam: Shopee, TikTok Shop, Lazada, Tiki.', 'Vietnam: Shopee, TikTok Shop, Lazada, Tiki.'),
            ('Mỹ: Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify.', 'United States: Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify.'),
-           ('Mở gian hàng, quảng cáo, KOC và creator, chăm sóc người mua, báo cáo và đối soát hằng tháng.', 'Store setup, ads, KOCs and creators, customer service, monthly reports and reconciliation.')],
-     'links': ['nghien-cuu-san-pham', 'ban-hang-tai-viet-nam', 'ban-hang-tai-my']},
+           ('Mở gian hàng, đăng sản phẩm, quảng cáo, KOC và creator, chăm sóc người mua.', 'Store setup, listings, ads, KOCs and creators, customer service.'),
+           ('Báo cáo và đối soát hằng tháng trên trang theo dõi riêng.', 'Monthly reports and reconciliation on a private dashboard.')],
+     'links': ['ban-hang-tai-viet-nam', 'ban-hang-tai-my']},
     {'id': 'cong-nghe', 'vid': 'technology', 't': ('Technology', 'Technology'),
-     's': ('Trợ lý AI, dashboard và hệ thống kết nối cho doanh nghiệp đã có đội ngũ.', 'AI assistants, dashboards and connected systems for companies with their own teams.'),
-     'b': [('Trợ lý AI làm thay việc lặp lại trên máy tính cho từng phòng ban, người trong đội vẫn duyệt và quyết định.', 'AI assistants that take over repetitive computer work for each department, while your people review and decide.'),
-           ('Dashboard gom doanh thu, lời lãi, tồn kho, quảng cáo của mọi sàn về một trang.', 'Dashboards that bring revenue, margin, inventory and ads from every channel onto one page.'),
-           ('Đồng bộ sản phẩm, đơn hàng, tồn kho giữa sàn, website và kho; website công ty và website bán hàng.', 'Sync of products, orders and inventory across marketplaces, website and warehouse; company websites and online stores.')],
-     'links': ['tro-ly-ai', 'dashboard-ket-noi-website']},
+     's': ('Hệ thống website, nghiên cứu sản phẩm, phân tích dữ liệu và hệ thống AI agents tự động cho doanh nghiệp.', 'Website systems, product research, data analysis and automated AI agent systems for businesses.'),
+     'b': [('Hệ thống website: website công ty, website bán hàng, kết nối với sàn và kho.', 'Website systems: company websites and online stores, connected to marketplaces and warehouse.'),
+           ('Nghiên cứu sản phẩm: ngách, đối thủ, khung giá, lời lãi dự kiến theo số liệu bán hàng thực tế trên sàn.', 'Product research: niches, competitors, price ranges and projected margin from real marketplace sales data.'),
+           ('Phân tích dữ liệu: dashboard doanh thu, lời lãi, tồn kho, quảng cáo của mọi sàn trên một trang.', 'Data analysis: dashboards for revenue, margin, inventory and ads across every channel.'),
+           ('Hệ thống AI agents tự động: làm thay việc lặp lại cho từng phòng ban, người trong đội vẫn duyệt và quyết định.', 'Automated AI agent systems: they take over repetitive work for each department while your people review and decide.')],
+     'links': ['dashboard-ket-noi-website', 'nghien-cuu-san-pham', 'tro-ly-ai']},
 ]
 
 
@@ -708,8 +709,8 @@ def home_blocks():
           <p class="sv-links">{links}</p>
         </div>
       </div>''')
-        right.append(f'''        <video class="sv-v{on}" data-panel="{sv['id']}" src="/assets/video/{sv['vid']}.mp4" poster="/assets/video/{sv['vid']}.jpg" muted loop playsinline preload="{'auto' if i == 1 else 'none'}" width="1200" height="900" aria-label="{sv['t'][0]}"></video>''')
-    return f'''<section id="dich-vu" class="sec sec-alt light sv-sec">
+        right.append(f'''        <video class="sv-v{on}" data-panel="{sv['id']}" src="/assets/video/{sv['vid']}.mp4" poster="/assets/video/{sv['vid']}.jpg" muted playsinline preload="{'auto' if i == 1 else 'none'}" width="1200" height="900" aria-label="{sv['t'][0]}"></video>''')
+    return f'''<section id="dich-vu" class="sec light sv-sec">
   <div class="wrap">
     <p class="eyebrow">Logistics, E-Commerce &amp; Technology</p>
     <h2>{L(('Ba mảng dịch vụ của TIMUS', 'Three TIMUS service lines'))}</h2>
@@ -727,7 +728,7 @@ def home_blocks():
   </div>
 </section>
 
-<section class="sec light">
+<section class="sec sec-alt light">
   <div class="wrap">
     <div class="included reveal" style="margin-top:0">
       <div>

@@ -115,20 +115,32 @@
     }
   }
 
-  /* ba mảng dịch vụ: bấm đề mục để mở chi tiết, video 3D bên phải đổi theo */
+  /* ba mảng dịch vụ: video tự chuyển lần lượt; bấm đề mục nào thì ra video mảng đó và dừng tự chuyển */
   var sv = doc.querySelector('.sv');
   if (sv) {
-    var vids = all('.sv-v', sv), svSeen = false;
-    var svSync = function () {
+    var vids = all('.sv-v', sv), svBtns = all('.sv-b', sv), svSeen = false, svAuto = true;
+    var svIds = svBtns.map(function (b) { return b.getAttribute('data-tab'); });
+    var svCur = function () { for (var i = 0; i < vids.length; i++) if (vids[i].classList.contains('on')) return i; return 0; };
+    var svPlay = function (restart) {
       vids.forEach(function (v) {
-        if (v.classList.contains('on') && svSeen) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-        else v.pause();
+        if (v.classList.contains('on') && svSeen) {
+          if (restart) { try { v.currentTime = 0; } catch (e) {} }
+          v.loop = !svAuto;
+          var p = v.play(); if (p && p.catch) p.catch(function () {});
+        } else v.pause();
       });
     };
-    all('.sv-b', sv).forEach(function (b) { b.addEventListener('click', function () { setTimeout(svSync, 0); }); });
-    var svVis = function () { var r = sv.getBoundingClientRect(); var s = r.top < innerHeight * .9 && r.bottom > innerHeight * .1; if (s !== svSeen) { svSeen = s; svSync(); } };
+    var svGo = function (id, restart) { sv._act(id); svPlay(restart); };
+    vids.forEach(function (v, i) {
+      v.addEventListener('ended', function () { if (svAuto && v.classList.contains('on')) svGo(svIds[(i + 1) % svIds.length], true); });
+      v.addEventListener('error', function () { if (svAuto && v.classList.contains('on')) setTimeout(function () { svGo(svIds[(i + 1) % svIds.length], true); }, 4000); });
+    });
+    svBtns.forEach(function (b) {
+      b.addEventListener('click', function () { svAuto = false; svGo(b.getAttribute('data-tab'), true); });
+    });
+    var svVis = function () { var r = sv.getBoundingClientRect(); var s = r.top < innerHeight * .9 && r.bottom > innerHeight * .1; if (s !== svSeen) { svSeen = s; svPlay(false); } };
     addEventListener('scroll', svVis, { passive: true }); addEventListener('resize', svVis); svVis();
-    var svHash = function () { var id = location.hash.slice(1); if (id && sv.querySelector('[data-tab="' + id + '"]')) { sv._act(id); svSync(); } };
+    var svHash = function () { var id = location.hash.slice(1); if (id && svIds.indexOf(id) >= 0) { svAuto = false; svGo(id, true); } };
     addEventListener('hashchange', svHash); svHash();
   }
 
