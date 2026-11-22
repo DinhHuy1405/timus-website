@@ -6,7 +6,7 @@ import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-const BASE = '/assets/3d/';
+const BASE = '/assets/3dc/';
 const GOLD = 0xd4a862, CREAM = 0xe9e2d2, DARK = 0x1c1915, INK = 0x0e0e0e;
 const ease = (u) => { u = Math.min(1, Math.max(0, u)); return u * u * (3 - 2 * u); };
 const M = {
@@ -31,7 +31,7 @@ function slot(fn) {
   });
 }
 const glb = (p) => slot(() => new Promise((res, rej) => gl.load(BASE + p + '.glb', (g) => res(g.scene), undefined, rej)));
-function ramp(c) {                                  /* màu gốc của bộ nội thất → tông TIMUS theo độ sáng */
+function ramp(c) { return c.clone();                                  /* màu gốc của bộ nội thất → tông TIMUS theo độ sáng */
   const L = .299 * c.r + .587 * c.g + .114 * c.b, mx = Math.max(c.r, c.g, c.b), mn = Math.min(c.r, c.g, c.b), S = mx ? (mx - mn) / mx : 0;
   const stops = S > .25 ? [[0, 0x16120c], [.4, 0x8a6426], [.7, 0xd4a862], [1, 0xf0e2c4]] : [[0, 0x121110], [.5, 0x4a443a], [1, 0xece6da]];
   for (let i = 0; i < stops.length - 1; i++) if (L <= stops[i + 1][0]) { const u = (L - stops[i][0]) / (stops[i + 1][0] - stops[i][0]); return new THREE.Color(stops[i][1]).lerp(new THREE.Color(stops[i + 1][1]), u); }
@@ -81,7 +81,7 @@ async function logistics() {
   /* mặt biển: mờ dần ra mép để hoà vào nền trang */
   const ac = document.createElement('canvas'); ac.width = ac.height = 256; const ax = ac.getContext('2d'); const gr = ax.createRadialGradient(128, 128, 30, 128, 128, 128);
   gr.addColorStop(0, '#fff'); gr.addColorStop(.62, '#fff'); gr.addColorStop(1, '#000'); ax.fillStyle = gr; ax.fillRect(0, 0, 256, 256);
-  const sea = new THREE.Mesh(new THREE.PlaneGeometry(48, 30), new THREE.MeshStandardMaterial({ color: 0x1d1810, metalness: .8, roughness: .38, transparent: true, alphaMap: new THREE.CanvasTexture(ac) }));
+  const sea = new THREE.Mesh(new THREE.PlaneGeometry(48, 30), new THREE.MeshStandardMaterial({ color: 0x123a5c, metalness: .55, roughness: .35, transparent: true, alphaMap: new THREE.CanvasTexture(ac) }));
   sea.rotation.x = -Math.PI / 2; sea.position.y = .02; sea.receiveShadow = true; root.add(sea);
   platform(root, 6, 10, -12.5); platform(root, 7, 10, -3.2); platform(root, 7, 10, 11.5);
   const r1 = dashed(root, Array.from({ length: 21 }, (_, i) => new THREE.Vector3(-9.3 + 2.4 * i / 20, .06, 1.6)));
@@ -212,8 +212,8 @@ export function mount(host, opt = {}) {
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.55;
   host.prepend(renderer.domElement);
   const scene = new THREE.Scene();
-  scene.add(new THREE.HemisphereLight(0xfff1d6, 0x2a2010, 1.5));
-  const sun = new THREE.DirectionalLight(0xffe2b0, 2.5); sun.position.set(-9, 17, 12); sun.castShadow = true; sun.shadow.mapSize.set(touch ? 1024 : 2048, touch ? 1024 : 2048);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x2a2622, 1.7));
+  const sun = new THREE.DirectionalLight(0xfff4e0, 2.4); sun.position.set(-9, 17, 12); sun.castShadow = true; sun.shadow.mapSize.set(touch ? 1024 : 2048, touch ? 1024 : 2048);
   Object.assign(sun.shadow.camera, { left: -16, right: 16, top: 12, bottom: -12, near: 1, far: 60 }); sun.shadow.bias = -.0006; scene.add(sun);
   const rim = new THREE.DirectionalLight(GOLD, 1.2); rim.position.set(12, 8, -12); scene.add(rim);
   const cam = new THREE.PerspectiveCamera(30, 4 / 3, .1, 200); cam.position.set(0, 13, 35);
