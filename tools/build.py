@@ -8,19 +8,18 @@ Chạy từ thư mục gốc của repo:  python3 tools/build.py
 Sửa chữ của trang dịch vụ thì sửa trong file này rồi chạy lại, không sửa tay file index.html của từng trang.
 Mỗi câu là một cặp (tiếng Việt, tiếng Anh).
 """
-import json, os, re, sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from journey import journey
+import json, os, re
 
 SITE = 'https://timusco.com'
-CSS_V = '10'
-JS_V = '2'
+CSS_V = '11'
+JS_V = '3'
 ZALO = 'https://zalo.me/0796796492'
 MAIL = 'info@timusco.com'
 
 GROUPS = {
-    'tech': {'id': 'cong-nghe', 'name': ('Công nghệ', 'Technology')},
-    'tmdt': {'id': 'thuong-mai-dien-tu', 'name': ('Thương mại điện tử', 'E-commerce')},
+    'logi': {'id': 'logistics', 'name': ('Logistics', 'Logistics')},
+    'tmdt': {'id': 'thuong-mai-dien-tu', 'name': ('E-commerce', 'E-commerce')},
+    'tech': {'id': 'cong-nghe', 'name': ('Technology', 'Technology')},
 }
 
 # ---------- phần dùng chung cho nhóm vận hành sàn ----------
@@ -215,7 +214,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Nghien cuu san pham',
     },
     {
-        'slug': 'nguon-hang', 'group': 'tmdt', 'num': '02',
+        'slug': 'nguon-hang', 'group': 'logi', 'num': '01',
         'title': ('Phát triển sản phẩm và nguồn hàng', 'Product development and sourcing'),
         'short': ('Tìm và so sánh nhà máy tại Việt Nam, Trung Quốc; phát triển mẫu, bao bì và làm lô thử trước khi làm lô lớn.',
                   'Find and compare factories in Vietnam and China; develop samples and packaging and run a test batch before scaling.'),
@@ -262,7 +261,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Nguon hang',
     },
     {
-        'slug': 'ban-hang-tai-my', 'group': 'tmdt', 'num': '04',
+        'slug': 'ban-hang-tai-my', 'group': 'tmdt', 'num': '03',
         'title': ('Bán hàng tại Mỹ', 'Selling in the United States'),
         'short': ('Mở gian hàng và vận hành trên Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify. Có gói thử nghiệm 3 tháng.',
                   'Store setup and operations on Amazon, TikTok Shop US, Walmart, eBay, Etsy and Shopify, with a 3 month test plan.'),
@@ -305,7 +304,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Ban hang tai My',
     },
     {
-        'slug': 'ban-hang-tai-viet-nam', 'group': 'tmdt', 'num': '05',
+        'slug': 'ban-hang-tai-viet-nam', 'group': 'tmdt', 'num': '02',
         'title': ('Bán hàng tại Việt Nam', 'Selling in Vietnam'),
         'short': ('Mở gian hàng và vận hành trên Shopee, TikTok Shop, Lazada, Tiki: quảng cáo, KOC, chăm sóc khách, báo cáo tháng.',
                   'Store setup and operations on Shopee, TikTok Shop, Lazada and Tiki: ads, KOCs, customer service and monthly reports.'),
@@ -341,7 +340,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Ban hang tai Viet Nam',
     },
     {
-        'slug': 'hau-can', 'group': 'tmdt', 'num': '03',
+        'slug': 'hau-can', 'group': 'logi', 'num': '02',
         'title': ('Hậu cần và đưa hàng đi', 'Logistics and fulfillment'),
         'short': ('Bao bì, tem nhãn, phối hợp giấy tờ xuất nhập khẩu, vận chuyển, và kho tại Mỹ kết nối các sàn.',
                   'Packaging, labels, export and import paperwork, shipping, and a US warehouse connected to marketplaces.'),
@@ -410,7 +409,7 @@ def P(t, cls=''):
     return f'<p{c} data-l="vi">{t[0]}</p><p{c} data-l="en">{t[1]}</p>'
 
 
-NAV = [('thuong-mai-dien-tu', ('Thương mại điện tử', 'E-commerce')), ('cong-nghe', ('Công nghệ', 'Technology')),
+NAV = [('dich-vu', ('Dịch vụ', 'Services')),
        ('cach-lam', ('Cách làm việc', 'How we work')), ('dao-tao', ('Đào tạo', 'Training')),
        ('ve-timus', ('Về TIMUS', 'About')), ('lien-he', ('Liên hệ', 'Contact'))]
 
@@ -669,16 +668,62 @@ def page(p):
     return ''.join(out)
 
 
+SERVICES = [
+    {'id': 'logistics', 'vid': 'logistics', 't': ('Logistics', 'Logistics'),
+     's': ('Nguồn hàng từ nhà máy Việt Nam, Trung Quốc và đưa hàng sang Mỹ.', 'Sourcing from factories in Vietnam and China, and getting goods to the United States.'),
+     'b': [('Tìm và so sánh nhà máy, làm mẫu, bao bì và lô thử trước khi làm lô lớn.', 'Find and compare factories, then samples, packaging and a test batch before scaling.'),
+           ('Bao bì, tem nhãn, phối hợp giấy tờ xuất nhập khẩu và vận chuyển.', 'Packaging, labels and coordination of export, import and shipping.'),
+           ('Nhận hàng và vận hành kho tại Mỹ, kết nối các sàn để giao đơn.', 'Receiving and warehouse operations in the US, connected to marketplaces for fulfilment.')],
+     'links': ['nguon-hang', 'hau-can']},
+    {'id': 'thuong-mai-dien-tu', 'vid': 'ecommerce', 't': ('E-commerce', 'E-commerce'),
+     's': ('Bán hàng trên các sàn tại Việt Nam và Mỹ, từ nghiên cứu sản phẩm đến vận hành hằng tháng.', 'Selling on marketplaces in Vietnam and the United States, from product research to monthly operations.'),
+     'b': [('Nghiên cứu sản phẩm và thị trường trước khi bỏ tiền làm hàng.', 'Product and market research before money goes into inventory.'),
+           ('Việt Nam: Shopee, TikTok Shop, Lazada, Tiki.', 'Vietnam: Shopee, TikTok Shop, Lazada, Tiki.'),
+           ('Mỹ: Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify.', 'United States: Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify.'),
+           ('Mở gian hàng, quảng cáo, KOC và creator, chăm sóc người mua, báo cáo và đối soát hằng tháng.', 'Store setup, ads, KOCs and creators, customer service, monthly reports and reconciliation.')],
+     'links': ['nghien-cuu-san-pham', 'ban-hang-tai-viet-nam', 'ban-hang-tai-my']},
+    {'id': 'cong-nghe', 'vid': 'technology', 't': ('Technology', 'Technology'),
+     's': ('Trợ lý AI, dashboard và hệ thống kết nối cho doanh nghiệp đã có đội ngũ.', 'AI assistants, dashboards and connected systems for companies with their own teams.'),
+     'b': [('Trợ lý AI làm thay việc lặp lại trên máy tính cho từng phòng ban, người trong đội vẫn duyệt và quyết định.', 'AI assistants that take over repetitive computer work for each department, while your people review and decide.'),
+           ('Dashboard gom doanh thu, lời lãi, tồn kho, quảng cáo của mọi sàn về một trang.', 'Dashboards that bring revenue, margin, inventory and ads from every channel onto one page.'),
+           ('Đồng bộ sản phẩm, đơn hàng, tồn kho giữa sàn, website và kho; website công ty và website bán hàng.', 'Sync of products, orders and inventory across marketplaces, website and warehouse; company websites and online stores.')],
+     'links': ['tro-ly-ai', 'dashboard-ket-noi-website']},
+]
+
+
 def home_blocks():
-    tech = [p for p in PAGES if p['group'] == 'tech']
-    return f'''<section id="thuong-mai-dien-tu" class="sec jr-sec">
-  <div class="jr-pin">
+    by = {p['slug']: p for p in PAGES}
+    left, right = [], []
+    for i, sv in enumerate(SERVICES, 1):
+        on = ' on' if i == 1 else ''
+        links = ''.join(f'<a class="link" href="/{sl}/">{L(by[sl]["title"])} →</a>' for sl in sv['links'])
+        left.append(f'''      <div class="sv-i" id="{sv['id']}">
+        <button type="button" class="sv-b{on}" data-tab="{sv['id']}" role="tab" aria-selected="{'true' if i == 1 else 'false'}">
+          <span class="sv-n">0{i}</span>
+          <span class="sv-h"><b>{L(sv['t'])}</b><span class="sv-s">{L(sv['s'])}</span></span>
+          <i class="sv-x" aria-hidden="true"></i>
+        </button>
+        <div class="sv-d{on}" data-panel="{sv['id']}" role="tabpanel">
+          {UL(sv['b'], 'safe')}
+          <p class="sv-links">{links}</p>
+        </div>
+      </div>''')
+        right.append(f'''        <video class="sv-v{on}" data-panel="{sv['id']}" src="/assets/video/{sv['vid']}.mp4" poster="/assets/video/{sv['vid']}.jpg" muted loop playsinline preload="{'auto' if i == 1 else 'none'}" width="1200" height="900" aria-label="{sv['t'][0]}"></video>''')
+    return f'''<section id="dich-vu" class="sec sec-alt light sv-sec">
   <div class="wrap">
-    <p class="eyebrow">{L(('Thương mại điện tử', 'E-commerce'))}</p>
-    <h2>{L(('Từ sản phẩm đến đơn hàng, TIMUS làm từng khâu', 'From product to orders, one stage at a time'))}</h2>
-    <p class="sub">{L(('Năm khâu nối tiếp nhau. Doanh nghiệp chọn đúng khâu mình cần, hoặc giao cả chuỗi. Cuộn trang để theo kiện hàng đi qua từng khâu.', 'Five stages in sequence. Take only the stage you need, or hand over the whole chain. Scroll to follow the parcel through each stage.'))}</p>
-{journey(L, P, UL)}
-  </div>
+    <p class="eyebrow">Logistics, E-Commerce &amp; Technology</p>
+    <h2>{L(('Ba mảng dịch vụ của TIMUS', 'Three TIMUS service lines'))}</h2>
+    <div class="sv" data-tabs>
+      <div class="sv-l" role="tablist">
+{chr(10).join(left)}
+      </div>
+      <div class="sv-r">
+        <div class="sv-stage">
+{chr(10).join(right)}
+        </div>
+        <p class="sv-cap">{L(('Hình mô phỏng, toạ độ minh hoạ.', 'Illustrative animation; locations are indicative.'))}</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -694,17 +739,6 @@ def home_blocks():
         {P(('Báo giá theo phạm vi từng doanh nghiệp, gửi sau buổi trao đổi đầu. Chi phí bên thứ ba (vận chuyển, kho, thuế, phí sàn, quảng cáo, hàng mẫu) doanh nghiệp trả theo thực tế, TIMUS không cộng phí.', 'Quoted per scope after a first call. Third party costs (shipping, warehousing, duties, marketplace fees, ads, samples) are paid at actual cost with no markup from TIMUS.'))}
         <a class="link" href="#lien-he">{L(('Liên hệ báo giá', 'Get a quote'))} →</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="cong-nghe" class="sec sec-alt light">
-  <div class="wrap">
-    <p class="eyebrow">{L(('Công nghệ', 'Technology'))}</p>
-    <h2>{L(('Công nghệ đứng sau chuỗi bán hàng, dùng riêng cũng được', 'The technology behind the chain, also available on its own'))}</h2>
-    <p class="sub">{L(('Dashboard, hệ thống kết nối và trợ lý AI là phần chạy bên dưới năm khâu ở trên. Doanh nghiệp đã tự bán hàng và có đội ngũ có thể chỉ dùng phần công nghệ, không cần ký vận hành.', 'Dashboards, connected systems and AI assistants run underneath the five stages above. Companies that already sell and have their own teams can take the technology alone, without an operations contract.'))}</p>
-    <div class="sgrid two reveal">
-{chr(10).join(scard(p) for p in tech)}
     </div>
   </div>
 </section>

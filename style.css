@@ -451,3 +451,37 @@ a.who-b { display: block; text-decoration: none; }
   .jr-rail { margin-top: 20px; }
   .jr-rail i { display: none; }
 }
+
+/* v11: ba mảng dịch vụ, đề mục bên trái, video 3D bên phải; chỉ phần đầu trang nền đen */
+.light .eyebrow { color: var(--gold-t); }
+.sv-sec { padding-top: 80px; }
+.sv { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); gap: 56px; align-items: start; margin-top: 28px; }
+.sv-l { border-top: 1px solid #D9D4C8; }
+.sv-i { border-bottom: 1px solid #D9D4C8; scroll-margin-top: 96px; }
+.sv-b { display: grid; grid-template-columns: 44px 1fr 28px; column-gap: 12px; align-items: start; width: 100%; text-align: left; background: none; border: 0; padding: 26px 0; cursor: pointer; color: var(--text); font: inherit; }
+.sv-n { font: 600 14px/1 Montserrat, sans-serif; color: var(--gold-t); letter-spacing: .06em; padding-top: 12px; }
+.sv-h b { display: block; font: 700 34px/1.15 Montserrat, sans-serif; letter-spacing: -.01em; transition: color .2s; }
+.sv-s { display: block; margin-top: 8px; color: var(--muted); font-size: 16px; }
+.sv-b:hover .sv-h b, .sv-b.on .sv-h b { color: var(--gold-t); }
+.sv-x { position: relative; width: 22px; height: 22px; margin-top: 10px; justify-self: end; }
+.sv-x::before, .sv-x::after { content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: var(--gold-t); transition: transform .25s; }
+.sv-x::after { transform: rotate(90deg); }
+.sv-b.on .sv-x::after { transform: rotate(0deg); }
+.sv-b:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.sv-d { display: none; padding: 0 28px 28px 56px; }
+.sv-d.on { display: block; animation: fadeUp .3s ease; }
+.sv-d .safe { font-size: 16px; }
+.sv-links { display: flex; flex-direction: column; gap: 8px; margin: 18px 0 0; }
+.sv-r { position: sticky; top: 88px; }
+.sv-stage { position: relative; aspect-ratio: 4 / 3; background: #F7F5F0; overflow: hidden; -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 62%, transparent 100%); }
+.sv-v { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s ease; }
+.sv-v.on { opacity: 1; }
+.sv-cap { margin: 4px 0 0; text-align: center; font-size: 12.5px; color: var(--muted); }
+@media (max-width: 900px) {
+  .sv { grid-template-columns: 1fr; gap: 20px; }
+  .sv-r { position: static; order: -1; }
+  .sv-h b { font-size: 26px; }
+  .sv-b { grid-template-columns: 34px 1fr 24px; padding: 20px 0; }
+  .sv-n { padding-top: 8px; }
+  .sv-d { padding: 0 8px 22px 46px; }
+}
