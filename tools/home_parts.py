@@ -40,25 +40,19 @@ TABS = [
 
 
 def hero():
-    copy = []
-    for i, t in enumerate(TABS):
-        tag = 'h1' if i == 0 else 'p'
-        links = ''.join(f'<a class="link" href="{h}">{L(x)} →</a>' for h, x in t['links'])
-        copy.append(f'''        <div class="hx-c{' on' if i == 0 else ''}" data-panel="{t['id']}">
-          <{tag} class="hx-h">{L(t['h'])}</{tag}>
-          <p class="lead">{L(t['d'])}</p>
-          <p class="hx-links">{links}</p>
-        </div>''')
-    tabs = '\n'.join(f'''      <button type="button" class="hx-t{' on' if i == 0 else ''}" id="{t['id']}" data-tab="{t['id']}" role="tab" aria-selected="{'true' if i == 0 else 'false'}"><span class="hx-n">0{i + 1}</span><b>{L(t['t'])}</b><i class="hx-pg" aria-hidden="true"></i></button>''' for i, t in enumerate(TABS))
-
-    marks = ''.join(f'<i class="sv-v sv-live{" on" if i == 0 else ""}" data-panel="{t["id"]}" data-dur="7" hidden></i>' for i, t in enumerate(TABS))
-    return f'''<section class="hero hx" data-svc data-tabs>
+    t = TABS[0]
+    links = ''.join(f'<a class="link" href="#{x["id"]}">{x["name"]} →</a>' for x in PILLARS)
+    return f'''<section class="hero hx solo">
   <canvas id="heroFx" class="hero-fx" aria-hidden="true"></canvas>
   <div class="wrap hx-in">
     <div class="hx-l">
       <p class="eyebrow">Logistics, E-Commerce &amp; Technology</p>
       <div class="hx-copy">
-{chr(10).join(copy)}
+        <div class="hx-c on">
+          <h1 class="hx-h">{L(t['h'])}</h1>
+          <p class="lead">{L(t['d'])}</p>
+          <p class="hx-links">{links}</p>
+        </div>
       </div>
       <div class="cta">
         <a class="btn btn-gold" href="{ZALO}" target="_blank" rel="noopener">{L(('Nhắn Zalo', 'Message on Zalo'))}</a>
@@ -67,12 +61,6 @@ def hero():
     </div>
     <div class="hx-r">
       <img class="hx-logo" src="/assets/timus-logo.webp" alt="Logo TIMUS" width="900" height="760">
-      {marks}
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="hx-tabs" role="tablist">
-{tabs}
     </div>
   </div>
 </section>'''
@@ -143,7 +131,7 @@ def services(by, P):
             if slug == 'dashboard-ket-noi-website':
                 sh = ('Dashboard tổng hợp và đồng bộ đơn hàng, tồn kho giữa sàn, website và kho.', 'Unified dashboards and order and stock sync across marketplaces, website and warehouse.')
             rows.append(f'''          <a class="pl-a" href="/{slug}/"><span class="num">0{n}</span><span class="pl-at"><b>{L(title)}</b><span>{L(sh)}</span></span><i aria-hidden="true">→</i></a>''')
-        out.append(f'''      <div class="pl{' rev' if i % 2 else ''} reveal" id="mang-{pl['id']}">
+        out.append(f'''      <div class="pl{' rev' if i % 2 else ''} reveal" id="{pl['id']}">
         <div class="pl-tx">
           <p class="pl-k">{pl['name']}</p>
           <h3 class="pl-h">{L(pl['h'])}</h3>

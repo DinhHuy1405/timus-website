@@ -761,3 +761,8 @@ img.hx-logo { display: block; width: 86%; max-width: 460px; height: auto; margin
 .strip.logos.light::before, .strip.logos.light::after { content: ""; position: absolute; top: 0; bottom: 0; width: 7%; z-index: 1; pointer-events: none; }
 .strip.logos.light::before { left: 0; background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0)); }
 .strip.logos.light::after { right: 0; background: linear-gradient(270deg, #fff, rgba(255, 255, 255, 0)); }
+
+/* v19: phần đầu trang không còn bốn tab, ba đường dẫn trỏ xuống ba mảng dịch vụ */
+.hero.hx.solo { padding-bottom: 64px; }
+.pl { scroll-margin-top: 72px; }
+@media (max-width: 900px) { .hero.hx.solo { padding-bottom: 40px; } }

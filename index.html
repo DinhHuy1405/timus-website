@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=18">
+<link rel="stylesheet" href="/style.css?v=19">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js">
 <link rel="modulepreload" href="/assets/scene3d.js?v=5">
@@ -65,31 +65,16 @@
 <main>
 
 <!-- HERO:START -->
-<section class="hero hx" data-svc data-tabs>
+<section class="hero hx solo">
   <canvas id="heroFx" class="hero-fx" aria-hidden="true"></canvas>
   <div class="wrap hx-in">
     <div class="hx-l">
       <p class="eyebrow">Logistics, E-Commerce &amp; Technology</p>
       <div class="hx-copy">
-        <div class="hx-c on" data-panel="tong-quan">
+        <div class="hx-c on">
           <h1 class="hx-h"><span data-l="vi">Thương mại điện tử và công nghệ cho doanh nghiệp Việt</span><span data-l="en">E-commerce and technology for Vietnamese businesses</span></h1>
           <p class="lead"><span data-l="vi">Từ nguồn hàng tại Việt Nam, Trung Quốc đến đơn hàng trên sàn tại Việt Nam và Mỹ. TIMUS điều phối cả chuỗi và báo cáo rõ từng tháng.</span><span data-l="en">From sourcing in Vietnam and China to orders on marketplaces in Vietnam and the United States. TIMUS coordinates the whole chain and reports every month.</span></p>
-          <p class="hx-links"><a class="link" href="#dich-vu"><span data-l="vi">Xem các dịch vụ</span><span data-l="en">See the services</span> →</a></p>
-        </div>
-        <div class="hx-c" data-panel="logistics">
-          <p class="hx-h"><span data-l="vi">Logistics: nhập hàng Trung Quốc về Việt Nam, đưa hàng sang Mỹ</span><span data-l="en">Logistics: China to Vietnam imports, and shipping to the US</span></p>
-          <p class="lead"><span data-l="vi">Tìm nhà máy và nhập hàng từ Trung Quốc về Việt Nam; bao bì, tem nhãn, giấy tờ xuất nhập khẩu, vận chuyển sang Mỹ và kho tại Mỹ kết nối các sàn.</span><span data-l="en">Factory sourcing and imports from China to Vietnam; packaging, labels, export and import paperwork, shipping to the US and a US warehouse connected to marketplaces.</span></p>
-          <p class="hx-links"><a class="link" href="/nguon-hang/"><span data-l="vi">Nguồn hàng</span><span data-l="en">Sourcing</span> →</a><a class="link" href="/hau-can/"><span data-l="vi">Hậu cần</span><span data-l="en">Logistics</span> →</a></p>
-        </div>
-        <div class="hx-c" data-panel="thuong-mai-dien-tu">
-          <p class="hx-h"><span data-l="vi">E-commerce: bán hàng trên sàn tại Việt Nam và Mỹ</span><span data-l="en">E-commerce: selling on marketplaces in Vietnam and the US</span></p>
-          <p class="lead"><span data-l="vi">Mở gian hàng, quảng cáo, KOC và creator, chăm sóc người mua, báo cáo và đối soát hằng tháng trước ngày 05.</span><span data-l="en">Store setup, ads, KOCs and creators, customer service, with a monthly report and reconciliation before the 5th.</span></p>
-          <p class="hx-links"><a class="link" href="/ban-hang-tai-viet-nam/"><span data-l="vi">Bán tại Việt Nam</span><span data-l="en">Selling in Vietnam</span> →</a><a class="link" href="/ban-hang-tai-my/"><span data-l="vi">Bán tại Mỹ</span><span data-l="en">Selling in the US</span> →</a></p>
-        </div>
-        <div class="hx-c" data-panel="cong-nghe">
-          <p class="hx-h"><span data-l="vi">Technology: website, dữ liệu và AI agents</span><span data-l="en">Technology: websites, data and AI agents</span></p>
-          <p class="lead"><span data-l="vi">Hệ thống website, nghiên cứu sản phẩm, phân tích dữ liệu và hệ thống AI agents tự động cho doanh nghiệp.</span><span data-l="en">Website systems, product research, data analysis and automated AI agent systems for businesses.</span></p>
-          <p class="hx-links"><a class="link" href="/tro-ly-ai/"><span data-l="vi">AI agents</span><span data-l="en">AI agents</span> →</a><a class="link" href="/dashboard-ket-noi-website/"><span data-l="vi">Dashboard, website</span><span data-l="en">Dashboards, websites</span> →</a><a class="link" href="/nghien-cuu-san-pham/"><span data-l="vi">Nghiên cứu sản phẩm</span><span data-l="en">Product research</span> →</a></p>
+          <p class="hx-links"><a class="link" href="#logistics">Logistics →</a><a class="link" href="#thuong-mai-dien-tu">E-commerce →</a><a class="link" href="#cong-nghe">Technology →</a></p>
         </div>
       </div>
       <div class="cta">
@@ -99,15 +84,6 @@
     </div>
     <div class="hx-r">
       <img class="hx-logo" src="/assets/timus-logo.webp" alt="Logo TIMUS" width="900" height="760">
-      <i class="sv-v sv-live on" data-panel="tong-quan" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="logistics" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="thuong-mai-dien-tu" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="cong-nghe" data-dur="7" hidden></i>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="hx-tabs" role="tablist">
-      <button type="button" class="hx-t on" id="tong-quan" data-tab="tong-quan" role="tab" aria-selected="true"><span class="hx-n">01</span><b><span data-l="vi">Tổng quan</span><span data-l="en">Overview</span></b><i class="hx-pg" aria-hidden="true"></i></button>
-      <button type="button" class="hx-t" id="logistics" data-tab="logistics" role="tab" aria-selected="false"><span class="hx-n">02</span><b><span data-l="vi">Logistics</span><span data-l="en">Logistics</span></b><i class="hx-pg" aria-hidden="true"></i></button>
-      <button type="button" class="hx-t" id="thuong-mai-dien-tu" data-tab="thuong-mai-dien-tu" role="tab" aria-selected="false"><span class="hx-n">03</span><b><span data-l="vi">E-commerce</span><span data-l="en">E-commerce</span></b><i class="hx-pg" aria-hidden="true"></i></button>
-      <button type="button" class="hx-t" id="cong-nghe" data-tab="cong-nghe" role="tab" aria-selected="false"><span class="hx-n">04</span><b><span data-l="vi">Technology</span><span data-l="en">Technology</span></b><i class="hx-pg" aria-hidden="true"></i></button>
     </div>
   </div>
 </section>
@@ -134,7 +110,7 @@
     <p class="eyebrow"><span data-l="vi">Dịch vụ</span><span data-l="en">Services</span></p>
     <h2><span data-l="vi">Ba mảng dịch vụ, chọn đúng khâu doanh nghiệp cần</span><span data-l="en">Three service areas, take only the stages you need</span></h2>
     <p class="sub"><span data-l="vi">Mỗi khâu là một phần việc riêng, có trang chi tiết riêng. Doanh nghiệp có thể bắt đầu từ nghiên cứu, hoặc vào thẳng khâu vận hành nếu đã có sản phẩm.</span><span data-l="en">Each stage is a separate scope with its own page. Start with research, or go straight to operations if your product is ready.</span></p>
-      <div class="pl reveal" id="mang-logistics">
+      <div class="pl reveal" id="logistics">
         <div class="pl-tx">
           <p class="pl-k">Logistics</p>
           <h3 class="pl-h"><span data-l="vi">Từ nhà máy đến kho tại Mỹ</span><span data-l="en">From the factory to a US warehouse</span></h3>
@@ -148,7 +124,7 @@
           <div class="pl-wait"><span class="pl-bars"><i></i><i></i><i></i></span><em><span data-l="vi">Đang tải mô hình 3D</span><span data-l="en">Loading the 3D model</span></em></div>
         </div>
       </div>
-      <div class="pl rev reveal" id="mang-thuong-mai-dien-tu">
+      <div class="pl rev reveal" id="thuong-mai-dien-tu">
         <div class="pl-tx">
           <p class="pl-k">E-commerce</p>
           <h3 class="pl-h"><span data-l="vi">Vận hành gian hàng tại Việt Nam và Mỹ</span><span data-l="en">Running stores in Vietnam and the US</span></h3>
@@ -162,7 +138,7 @@
           <div class="pl-wait"><span class="pl-bars"><i></i><i></i><i></i></span><em><span data-l="vi">Đang tải mô hình 3D</span><span data-l="en">Loading the 3D model</span></em></div>
         </div>
       </div>
-      <div class="pl reveal" id="mang-cong-nghe">
+      <div class="pl reveal" id="cong-nghe">
         <div class="pl-tx">
           <p class="pl-k">Technology</p>
           <h3 class="pl-h"><span data-l="vi">Website, dữ liệu và AI agents</span><span data-l="en">Websites, data and AI agents</span></h3>
