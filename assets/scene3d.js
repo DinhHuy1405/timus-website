@@ -1,5 +1,5 @@
-/* Ba cảnh 3D ở phần đầu trang timusco.com: Logistics, E-commerce, Technology.
-   Mô hình: các bộ CC0 của Kenney (kenney.nl), đã đổi sang màu TIMUS. Chỉ tải trên máy tính, khi trang đã tải xong. */
+/* Ba cảnh 3D ở phần dịch vụ của timusco.com: Logistics, E-commerce, Technology.
+   Mô hình: các bộ CC0 của Kenney (kenney.nl), đã đổi sang màu TIMUS. Mỗi mảng một khung riêng, chỉ vẽ khi khung đang nằm trong màn hình. */
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
@@ -204,22 +204,24 @@ async function technology() {
 const BUILD = { 'logistics': logistics, 'thuong-mai-dien-tu': ecommerce, 'cong-nghe': technology };
 
 /* ---------- gắn vào khung ---------- */
-export function mount(host) {
+export function mount(host, opt = {}) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return null; }
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const touch = matchMedia('(pointer: coarse)').matches;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, touch ? 1.5 : 2)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.55;
   host.prepend(renderer.domElement);
   const scene = new THREE.Scene();
   scene.add(new THREE.HemisphereLight(0xfff1d6, 0x2a2010, 1.5));
-  const sun = new THREE.DirectionalLight(0xffe2b0, 2.5); sun.position.set(-9, 17, 12); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  const sun = new THREE.DirectionalLight(0xffe2b0, 2.5); sun.position.set(-9, 17, 12); sun.castShadow = true; sun.shadow.mapSize.set(touch ? 1024 : 2048, touch ? 1024 : 2048);
   Object.assign(sun.shadow.camera, { left: -16, right: 16, top: 12, bottom: -12, near: 1, far: 60 }); sun.shadow.bias = -.0006; scene.add(sun);
   const rim = new THREE.DirectionalLight(GOLD, 1.2); rim.position.set(12, 8, -12); scene.add(rim);
   const cam = new THREE.PerspectiveCamera(30, 4 / 3, .1, 200); cam.position.set(0, 13, 35);
   const ctl = new OrbitControls(cam, renderer.domElement); ctl.target.set(0, 2.2, 0); ctl.enableZoom = false; ctl.enablePan = false; ctl.enableDamping = true;
+  if (touch) { ctl.enabled = false; renderer.domElement.style.touchAction = 'auto'; }
   ctl.minPolarAngle = .8; ctl.maxPolarAngle = 1.35; ctl.minAzimuthAngle = -.6; ctl.maxAzimuthAngle = .6;
   const size = () => { const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); cam.aspect = w / h; cam.fov = 30 * Math.max(1, 1.34 / cam.aspect); cam.updateProjectionMatrix(); };
-  size(); addEventListener('resize', size);
+  size(); addEventListener('resize', size); if (window.ResizeObserver) new ResizeObserver(size).observe(host);
 
   const scenes = {}, lbs = [], v3 = new THREE.Vector3();
   let cur = null, t0 = performance.now(), seen = true, want = null;
@@ -233,7 +235,7 @@ export function mount(host) {
     if (!BUILD[id]) { cur = null; host.classList.remove('on'); return; }
     if (!scenes[id]) { try { scenes[id] = await BUILD[id](); } catch (e) { scenes[id] = null; } }
     if (want !== id) return;
-    const s = scenes[id]; if (!s) { cur = null; host.classList.remove('on'); return; }
+    const s = scenes[id]; if (!s) { cur = null; host.classList.remove('on'); host.classList.add('fail'); return; }
     if (cur) scene.remove(cur.root);
     cur = s; scene.add(s.root); labels(s.labels); t0 = performance.now(); ctl.reset(); cam.position.set(0, s.cam[0], s.cam[1]); ctl.target.set(0, s.cam[2] || 2.2, 0); ctl.update(); size(); host.classList.add('on');
   }
@@ -244,9 +246,9 @@ export function mount(host) {
     const t = still ? cur.T * .5 : ((performance.now() - t0) / 1000) % cur.T;
     cur.update(t); ctl.update(); renderer.render(scene, cam);
     const w = host.clientWidth, h = host.clientHeight;
-    lbs.forEach((l) => { v3.set(l.x, l.y, l.z).project(cam); l.el.style.transform = 'translate(-50%,-100%) translate(' + ((v3.x * .5 + .5) * w).toFixed(1) + 'px,' + ((-v3.y * .5 + .5) * h).toFixed(1) + 'px)'; });
+    lbs.forEach((l) => { v3.set(l.x, l.y, l.z).project(cam); const lw = (l.w || (l.w = l.el.offsetWidth)) / 2 + 4; l.el.style.transform = 'translate(-50%,-100%) translate(' + Math.min(w - lw, Math.max(lw, (v3.x * .5 + .5) * w)).toFixed(1) + 'px,' + ((-v3.y * .5 + .5) * h).toFixed(1) + 'px)'; });
   })();
   /* dựng sẵn cả ba cảnh ở nền để lúc chuyển tab không phải chờ */
-  (async () => { for (const id of Object.keys(BUILD)) if (!scenes[id]) { try { scenes[id] = await BUILD[id](); } catch (e) { scenes[id] = null; } } })();
+  if (!opt.only) (async () => { for (const id of Object.keys(BUILD)) if (!scenes[id]) { try { scenes[id] = await BUILD[id](); } catch (e) { scenes[id] = null; } } })();
   return { show };
 }

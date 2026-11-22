@@ -20,7 +20,7 @@ TABS = [
      'h': ('Thương mại điện tử và công nghệ cho doanh nghiệp Việt', 'E-commerce and technology for Vietnamese businesses'),
      'd': ('Từ nguồn hàng tại Việt Nam, Trung Quốc đến đơn hàng trên sàn tại Việt Nam và Mỹ. TIMUS điều phối cả chuỗi và báo cáo rõ từng tháng.',
            'From sourcing in Vietnam and China to orders on marketplaces in Vietnam and the United States. TIMUS coordinates the whole chain and reports every month.'),
-     'links': [('#dich-vu', ('Xem 6 dịch vụ', 'See the 6 services'))]},
+     'links': [('#dich-vu', ('Xem các dịch vụ', 'See the services'))]},
     {'id': 'logistics', 't': ('Logistics', 'Logistics'),
      'h': ('Logistics: nhập hàng Trung Quốc về Việt Nam, đưa hàng sang Mỹ', 'Logistics: China to Vietnam imports, and shipping to the US'),
      'd': ('Tìm nhà máy và nhập hàng từ Trung Quốc về Việt Nam; bao bì, tem nhãn, giấy tờ xuất nhập khẩu, vận chuyển sang Mỹ và kho tại Mỹ kết nối các sàn.',
@@ -51,7 +51,7 @@ def hero():
         </div>''')
     tabs = '\n'.join(f'''      <button type="button" class="hx-t{' on' if i == 0 else ''}" id="{t['id']}" data-tab="{t['id']}" role="tab" aria-selected="{'true' if i == 0 else 'false'}"><span class="hx-n">0{i + 1}</span><b>{L(t['t'])}</b><i class="hx-pg" aria-hidden="true"></i></button>''' for i, t in enumerate(TABS))
 
-    marks = ''.join(f'<i class="sv-v sv-live{" on" if i == 0 else ""}" data-panel="{t["id"]}" data-dur="{7 if i == 0 else 13}" hidden></i>' for i, t in enumerate(TABS))
+    marks = ''.join(f'<i class="sv-v sv-live{" on" if i == 0 else ""}" data-panel="{t["id"]}" data-dur="7" hidden></i>' for i, t in enumerate(TABS))
     return f'''<section class="hero hx" data-svc data-tabs>
   <canvas id="heroFx" class="hero-fx" aria-hidden="true"></canvas>
   <div class="wrap hx-in">
@@ -67,7 +67,6 @@ def hero():
     </div>
     <div class="hx-r">
       <img class="hx-logo" src="/assets/timus-logo.webp" alt="Logo TIMUS" width="900" height="760">
-      <div class="hx-3d" id="hx3d" aria-hidden="true"></div>
       {marks}
     </div>
   </div>
@@ -112,28 +111,57 @@ CARDS = [
 ]
 
 
+PILLARS = [
+    {'id': 'logistics', 'name': 'Logistics',
+     'h': ('Từ nhà máy đến kho tại Mỹ', 'From the factory to a US warehouse'),
+     'd': ('Hàng đi theo hai chặng: nhập từ Trung Quốc về Việt Nam, rồi từ Việt Nam sang kho tại Mỹ. TIMUS lo nhà máy, bao bì, giấy tờ và vận chuyển.',
+           'Goods move in two legs: from China into Vietnam, then from Vietnam to a US warehouse. TIMUS handles factories, packaging, paperwork and shipping.'),
+     'items': ['nguon-hang', 'hau-can']},
+    {'id': 'thuong-mai-dien-tu', 'name': 'E-commerce',
+     'h': ('Vận hành gian hàng tại Việt Nam và Mỹ', 'Running stores in Vietnam and the US'),
+     'd': ('Gian hàng trên các sàn tại Việt Nam và Mỹ, từ lúc mở gian hàng đến quảng cáo, chăm sóc người mua và đối soát hằng tháng.',
+           'Stores on marketplaces in Vietnam and the US, from setup to ads, customer service and monthly reconciliation.'),
+     'items': ['ban-hang-tai-viet-nam', 'ban-hang-tai-my']},
+    {'id': 'cong-nghe', 'name': 'Technology',
+     'h': ('Website, dữ liệu và AI agents', 'Websites, data and AI agents'),
+     'd': ('Website, dashboard số liệu, nghiên cứu sản phẩm và các AI agents làm việc tự động cho doanh nghiệp.',
+           'Websites, data dashboards, product research and AI agents that run tasks automatically for your business.'),
+     'items': ['nghien-cuu-san-pham', 'dashboard-ket-noi-website', 'tro-ly-ai']},
+]
+
+
 def services(by, P):
-    out = []
-    for i, (slug, mi, short) in enumerate(CARDS, 1):
-        p = by[slug]
-        title = p['title'] if slug != 'dashboard-ket-noi-website' else ('Công nghệ: dashboard, kết nối, AI agents', 'Technology: dashboards, sync, AI agents')
-        extra = ''
-        if slug == 'dashboard-ket-noi-website':
-            extra = f'<span class="link sub2" data-href="/tro-ly-ai/">{L(("AI agents", "AI agents"))} →</span>'
-        out.append(f'''      <a class="scard" href="/{slug}/">
-        <span class="num">0{i}</span>
-        <h3>{L(title)}</h3>
-        {P(short)}
-        <span class="link">{L(('Xem chi tiết', 'View details'))} →</span>
-      </a>''')
-    return f'''<section id="dich-vu" class="sec light">
+    short = {slug: sh for slug, _mi, sh in CARDS}
+    out, n = [], 0
+    for i, pl in enumerate(PILLARS):
+        rows = []
+        for slug in pl['items']:
+            n += 1
+            pg = by[slug]
+            title = ('AI agents cho đội ngũ', 'AI agents for your team') if slug == 'tro-ly-ai' else pg['title']
+            sh = short.get(slug) or pg['short']
+            if slug == 'dashboard-ket-noi-website':
+                sh = ('Dashboard tổng hợp và đồng bộ đơn hàng, tồn kho giữa sàn, website và kho.', 'Unified dashboards and order and stock sync across marketplaces, website and warehouse.')
+            rows.append(f'''          <a class="pl-a" href="/{slug}/"><span class="num">0{n}</span><span class="pl-at"><b>{L(title)}</b><span>{L(sh)}</span></span><i aria-hidden="true">→</i></a>''')
+        out.append(f'''      <div class="pl{' rev' if i % 2 else ''} reveal" id="mang-{pl['id']}">
+        <div class="pl-tx">
+          <p class="pl-k">{pl['name']}</p>
+          <h3 class="pl-h">{L(pl['h'])}</h3>
+          <p class="pl-d">{L(pl['d'])}</p>
+          <div class="pl-ls">
+{chr(10).join(rows)}
+          </div>
+        </div>
+        <div class="pl-st" data-3d="{pl['id']}" aria-hidden="true">
+          <div class="pl-wait"><span class="pl-bars"><i></i><i></i><i></i></span><em>{L(('Đang tải mô hình 3D', 'Loading the 3D model'))}</em></div>
+        </div>
+      </div>''')
+    return f'''<section id="dich-vu" class="sec pillars">
   <div class="wrap">
     <p class="eyebrow">{L(('Dịch vụ', 'Services'))}</p>
-    <h2>{L(('Sáu dịch vụ, chọn đúng khâu doanh nghiệp cần', 'Six services, take only the stages you need'))}</h2>
+    <h2>{L(('Ba mảng dịch vụ, chọn đúng khâu doanh nghiệp cần', 'Three service areas, take only the stages you need'))}</h2>
     <p class="sub">{L(('Mỗi khâu là một phần việc riêng, có trang chi tiết riêng. Doanh nghiệp có thể bắt đầu từ nghiên cứu, hoặc vào thẳng khâu vận hành nếu đã có sản phẩm.', 'Each stage is a separate scope with its own page. Start with research, or go straight to operations if your product is ready.'))}</p>
-    <div class="sgrid reveal">
 {chr(10).join(out)}
-    </div>
   </div>
 </section>
 '''

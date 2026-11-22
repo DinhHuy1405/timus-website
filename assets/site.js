@@ -193,18 +193,6 @@
     var svHash = function () { var id = location.hash.slice(1); if (id && svIds.indexOf(id) >= 0) { svAuto = false; svGo(id, true); } };
     addEventListener('hashchange', svHash); svHash();
 
-    /* cảnh 3D cho ba tab dịch vụ: chỉ tải trên máy tính, sau khi trang đã tải xong */
-    var host3d = doc.getElementById('hx3d');
-    if (host3d && matchMedia('(min-width: 901px)').matches && window.WebGLRenderingContext) {
-      var go3d = function () {
-        import('/assets/scene3d.js?v=4').then(function (m) {
-          sv3d = m.mount(host3d);
-          if (sv3d) { var b = svBtns.filter(function (x) { return x.classList.contains('on'); })[0]; if (b) sv3d.show(b.getAttribute('data-tab')); }
-        }).catch(function () {});
-      };
-      if (doc.readyState === 'complete') setTimeout(go3d, 600); else addEventListener('load', function () { setTimeout(go3d, 600); });
-    }
-
     /* cụm giao diện động: co theo khung, nghiêng theo chuột */
     var stage = sv.querySelector('.sv-stage'), txs = all('.tx', sv);
     if (stage && txs.length) {
@@ -221,6 +209,19 @@
   }
 
   /* dải logo sàn chạy ngang */
+  /* cảnh 3D ở ba mảng dịch vụ: tải ngay khi trang dựng xong, mỗi khung có hiệu ứng chờ cho tới khi mô hình sẵn sàng */
+  var sts = [].slice.call(doc.querySelectorAll('[data-3d]'));
+  if (sts.length) {
+    var no3d = function () { sts.forEach(function (el) { el.classList.add('fail'); }); };
+    if (!window.WebGLRenderingContext) no3d();
+    else {
+      var go3d = function (m) { sts.forEach(function (el) { var s = m.mount(el, { only: true }); if (s) s.show(el.getAttribute('data-3d')); else el.classList.add('fail'); }); };
+      import('/assets/scene3d.js?v=5').then(go3d).catch(function () {
+        setTimeout(function () { import('/assets/scene3d.js?v=5&r=1').then(go3d).catch(no3d); }, 1500);
+      });
+    }
+  }
+
   var t = doc.getElementById('lgTrack');
   if (t) {
     var g0 = t.querySelector('.lg-grp');

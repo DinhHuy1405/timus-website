@@ -17,7 +17,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=17">
+<link rel="stylesheet" href="/style.css?v=18">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js">
+<link rel="modulepreload" href="/assets/scene3d.js?v=5">
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
 </script>
@@ -71,7 +74,7 @@
         <div class="hx-c on" data-panel="tong-quan">
           <h1 class="hx-h"><span data-l="vi">Thương mại điện tử và công nghệ cho doanh nghiệp Việt</span><span data-l="en">E-commerce and technology for Vietnamese businesses</span></h1>
           <p class="lead"><span data-l="vi">Từ nguồn hàng tại Việt Nam, Trung Quốc đến đơn hàng trên sàn tại Việt Nam và Mỹ. TIMUS điều phối cả chuỗi và báo cáo rõ từng tháng.</span><span data-l="en">From sourcing in Vietnam and China to orders on marketplaces in Vietnam and the United States. TIMUS coordinates the whole chain and reports every month.</span></p>
-          <p class="hx-links"><a class="link" href="#dich-vu"><span data-l="vi">Xem 6 dịch vụ</span><span data-l="en">See the 6 services</span> →</a></p>
+          <p class="hx-links"><a class="link" href="#dich-vu"><span data-l="vi">Xem các dịch vụ</span><span data-l="en">See the services</span> →</a></p>
         </div>
         <div class="hx-c" data-panel="logistics">
           <p class="hx-h"><span data-l="vi">Logistics: nhập hàng Trung Quốc về Việt Nam, đưa hàng sang Mỹ</span><span data-l="en">Logistics: China to Vietnam imports, and shipping to the US</span></p>
@@ -96,8 +99,7 @@
     </div>
     <div class="hx-r">
       <img class="hx-logo" src="/assets/timus-logo.webp" alt="Logo TIMUS" width="900" height="760">
-      <div class="hx-3d" id="hx3d" aria-hidden="true"></div>
-      <i class="sv-v sv-live on" data-panel="tong-quan" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="logistics" data-dur="13" hidden></i><i class="sv-v sv-live" data-panel="thuong-mai-dien-tu" data-dur="13" hidden></i><i class="sv-v sv-live" data-panel="cong-nghe" data-dur="13" hidden></i>
+      <i class="sv-v sv-live on" data-panel="tong-quan" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="logistics" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="thuong-mai-dien-tu" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="cong-nghe" data-dur="7" hidden></i>
     </div>
   </div>
   <div class="wrap">
@@ -111,7 +113,7 @@
 </section>
 <!-- HERO:END -->
 
-<section class="strip logos" aria-label="Các sàn TIMUS đang làm việc">
+<section class="strip logos light" aria-label="Các sàn TIMUS đang làm việc">
   <div class="lg-track" id="lgTrack">
     <div class="lg-grp">
         <img src="assets/san/shopee.png" alt="Shopee" height="34">
@@ -127,49 +129,54 @@
 </section>
 
 <!-- SVC:START -->
-<section id="dich-vu" class="sec light">
+<section id="dich-vu" class="sec pillars">
   <div class="wrap">
     <p class="eyebrow"><span data-l="vi">Dịch vụ</span><span data-l="en">Services</span></p>
-    <h2><span data-l="vi">Sáu dịch vụ, chọn đúng khâu doanh nghiệp cần</span><span data-l="en">Six services, take only the stages you need</span></h2>
+    <h2><span data-l="vi">Ba mảng dịch vụ, chọn đúng khâu doanh nghiệp cần</span><span data-l="en">Three service areas, take only the stages you need</span></h2>
     <p class="sub"><span data-l="vi">Mỗi khâu là một phần việc riêng, có trang chi tiết riêng. Doanh nghiệp có thể bắt đầu từ nghiên cứu, hoặc vào thẳng khâu vận hành nếu đã có sản phẩm.</span><span data-l="en">Each stage is a separate scope with its own page. Start with research, or go straight to operations if your product is ready.</span></p>
-    <div class="sgrid reveal">
-      <a class="scard" href="/nghien-cuu-san-pham/">
-        <span class="num">01</span>
-        <h3><span data-l="vi">Nghiên cứu sản phẩm và phân tích thị trường</span><span data-l="en">Product research and market analysis</span></h3>
-        <p data-l="vi">Lọc số liệu sàn để biết bán gì, giá bao nhiêu, lời lãi dự kiến, trước khi bỏ tiền làm hàng.</p><p data-l="en">Filter marketplace data to know what to sell, at what price and margin, before money goes into inventory.</p>
-        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
-      </a>
-      <a class="scard" href="/nguon-hang/">
-        <span class="num">02</span>
-        <h3><span data-l="vi">Phát triển sản phẩm và nguồn hàng</span><span data-l="en">Product development and sourcing</span></h3>
-        <p data-l="vi">So sánh nhà máy Việt Nam, Trung Quốc; làm mẫu, bao bì và lô thử trước khi làm lô lớn.</p><p data-l="en">Compare factories in Vietnam and China; samples, packaging and a test batch before scaling.</p>
-        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
-      </a>
-      <a class="scard" href="/ban-hang-tai-my/">
-        <span class="num">03</span>
-        <h3><span data-l="vi">Bán hàng tại Mỹ</span><span data-l="en">Selling in the United States</span></h3>
-        <p data-l="vi">Mở gian hàng, quảng cáo, creator và vận hành hằng ngày trên các sàn tại Mỹ.</p><p data-l="en">Store setup, ads, creators and daily operations on US marketplaces.</p>
-        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
-      </a>
-      <a class="scard" href="/ban-hang-tai-viet-nam/">
-        <span class="num">04</span>
-        <h3><span data-l="vi">Bán hàng tại Việt Nam</span><span data-l="en">Selling in Vietnam</span></h3>
-        <p data-l="vi">Mở gian hàng, quảng cáo, KOC và vận hành hằng ngày trên các sàn tại Việt Nam.</p><p data-l="en">Store setup, ads, KOCs and daily operations on Vietnamese marketplaces.</p>
-        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
-      </a>
-      <a class="scard" href="/dashboard-ket-noi-website/">
-        <span class="num">05</span>
-        <h3><span data-l="vi">Công nghệ: dashboard, kết nối, AI agents</span><span data-l="en">Technology: dashboards, sync, AI agents</span></h3>
-        <p data-l="vi">Dashboard tổng hợp và đồng bộ đơn hàng, tồn kho giữa sàn, website và kho; kèm AI agents tự động.</p><p data-l="en">Unified dashboards and order and stock sync across marketplaces, website and warehouse; plus automated AI agents.</p>
-        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
-      </a>
-      <a class="scard" href="/hau-can/">
-        <span class="num">06</span>
-        <h3><span data-l="vi">Hậu cần và đưa hàng đi</span><span data-l="en">Logistics and fulfillment</span></h3>
-        <p data-l="vi">Đóng gói, tem nhãn, giấy tờ xuất nhập khẩu, kho tại Mỹ; pháp lý và thuế do đơn vị đối tác làm.</p><p data-l="en">Packing, labels, export and import paperwork, US warehouse; legal and tax handled by partner specialists.</p>
-        <span class="link"><span data-l="vi">Xem chi tiết</span><span data-l="en">View details</span> →</span>
-      </a>
-    </div>
+      <div class="pl reveal" id="mang-logistics">
+        <div class="pl-tx">
+          <p class="pl-k">Logistics</p>
+          <h3 class="pl-h"><span data-l="vi">Từ nhà máy đến kho tại Mỹ</span><span data-l="en">From the factory to a US warehouse</span></h3>
+          <p class="pl-d"><span data-l="vi">Hàng đi theo hai chặng: nhập từ Trung Quốc về Việt Nam, rồi từ Việt Nam sang kho tại Mỹ. TIMUS lo nhà máy, bao bì, giấy tờ và vận chuyển.</span><span data-l="en">Goods move in two legs: from China into Vietnam, then from Vietnam to a US warehouse. TIMUS handles factories, packaging, paperwork and shipping.</span></p>
+          <div class="pl-ls">
+          <a class="pl-a" href="/nguon-hang/"><span class="num">01</span><span class="pl-at"><b><span data-l="vi">Phát triển sản phẩm và nguồn hàng</span><span data-l="en">Product development and sourcing</span></b><span><span data-l="vi">So sánh nhà máy Việt Nam, Trung Quốc; làm mẫu, bao bì và lô thử trước khi làm lô lớn.</span><span data-l="en">Compare factories in Vietnam and China; samples, packaging and a test batch before scaling.</span></span></span><i aria-hidden="true">→</i></a>
+          <a class="pl-a" href="/hau-can/"><span class="num">02</span><span class="pl-at"><b><span data-l="vi">Hậu cần và đưa hàng đi</span><span data-l="en">Logistics and fulfillment</span></b><span><span data-l="vi">Đóng gói, tem nhãn, giấy tờ xuất nhập khẩu, kho tại Mỹ; pháp lý và thuế do đơn vị đối tác làm.</span><span data-l="en">Packing, labels, export and import paperwork, US warehouse; legal and tax handled by partner specialists.</span></span></span><i aria-hidden="true">→</i></a>
+          </div>
+        </div>
+        <div class="pl-st" data-3d="logistics" aria-hidden="true">
+          <div class="pl-wait"><span class="pl-bars"><i></i><i></i><i></i></span><em><span data-l="vi">Đang tải mô hình 3D</span><span data-l="en">Loading the 3D model</span></em></div>
+        </div>
+      </div>
+      <div class="pl rev reveal" id="mang-thuong-mai-dien-tu">
+        <div class="pl-tx">
+          <p class="pl-k">E-commerce</p>
+          <h3 class="pl-h"><span data-l="vi">Vận hành gian hàng tại Việt Nam và Mỹ</span><span data-l="en">Running stores in Vietnam and the US</span></h3>
+          <p class="pl-d"><span data-l="vi">Gian hàng trên các sàn tại Việt Nam và Mỹ, từ lúc mở gian hàng đến quảng cáo, chăm sóc người mua và đối soát hằng tháng.</span><span data-l="en">Stores on marketplaces in Vietnam and the US, from setup to ads, customer service and monthly reconciliation.</span></p>
+          <div class="pl-ls">
+          <a class="pl-a" href="/ban-hang-tai-viet-nam/"><span class="num">03</span><span class="pl-at"><b><span data-l="vi">Bán hàng tại Việt Nam</span><span data-l="en">Selling in Vietnam</span></b><span><span data-l="vi">Mở gian hàng, quảng cáo, KOC và vận hành hằng ngày trên các sàn tại Việt Nam.</span><span data-l="en">Store setup, ads, KOCs and daily operations on Vietnamese marketplaces.</span></span></span><i aria-hidden="true">→</i></a>
+          <a class="pl-a" href="/ban-hang-tai-my/"><span class="num">04</span><span class="pl-at"><b><span data-l="vi">Bán hàng tại Mỹ</span><span data-l="en">Selling in the United States</span></b><span><span data-l="vi">Mở gian hàng, quảng cáo, creator và vận hành hằng ngày trên các sàn tại Mỹ.</span><span data-l="en">Store setup, ads, creators and daily operations on US marketplaces.</span></span></span><i aria-hidden="true">→</i></a>
+          </div>
+        </div>
+        <div class="pl-st" data-3d="thuong-mai-dien-tu" aria-hidden="true">
+          <div class="pl-wait"><span class="pl-bars"><i></i><i></i><i></i></span><em><span data-l="vi">Đang tải mô hình 3D</span><span data-l="en">Loading the 3D model</span></em></div>
+        </div>
+      </div>
+      <div class="pl reveal" id="mang-cong-nghe">
+        <div class="pl-tx">
+          <p class="pl-k">Technology</p>
+          <h3 class="pl-h"><span data-l="vi">Website, dữ liệu và AI agents</span><span data-l="en">Websites, data and AI agents</span></h3>
+          <p class="pl-d"><span data-l="vi">Website, dashboard số liệu, nghiên cứu sản phẩm và các AI agents làm việc tự động cho doanh nghiệp.</span><span data-l="en">Websites, data dashboards, product research and AI agents that run tasks automatically for your business.</span></p>
+          <div class="pl-ls">
+          <a class="pl-a" href="/nghien-cuu-san-pham/"><span class="num">05</span><span class="pl-at"><b><span data-l="vi">Nghiên cứu sản phẩm và phân tích thị trường</span><span data-l="en">Product research and market analysis</span></b><span><span data-l="vi">Lọc số liệu sàn để biết bán gì, giá bao nhiêu, lời lãi dự kiến, trước khi bỏ tiền làm hàng.</span><span data-l="en">Filter marketplace data to know what to sell, at what price and margin, before money goes into inventory.</span></span></span><i aria-hidden="true">→</i></a>
+          <a class="pl-a" href="/dashboard-ket-noi-website/"><span class="num">06</span><span class="pl-at"><b><span data-l="vi">Dashboard, kết nối sàn và website</span><span data-l="en">Dashboards, marketplace sync and websites</span></b><span><span data-l="vi">Dashboard tổng hợp và đồng bộ đơn hàng, tồn kho giữa sàn, website và kho.</span><span data-l="en">Unified dashboards and order and stock sync across marketplaces, website and warehouse.</span></span></span><i aria-hidden="true">→</i></a>
+          <a class="pl-a" href="/tro-ly-ai/"><span class="num">07</span><span class="pl-at"><b><span data-l="vi">AI agents cho đội ngũ</span><span data-l="en">AI agents for your team</span></b><span><span data-l="vi">Dạy trợ lý làm thay việc lặp lại trên máy tính cho từng phòng ban. Người trong đội vẫn là người duyệt và quyết định.</span><span data-l="en">Teach an assistant to take over repetitive computer work for each department. Your people still review and decide.</span></span></span><i aria-hidden="true">→</i></a>
+          </div>
+        </div>
+        <div class="pl-st" data-3d="cong-nghe" aria-hidden="true">
+          <div class="pl-wait"><span class="pl-bars"><i></i><i></i><i></i></span><em><span data-l="vi">Đang tải mô hình 3D</span><span data-l="en">Loading the 3D model</span></em></div>
+        </div>
+      </div>
   </div>
 </section>
 
@@ -260,7 +267,7 @@
   </div>
 </section>
 
-<section id="ve-timus" class="sec sec-alt light">
+<section id="ve-timus" class="sec sec-alt">
   <div class="wrap about reveal">
     <div>
       <h2><span data-l="vi">Về TIMUS</span><span data-l="en">About TIMUS</span></h2>
@@ -349,7 +356,7 @@
   </div>
 </section>
 
-<section id="lien-he" class="sec light contact">
+<section id="lien-he" class="sec contact">
   <div class="wrap">
     <h2><span data-l="vi">Liên hệ</span><span data-l="en">Contact</span></h2>
     <p class="sub">
@@ -385,6 +392,6 @@
   </div>
 </footer>
 
-<script src="/assets/site.js?v=10"></script>
+<script src="/assets/site.js?v=11"></script>
 </body>
 </html>

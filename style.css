@@ -710,3 +710,54 @@ img.hx-logo { display: block; width: 86%; max-width: 460px; height: auto; margin
 /* v17: khung 3D rộng hơn, tràn ra mép phải màn hình để mô hình to và rõ hơn */
 .hx-3d { left: -10%; right: calc(-1 * clamp(20px, (100vw - 1072px) / 2 - 12px, 300px)); aspect-ratio: 16 / 10; }
 .hero.hx > .wrap:last-of-type { position: relative; z-index: 2; }
+
+/* v18: ba cảnh 3D chuyển xuống phần dịch vụ (ba mảng, nền đen); logo sàn có màu trên nền trắng */
+.strip.logos.light { border-color: var(--line); }
+.strip.logos.light .lg-grp img { filter: none; opacity: 1; }
+.pillars { overflow: clip; border-bottom: 1px solid var(--line); --bleed: clamp(0px, (100vw - 1072px) / 2 - 12px, 300px); }
+.pillars .sub { margin-bottom: 8px; }
+.pl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 48px; align-items: center; padding: 44px 0; }
+.pl + .pl { border-top: 1px solid var(--line); }
+.pl.rev { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.pl.rev .pl-st { order: -1; margin-right: 0; margin-left: calc(-1 * var(--bleed)); }
+.pl-k { margin: 0 0 12px; font: 600 13px/1 Montserrat, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.pl-h { font-size: clamp(24px, 2.4vw, 32px); line-height: 1.22; margin: 0 0 14px; }
+.pl-d { color: var(--body); margin: 0 0 22px; }
+.pl-ls { display: grid; border-top: 1px solid var(--line); }
+.pl-a { display: grid; grid-template-columns: 34px 1fr 20px; gap: 6px; align-items: start; padding: 16px 4px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--text); transition: background .2s, padding .2s; }
+.pl-a .num { margin: 4px 0 0; }
+.pl-at b { display: block; font: 600 16.5px/1.35 Montserrat, sans-serif; }
+.pl-at > span { display: block; margin-top: 4px; color: var(--muted); font-size: 14.5px; line-height: 1.5; }
+.pl-a i { font-style: normal; color: var(--gold); margin-top: 1px; transition: transform .2s; }
+.pl-a:hover { background: rgba(212, 168, 98, .07); padding-left: 10px; padding-right: 10px; }
+.pl-a:hover b { color: var(--gold-2); }
+.pl-a:hover i { transform: translateX(4px); }
+.pl-a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.pl-st { position: relative; aspect-ratio: 16 / 10; margin-right: calc(-1 * var(--bleed)); background: radial-gradient(closest-side, rgba(212, 168, 98, .09), transparent 78%); }
+.pl-st canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: 0; transition: opacity .7s ease; cursor: grab; }
+.pl-st canvas:active { cursor: grabbing; }
+.pl-st.on canvas { opacity: 1; }
+.pl-st .hx-lb { opacity: 0; transition: opacity .7s ease; }
+.pl-st.on .hx-lb { opacity: 1; }
+.pl-wait { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 18px; transition: opacity .5s ease; pointer-events: none; }
+.pl-st.on .pl-wait { opacity: 0; }
+.pl-bars { display: flex; gap: 10px; transform: skewX(-32deg); }
+.pl-bars i { width: 12px; height: 56px; background: linear-gradient(#E3BD7E, #8F6516); opacity: .25; animation: plWait 1.2s ease-in-out infinite; }
+.pl-bars i:nth-child(2) { animation-delay: .18s; }
+.pl-bars i:nth-child(3) { animation-delay: .36s; }
+@keyframes plWait { 0%, 100% { opacity: .2; transform: scaleY(.6); } 40% { opacity: 1; transform: scaleY(1); } }
+.pl-wait em { font: 500 13px/1 Montserrat, sans-serif; font-style: normal; letter-spacing: .04em; color: var(--muted); }
+.pl-st.fail .pl-wait em { display: none; }
+.pl-st.fail .pl-bars i { animation: none; opacity: .35; }
+@media (prefers-reduced-motion: reduce) { .pl-bars i { animation: none; opacity: .5; } }
+@media (max-width: 900px) {
+  .pillars { --bleed: 0px; }
+  .pl, .pl.rev { grid-template-columns: 1fr; gap: 18px; padding: 32px 0; }
+  .pl .pl-st, .pl.rev .pl-st { order: -1; margin: 0 -12px; }
+  .pl-st .hx-lb { font-size: 10.5px; padding: 3px 7px; }
+  .pl-st.fail { display: none; }
+}
+.strip.logos.light { position: relative; -webkit-mask-image: none; mask-image: none; }
+.strip.logos.light::before, .strip.logos.light::after { content: ""; position: absolute; top: 0; bottom: 0; width: 7%; z-index: 1; pointer-events: none; }
+.strip.logos.light::before { left: 0; background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0)); }
+.strip.logos.light::after { right: 0; background: linear-gradient(270deg, #fff, rgba(255, 255, 255, 0)); }
