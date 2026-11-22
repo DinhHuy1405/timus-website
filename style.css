@@ -693,3 +693,16 @@ video.sv-v { -webkit-mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #00
 /* v15: phần đầu trang chỉ logo, chữ và tab; thẻ dịch vụ không minh hoạ */
 img.hx-logo { display: block; width: 86%; max-width: 460px; height: auto; margin: 0 auto; }
 @media (max-width: 900px) { img.hx-logo { max-width: 220px; } }
+
+/* v16: cảnh 3D ở ba tab dịch vụ của phần đầu trang (chỉ máy tính) */
+.hx-r { position: relative; }
+.hx-3d { position: absolute; left: -4%; right: -6%; top: 50%; aspect-ratio: 4 / 3; transform: translateY(-50%); opacity: 0; pointer-events: none; transition: opacity .5s ease; }
+.hx-3d.on { opacity: 1; pointer-events: auto; cursor: grab; }
+.hx-3d.on:active { cursor: grabbing; }
+.hx-3d canvas { display: block; width: 100%; height: 100%; }
+.hx-r img.hx-logo { transition: opacity .5s ease; }
+.hx-r:has(.hx-3d.on) img.hx-logo { opacity: 0; }
+.hx-lb { position: absolute; left: 0; top: 0; padding: 5px 11px; border-radius: 4px; background: rgba(14, 14, 14, .86); border: 1px solid var(--gold); color: #E3BD7E; font: 600 12.5px/1.2 Montserrat, sans-serif; white-space: nowrap; pointer-events: none; }
+@media (max-width: 900px) { .hx-3d { display: none; } }
+.hero.hx { overflow: clip; }
+.hx-t { scroll-margin-top: 620px; }

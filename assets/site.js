@@ -174,7 +174,8 @@
       });
       svBar();
     };
-    var svGo = function (id, restart) { clearTimeout(svT); sv._act(id); svPlay(restart); };
+    var sv3d = null;
+    var svGo = function (id, restart) { clearTimeout(svT); sv._act(id); svPlay(restart); if (sv3d) sv3d.show(id); };
     vids.forEach(function (v, i) {
       if (!isVid(v)) return;
       v.addEventListener('ended', function () { if (svAuto && v.classList.contains('on')) svNext(i); });
@@ -191,6 +192,18 @@
     addEventListener('scroll', svVis, { passive: true }); addEventListener('resize', svVis); svVis();
     var svHash = function () { var id = location.hash.slice(1); if (id && svIds.indexOf(id) >= 0) { svAuto = false; svGo(id, true); } };
     addEventListener('hashchange', svHash); svHash();
+
+    /* cảnh 3D cho ba tab dịch vụ: chỉ tải trên máy tính, sau khi trang đã tải xong */
+    var host3d = doc.getElementById('hx3d');
+    if (host3d && matchMedia('(min-width: 901px)').matches && window.WebGLRenderingContext) {
+      var go3d = function () {
+        import('/assets/scene3d.js?v=3').then(function (m) {
+          sv3d = m.mount(host3d);
+          if (sv3d) { var b = svBtns.filter(function (x) { return x.classList.contains('on'); })[0]; if (b) sv3d.show(b.getAttribute('data-tab')); }
+        }).catch(function () {});
+      };
+      if (doc.readyState === 'complete') setTimeout(go3d, 600); else addEventListener('load', function () { setTimeout(go3d, 600); });
+    }
 
     /* cụm giao diện động: co theo khung, nghiêng theo chuột */
     var stage = sv.querySelector('.sv-stage'), txs = all('.tx', sv);

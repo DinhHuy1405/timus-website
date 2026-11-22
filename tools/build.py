@@ -13,8 +13,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import home_parts
 
 SITE = 'https://timusco.com'
-CSS_V = '15'
-JS_V = '6'
+CSS_V = '16'
+JS_V = '9'
 ZALO = 'https://zalo.me/0796796492'
 MAIL = 'info@timusco.com'
 

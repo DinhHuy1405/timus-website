@@ -22,9 +22,9 @@ TABS = [
            'From sourcing in Vietnam and China to orders on marketplaces in Vietnam and the United States. TIMUS coordinates the whole chain and reports every month.'),
      'links': [('#dich-vu', ('Xem 6 dịch vụ', 'See the 6 services'))]},
     {'id': 'logistics', 't': ('Logistics', 'Logistics'),
-     'h': ('Logistics: nguồn hàng và đưa hàng sang Mỹ', 'Logistics: sourcing and shipping to the US'),
-     'd': ('Tìm nhà máy tại Việt Nam, Trung Quốc; bao bì, tem nhãn, giấy tờ xuất nhập khẩu, vận chuyển và kho tại Mỹ kết nối các sàn.',
-           'Factories in Vietnam and China; packaging, labels, export and import paperwork, shipping and a US warehouse connected to marketplaces.'),
+     'h': ('Logistics: nhập hàng Trung Quốc về Việt Nam, đưa hàng sang Mỹ', 'Logistics: China to Vietnam imports, and shipping to the US'),
+     'd': ('Tìm nhà máy và nhập hàng từ Trung Quốc về Việt Nam; bao bì, tem nhãn, giấy tờ xuất nhập khẩu, vận chuyển sang Mỹ và kho tại Mỹ kết nối các sàn.',
+           'Factory sourcing and imports from China to Vietnam; packaging, labels, export and import paperwork, shipping to the US and a US warehouse connected to marketplaces.'),
      'links': [('/nguon-hang/', ('Nguồn hàng', 'Sourcing')), ('/hau-can/', ('Hậu cần', 'Logistics'))]},
     {'id': 'thuong-mai-dien-tu', 't': ('E-commerce', 'E-commerce'),
      'h': ('E-commerce: bán hàng trên sàn tại Việt Nam và Mỹ', 'E-commerce: selling on marketplaces in Vietnam and the US'),
@@ -51,7 +51,7 @@ def hero():
         </div>''')
     tabs = '\n'.join(f'''      <button type="button" class="hx-t{' on' if i == 0 else ''}" id="{t['id']}" data-tab="{t['id']}" role="tab" aria-selected="{'true' if i == 0 else 'false'}"><span class="hx-n">0{i + 1}</span><b>{L(t['t'])}</b><i class="hx-pg" aria-hidden="true"></i></button>''' for i, t in enumerate(TABS))
 
-    marks = ''.join(f'<i class="sv-v sv-live{" on" if i == 0 else ""}" data-panel="{t["id"]}" data-dur="7" hidden></i>' for i, t in enumerate(TABS))
+    marks = ''.join(f'<i class="sv-v sv-live{" on" if i == 0 else ""}" data-panel="{t["id"]}" data-dur="{7 if i == 0 else 13}" hidden></i>' for i, t in enumerate(TABS))
     return f'''<section class="hero hx" data-svc data-tabs>
   <canvas id="heroFx" class="hero-fx" aria-hidden="true"></canvas>
   <div class="wrap hx-in">
@@ -67,6 +67,7 @@ def hero():
     </div>
     <div class="hx-r">
       <img class="hx-logo" src="/assets/timus-logo.webp" alt="Logo TIMUS" width="900" height="760">
+      <div class="hx-3d" id="hx3d" aria-hidden="true"></div>
       {marks}
     </div>
   </div>

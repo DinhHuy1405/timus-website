@@ -17,7 +17,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=15">
+<link rel="stylesheet" href="/style.css?v=16">
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"TIMUS CO., LTD","url":"https://timusco.com/","logo":"https://timusco.com/assets/apple-touch-icon.png","email":"info@timusco.com","address":{"@type":"PostalAddress","addressLocality":"Da Nang","addressCountry":"VN"},"description":"E-commerce operations, product research, sourcing, AI assistants for business teams, reporting dashboards and multichannel systems for Vietnamese brands in Vietnam and the United States.","knowsAbout":["E-commerce operations","AI agents for business","Reporting dashboards","Multichannel e-commerce systems"]}
 </script>
@@ -71,8 +74,8 @@
           <p class="hx-links"><a class="link" href="#dich-vu"><span data-l="vi">Xem 6 dịch vụ</span><span data-l="en">See the 6 services</span> →</a></p>
         </div>
         <div class="hx-c" data-panel="logistics">
-          <p class="hx-h"><span data-l="vi">Logistics: nguồn hàng và đưa hàng sang Mỹ</span><span data-l="en">Logistics: sourcing and shipping to the US</span></p>
-          <p class="lead"><span data-l="vi">Tìm nhà máy tại Việt Nam, Trung Quốc; bao bì, tem nhãn, giấy tờ xuất nhập khẩu, vận chuyển và kho tại Mỹ kết nối các sàn.</span><span data-l="en">Factories in Vietnam and China; packaging, labels, export and import paperwork, shipping and a US warehouse connected to marketplaces.</span></p>
+          <p class="hx-h"><span data-l="vi">Logistics: nhập hàng Trung Quốc về Việt Nam, đưa hàng sang Mỹ</span><span data-l="en">Logistics: China to Vietnam imports, and shipping to the US</span></p>
+          <p class="lead"><span data-l="vi">Tìm nhà máy và nhập hàng từ Trung Quốc về Việt Nam; bao bì, tem nhãn, giấy tờ xuất nhập khẩu, vận chuyển sang Mỹ và kho tại Mỹ kết nối các sàn.</span><span data-l="en">Factory sourcing and imports from China to Vietnam; packaging, labels, export and import paperwork, shipping to the US and a US warehouse connected to marketplaces.</span></p>
           <p class="hx-links"><a class="link" href="/nguon-hang/"><span data-l="vi">Nguồn hàng</span><span data-l="en">Sourcing</span> →</a><a class="link" href="/hau-can/"><span data-l="vi">Hậu cần</span><span data-l="en">Logistics</span> →</a></p>
         </div>
         <div class="hx-c" data-panel="thuong-mai-dien-tu">
@@ -93,7 +96,8 @@
     </div>
     <div class="hx-r">
       <img class="hx-logo" src="/assets/timus-logo.webp" alt="Logo TIMUS" width="900" height="760">
-      <i class="sv-v sv-live on" data-panel="tong-quan" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="logistics" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="thuong-mai-dien-tu" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="cong-nghe" data-dur="7" hidden></i>
+      <div class="hx-3d" id="hx3d" aria-hidden="true"></div>
+      <i class="sv-v sv-live on" data-panel="tong-quan" data-dur="7" hidden></i><i class="sv-v sv-live" data-panel="logistics" data-dur="13" hidden></i><i class="sv-v sv-live" data-panel="thuong-mai-dien-tu" data-dur="13" hidden></i><i class="sv-v sv-live" data-panel="cong-nghe" data-dur="13" hidden></i>
     </div>
   </div>
   <div class="wrap">
@@ -381,6 +385,6 @@
   </div>
 </footer>
 
-<script src="/assets/site.js?v=6"></script>
+<script src="/assets/site.js?v=9"></script>
 </body>
 </html>
