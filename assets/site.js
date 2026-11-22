@@ -115,6 +115,51 @@
     }
   }
 
+  /* hành trình năm khâu: chạy theo lúc cuộn trang */
+  var jr = doc.querySelector('.jr');
+  if (jr) {
+    var jsec = jr.closest('.jr-sec'), pin = jsec.querySelector('.jr-pin'), jbs = all('.jr-b', jr), jbox = jr.querySelector('.jr-box');
+    var jcur = -1, jlock = 0;
+    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    var isPinned = function () { return getComputedStyle(pin).position === 'sticky'; };
+    var isRow = function () { return getComputedStyle(jr).display === 'grid'; };
+    var jprog = function () {
+      var vh = innerHeight, r;
+      if (isPinned()) { r = jsec.getBoundingClientRect(); return clamp((64 - r.top) / Math.max(1, r.height - (vh - 64))); }
+      r = jr.getBoundingClientRect();
+      if (isRow()) return clamp((vh * .72 - r.top) / (vh * .6));
+      return clamp((vh * .5 - r.top) / Math.max(1, r.height));
+    };
+    var jset = function (i) {
+      if (i === jcur) return; jcur = i;
+      jr._act('j' + (i + 1));
+      jbs.forEach(function (b, k) { b.classList.toggle('done', k < i); });
+    };
+    var jtick = function () {
+      var p = jprog(), n = jbs.length;
+      if (Date.now() > jlock) jset(Math.round(p * (n - 1)));
+      if (jbox && isRow()) {
+        var t = p * (n - 1), i = Math.min(n - 2, Math.floor(t)), f = t - i, jrR = jr.getBoundingClientRect();
+        var c = function (b) { var s = b.querySelector('svg').getBoundingClientRect(); return { x: s.left + s.width / 2 - jrR.left, y: s.top + s.height * .42 - jrR.top }; };
+        var A = c(jbs[i]), B = c(jbs[i + 1]);
+        var hop = Math.sin(f * Math.PI) * 16;
+        jbox.style.transform = 'translate(' + (A.x + (B.x - A.x) * f - 23).toFixed(1) + 'px,' + (A.y + (B.y - A.y) * f - 40 - hop).toFixed(1) + 'px)';
+        jbox.style.opacity = 1;
+      }
+    };
+    jbs.forEach(function (b, k) {
+      b.addEventListener('click', function () {
+        if (isPinned()) {
+          var r = jsec.getBoundingClientRect(), travel = r.height - (innerHeight - 64);
+          scrollTo({ top: scrollY + r.top - 64 + travel * (k / (jbs.length - 1)) * .98 + 2, behavior: 'smooth' });
+        } else { jlock = Date.now() + 2500; jcur = k; jbs.forEach(function (x, m) { x.classList.toggle('done', m < k); }); }
+      });
+    });
+    var jraf = 0;
+    var jreq = function () { if (!jraf) jraf = requestAnimationFrame(function () { jraf = 0; jtick(); }); };
+    addEventListener('scroll', jreq, { passive: true }); addEventListener('resize', jreq); addEventListener('load', jtick); jtick();
+  }
+
   /* dải logo sàn chạy ngang */
   var t = doc.getElementById('lgTrack');
   if (t) {

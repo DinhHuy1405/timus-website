@@ -387,3 +387,67 @@ a.who-b { display: block; text-decoration: none; }
   .scard { padding: 24px 20px; }
 }
 @media (min-width: 601px) and (max-width: 900px) { .sgrid, .sgrid.two { grid-template-columns: 1fr 1fr; } }
+
+/* v10: hành trình năm khâu bằng mô hình khối, chạy theo lúc cuộn */
+.jr-sec { padding: 72px 0; }
+.jr { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 26px; }
+.jr-b { grid-row: 1; position: relative; background: none; border: 0; padding: 0 6px 18px; cursor: pointer; color: var(--muted); font: inherit; text-align: center; outline: none; }
+.jr-b .iso { display: block; width: 100%; max-width: 190px; margin: 0 auto; overflow: visible; transition: transform .35s ease, filter .35s ease, opacity .35s ease; }
+.iso .g.t { fill: #EBCB8B; } .iso .g.l { fill: #C2954C; } .iso .g.r { fill: #8E6428; }
+.iso .k.t { fill: #2A2722; } .iso .k.l { fill: #1D1B17; } .iso .k.r { fill: #131210; }
+.iso .k { stroke: rgba(212,168,98,.38); stroke-width: .7; stroke-linejoin: round; }
+.iso .lens { fill: none; stroke: #F3DDAE; stroke-width: 4; stroke-linecap: round; }
+.iso-m { animation: jrfloat 4s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -.7s); }
+@keyframes jrfloat { from { transform: translateY(0); } to { transform: translateY(-7px); } }
+.jr-b .iso { opacity: .45; }
+.jr-b.done .iso { opacity: .85; }
+.jr-b:hover .iso { opacity: 1; }
+.jr-b.on .iso { opacity: 1; transform: translateY(-8px) scale(1.07); filter: drop-shadow(0 14px 22px rgba(212,168,98,.38)); }
+.jr-n { display: block; font: 600 12px/1 Montserrat, sans-serif; letter-spacing: .08em; color: var(--gold); margin-top: 4px; }
+.jr-t { display: block; font: 600 16px/1.3 Montserrat, sans-serif; color: var(--text); margin-top: 6px; }
+.jr-b.on .jr-t { color: var(--gold); }
+.jr-b:focus-visible .iso { outline: 2px solid var(--gold); outline-offset: 4px; }
+.jr-b:not(:nth-of-type(5))::after { content: ""; position: absolute; left: 80%; width: 40%; top: 40%; height: 2px; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(212,168,98,.9) 0 10px, transparent 10px 20px); background-size: 20px 2px; animation: jrflow 1s linear infinite; opacity: .35; transition: opacity .3s; }
+.jr-b.done::after { opacity: 1; }
+@keyframes jrflow { to { background-position: 20px 0; } }
+.jr-route { position: absolute; left: 60%; width: 80%; top: -14px; font-size: 11.5px; line-height: 1.3; color: var(--gold); opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 2; }
+.jr-b.on .jr-route, .jr-b.done .jr-route { opacity: .95; }
+.jr-b::before { content: ""; position: absolute; left: 50%; bottom: -18px; width: 1px; height: 26px; background: linear-gradient(var(--gold), rgba(212,168,98,.15)); }
+.jr-box { position: absolute; left: 0; top: 0; width: 46px; z-index: 3; pointer-events: none; opacity: 0; will-change: transform; filter: drop-shadow(0 6px 10px rgba(0,0,0,.6)) drop-shadow(0 0 10px rgba(240,210,150,.55)); }
+.jr-box .iso { display: block; width: 46px; opacity: 1; }
+.jr-rail { grid-row: 2; grid-column: 1 / -1; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 16px; margin-top: 18px; padding: 13px 22px; border: 1px solid var(--gold); border-radius: var(--radius); background: linear-gradient(90deg, rgba(212,168,98,.16), rgba(212,168,98,.04)); text-decoration: none; position: relative; overflow: hidden; }
+.jr-rail::before { content: ""; position: absolute; top: 0; bottom: 0; width: 120px; left: -120px; background: linear-gradient(90deg, transparent, rgba(255,236,190,.28), transparent); animation: jrsweep 3.2s linear infinite; }
+@keyframes jrsweep { to { left: 100%; } }
+.jr-rail b { font: 600 14px/1.3 Montserrat, sans-serif; color: var(--gold); letter-spacing: .04em; text-transform: uppercase; }
+.jr-rail span { color: var(--body); font-size: 15px; }
+.jr-rail i { margin-left: auto; font-style: normal; color: var(--gold); font-size: 18px; transition: transform .2s; }
+.jr-rail:hover i { transform: translateX(4px); }
+.jr-p { grid-row: 3; grid-column: 1 / -1; display: none; grid-template-columns: 1fr 1.15fr; gap: 48px; margin-top: 22px; padding: 26px 32px; background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius); min-height: 218px; }
+.jr-p.on { display: grid; animation: fadeUp .3s ease; }
+.jr-p h3 { font-size: 21px; margin-bottom: 10px; }
+.jr-d { color: var(--body); margin: 0 0 16px; font-size: 16px; }
+.jr-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; }
+.jr-p .safe { font-size: 15px; }
+.jr-tech { margin: 14px 0 0; padding: 10px 14px; border-left: 2px solid var(--gold); background: rgba(212,168,98,.08); color: var(--body); font-size: 14.5px; }
+.jr-tech b { display: block; font: 600 12px/1.4 Montserrat, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+/* ghim khối lại trong lúc cuộn (màn hình đủ rộng và đủ cao) */
+@media (min-width: 901px) and (min-height: 780px) {
+  .jr-sec { height: 340vh; padding: 0; }
+  .jr-pin { position: sticky; top: 64px; height: calc(100vh - 64px); display: flex; align-items: center; }
+  .jr-pin > .wrap { width: 100%; }
+  .jr-sec .sub { margin-bottom: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .iso-m, .jr-b::after, .jr-rail::before { animation: none; } }
+@media (max-width: 900px) {
+  .jr { display: block; }
+  .jr-b { display: grid; grid-template-columns: 96px 1fr; column-gap: 16px; align-items: center; width: 100%; text-align: left; padding: 10px 0; border-top: 1px solid var(--line); }
+  .jr-b .iso { grid-row: 1 / 3; max-width: 96px; }
+  .jr-n { align-self: end; margin: 0; } .jr-t { align-self: start; margin-top: 4px; font-size: 17px; }
+  .jr-b::after, .jr-b::before, .jr-route, .jr-box { display: none; }
+  .jr-b.on .iso { transform: none; }
+  .jr-p, .jr-p.on { display: grid; animation: none; grid-template-columns: 1fr; gap: 16px; margin: 0 0 14px; padding: 20px; min-height: 0; }
+  .jr-b + .jr-p { opacity: .6; transition: opacity .3s; } .jr-b.on + .jr-p { opacity: 1; border-color: var(--gold); }
+  .jr-rail { margin-top: 20px; }
+  .jr-rail i { display: none; }
+}

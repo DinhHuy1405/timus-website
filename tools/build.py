@@ -8,11 +8,13 @@ Chạy từ thư mục gốc của repo:  python3 tools/build.py
 Sửa chữ của trang dịch vụ thì sửa trong file này rồi chạy lại, không sửa tay file index.html của từng trang.
 Mỗi câu là một cặp (tiếng Việt, tiếng Anh).
 """
-import json, os, re
+import json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from journey import journey
 
 SITE = 'https://timusco.com'
-CSS_V = '9'
-JS_V = '1'
+CSS_V = '10'
+JS_V = '2'
 ZALO = 'https://zalo.me/0796796492'
 MAIL = 'info@timusco.com'
 
@@ -260,7 +262,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Nguon hang',
     },
     {
-        'slug': 'ban-hang-tai-my', 'group': 'tmdt', 'num': '03',
+        'slug': 'ban-hang-tai-my', 'group': 'tmdt', 'num': '04',
         'title': ('Bán hàng tại Mỹ', 'Selling in the United States'),
         'short': ('Mở gian hàng và vận hành trên Amazon, TikTok Shop US, Walmart, eBay, Etsy, Shopify. Có gói thử nghiệm 3 tháng.',
                   'Store setup and operations on Amazon, TikTok Shop US, Walmart, eBay, Etsy and Shopify, with a 3 month test plan.'),
@@ -303,7 +305,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Ban hang tai My',
     },
     {
-        'slug': 'ban-hang-tai-viet-nam', 'group': 'tmdt', 'num': '04',
+        'slug': 'ban-hang-tai-viet-nam', 'group': 'tmdt', 'num': '05',
         'title': ('Bán hàng tại Việt Nam', 'Selling in Vietnam'),
         'short': ('Mở gian hàng và vận hành trên Shopee, TikTok Shop, Lazada, Tiki: quảng cáo, KOC, chăm sóc khách, báo cáo tháng.',
                   'Store setup and operations on Shopee, TikTok Shop, Lazada and Tiki: ads, KOCs, customer service and monthly reports.'),
@@ -339,7 +341,7 @@ PAGES = [
         'cta': ('Nhắn Zalo', 'Message on Zalo'), 'subject': 'TIMUS - Ban hang tai Viet Nam',
     },
     {
-        'slug': 'hau-can', 'group': 'tmdt', 'num': '05',
+        'slug': 'hau-can', 'group': 'tmdt', 'num': '03',
         'title': ('Hậu cần và đưa hàng đi', 'Logistics and fulfillment'),
         'short': ('Bao bì, tem nhãn, phối hợp giấy tờ xuất nhập khẩu, vận chuyển, và kho tại Mỹ kết nối các sàn.',
                   'Packaging, labels, export and import paperwork, shipping, and a US warehouse connected to marketplaces.'),
@@ -408,7 +410,7 @@ def P(t, cls=''):
     return f'<p{c} data-l="vi">{t[0]}</p><p{c} data-l="en">{t[1]}</p>'
 
 
-NAV = [('cong-nghe', ('Công nghệ', 'Technology')), ('thuong-mai-dien-tu', ('Thương mại điện tử', 'E-commerce')),
+NAV = [('thuong-mai-dien-tu', ('Thương mại điện tử', 'E-commerce')), ('cong-nghe', ('Công nghệ', 'Technology')),
        ('cach-lam', ('Cách làm việc', 'How we work')), ('dao-tao', ('Đào tạo', 'Training')),
        ('ve-timus', ('Về TIMUS', 'About')), ('lien-he', ('Liên hệ', 'Contact'))]
 
@@ -669,27 +671,20 @@ def page(p):
 
 def home_blocks():
     tech = [p for p in PAGES if p['group'] == 'tech']
-    tm = [p for p in PAGES if p['group'] == 'tmdt']
-    return f'''<section id="cong-nghe" class="sec tech">
+    return f'''<section id="thuong-mai-dien-tu" class="sec jr-sec">
+  <div class="jr-pin">
   <div class="wrap">
-    <p class="eyebrow">{L(('Dành cho doanh nghiệp có đội ngũ', 'For companies with their own teams'))}</p>
-    <h2>{L(('Công nghệ cho doanh nghiệp', 'Technology for businesses'))}</h2>
-    <p class="sub">{L(('Trợ lý AI làm thay việc lặp lại, dashboard gom số liệu về một chỗ, và hệ thống nối các sàn, website, kho với nhau. Mỗi dịch vụ có một trang riêng.', 'AI assistants that take over repetitive work, dashboards that bring your numbers together, and systems that connect marketplaces, website and warehouse. Each service has its own page.'))}</p>
-    <div class="sgrid two reveal">
-{chr(10).join(scard(p) for p in tech)}
-    </div>
+    <p class="eyebrow">{L(('Thương mại điện tử', 'E-commerce'))}</p>
+    <h2>{L(('Từ sản phẩm đến đơn hàng, TIMUS làm từng khâu', 'From product to orders, one stage at a time'))}</h2>
+    <p class="sub">{L(('Năm khâu nối tiếp nhau. Doanh nghiệp chọn đúng khâu mình cần, hoặc giao cả chuỗi. Cuộn trang để theo kiện hàng đi qua từng khâu.', 'Five stages in sequence. Take only the stage you need, or hand over the whole chain. Scroll to follow the parcel through each stage.'))}</p>
+{journey(L, P, UL)}
+  </div>
   </div>
 </section>
 
-<section id="thuong-mai-dien-tu" class="sec light">
+<section class="sec light">
   <div class="wrap">
-    <p class="eyebrow">{L(('Dành cho doanh nghiệp muốn bán hàng trên sàn', 'For companies that want to sell on marketplaces'))}</p>
-    <h2>{L(('Thương mại điện tử', 'E-commerce'))}</h2>
-    <p class="sub">{L(('Từ nghiên cứu sản phẩm đến khi gian hàng có đơn và được vận hành hằng tháng, tại Việt Nam và Mỹ. Doanh nghiệp chọn đúng khâu mình cần, mỗi khâu là một phần việc riêng.', 'From product research to a store with orders that is run every month, in Vietnam and the United States. Pick only the stages you need; each one is a separate scope.'))}</p>
-    <div class="sgrid reveal">
-{chr(10).join(scard(p) for p in tm)}
-    </div>
-    <div class="included reveal">
+    <div class="included reveal" style="margin-top:0">
       <div>
         <h3>{L(('Gồm trong mọi gói vận hành', 'Included with every operations plan'))}</h3>
         {P(('Trang theo dõi riêng cho từng doanh nghiệp: doanh thu, lời lãi, tồn kho, thị trường. Báo cáo và đối soát gửi hằng tháng trước ngày 05.', 'A private dashboard for each brand: revenue, margin, inventory and market data. Monthly report and reconciliation before the 5th.'))}
@@ -699,6 +694,17 @@ def home_blocks():
         {P(('Báo giá theo phạm vi từng doanh nghiệp, gửi sau buổi trao đổi đầu. Chi phí bên thứ ba (vận chuyển, kho, thuế, phí sàn, quảng cáo, hàng mẫu) doanh nghiệp trả theo thực tế, TIMUS không cộng phí.', 'Quoted per scope after a first call. Third party costs (shipping, warehousing, duties, marketplace fees, ads, samples) are paid at actual cost with no markup from TIMUS.'))}
         <a class="link" href="#lien-he">{L(('Liên hệ báo giá', 'Get a quote'))} →</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="cong-nghe" class="sec sec-alt light">
+  <div class="wrap">
+    <p class="eyebrow">{L(('Công nghệ', 'Technology'))}</p>
+    <h2>{L(('Công nghệ đứng sau chuỗi bán hàng, dùng riêng cũng được', 'The technology behind the chain, also available on its own'))}</h2>
+    <p class="sub">{L(('Dashboard, hệ thống kết nối và trợ lý AI là phần chạy bên dưới năm khâu ở trên. Doanh nghiệp đã tự bán hàng và có đội ngũ có thể chỉ dùng phần công nghệ, không cần ký vận hành.', 'Dashboards, connected systems and AI assistants run underneath the five stages above. Companies that already sell and have their own teams can take the technology alone, without an operations contract.'))}</p>
+    <div class="sgrid two reveal">
+{chr(10).join(scard(p) for p in tech)}
     </div>
   </div>
 </section>
