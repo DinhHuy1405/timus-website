@@ -67,11 +67,16 @@ function dashed(parent, pts) {
   const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineDashedMaterial({ color: GOLD, dashSize: .3, gapSize: .26, transparent: true, opacity: .85 }));
   l.computeLineDistances(); parent.add(l); return l;
 }
+/* màn hình hiện một ảnh chụp: vẽ nền chờ, khi ảnh tải xong thì vẽ đúng một lần */
+function shot(src, bg) {
+  const im = new Image(); let done = false; im.src = src;
+  return (x, w, h) => { if (done) return false; x.fillStyle = bg; x.fillRect(0, 0, w, h); if (im.complete && im.naturalWidth) { x.drawImage(im, 0, 0, w, h); done = true; } };
+}
 function screen(w, h, draw, cw = 512, ch = 320) {     /* màn hình tự phát sáng, vẽ bằng canvas */
   const c = document.createElement('canvas'); c.width = cw; c.height = ch; const x = c.getContext('2d');
   const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
   const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false }));
-  m.userData.draw = (t) => { draw(x, cw, ch, t); tex.needsUpdate = true; }; m.userData.draw(0); return m;
+  m.userData.draw = (t) => { if (draw(x, cw, ch, t) !== false) tex.needsUpdate = true; }; m.userData.draw(0); return m;
 }
 const rr = (x, a, b, w, h, r, fill) => { x.beginPath(); x.roundRect(a, b, w, h, r); x.fillStyle = fill; x.fill(); };
 
@@ -86,9 +91,11 @@ async function logistics() {
   platform(root, 6, 10, -12.5); platform(root, 7, 10, -3.2); platform(root, 7, 10, 11.5);
   const r1 = dashed(root, Array.from({ length: 21 }, (_, i) => new THREE.Vector3(-9.3 + 2.4 * i / 20, .06, 1.6)));
   const r2 = dashed(root, Array.from({ length: 41 }, (_, i) => new THREE.Vector3(.6 + 7.2 * i / 40, .06, 1.6)));
+  const r3 = dashed(root, [[-11.2, 5.2], [-11.2, 6.6], [9.6, 6.6], [9.6, 5.2]].flatMap(([x, z], i, a) => i < a.length - 1 ? Array.from({ length: 12 }, (_, k) => new THREE.Vector3(x + (a[i + 1][0] - x) * k / 12, .06, z + (a[i + 1][1] - z) * k / 12)) : [new THREE.Vector3(x, .06, z)]));
   const [ship, boat, facA, facB, chim, tank, c1, c2, c3, pile, wh, whB, truck, van] = await Promise.all([
     glb('water/ship-cargo-a'), glb('water/ship-cargo-c'), glb('city/building-a'), glb('city/building-d'), glb('city/chimney-medium'), glb('city/detail-tank'), glb('city/shipping-container-a'),
     glb('city/shipping-container-b'), glb('water/cargo-container-a'), glb('water/cargo-pile-a'), glb('city/building-g'), glb('city/building-d'), glb('car/truck'), glb('car/delivery')]);
+  const ship2 = await glb('water/ship-cargo-a'); put(root, prep(ship2, 4.6), -9.5, 0, 6.6, Math.PI / 2);
   /* Trung Quốc: nhà máy */
   put(root, prep(facA, 4.2), -13, TOP, -2.2); put(root, prep(chim, 3), -14.2, TOP, -4.2); put(root, prep(c1, 1.9), -11.4, TOP, 3.4, Math.PI / 2);
   /* Việt Nam: nhà máy và kho gom hàng */
@@ -98,20 +105,32 @@ async function logistics() {
   put(root, prep(wh, 4.6), 12.6, TOP, -2.2); put(root, prep(whB, 3), 9.6, TOP, -3.4);
   put(root, prep(c3, 2), 9.4, TOP, 3.4, Math.PI / 2); put(root, prep(pile, 1.9), 9.6, TOP, 4.8); put(root, prep(van, 2.2), 10.6, TOP, 1.3, Math.PI / 2);
   put(root, prep(boat, 3), -8.9, 0, 1.6, Math.PI / 2); put(root, prep(ship, 6), 1.2, 0, 1.6, Math.PI / 2);
-  for (const o of [ship, boat]) o.traverse((m) => { if (m.isMesh) { m.material = m.material.clone(); m.material.transparent = true; } });
-  const sy = ship.position.y, by = boat.position.y, T = 13;
+  for (const o of [ship, boat, ship2]) o.traverse((m) => { if (m.isMesh) { m.material = m.material.clone(); m.material.transparent = true; } });
+  const sy = ship.position.y, by = boat.position.y, s2y = ship2.position.y, T = 13;
   return { root, T, cam: [11, 28.5], labels: [[['Trung Quốc', 'China'], -12.5 * .78, 5.2, -2.2], [['Việt Nam', 'Vietnam'], -3.2 * .78, 4.6, -2.6], [['Kho tại Mỹ', 'US warehouse'], 11.5 * .78, 5.4, -2.2]],
     update(t) {
-      /* 0–3,5s: tàu nhỏ Trung Quốc → Việt Nam; 3–4,5s: xe tải ra cảng; 4,5–9,8s: tàu container Việt Nam → Mỹ; 9,8–12s: xe giao hàng rời kho */
+      /* 1–10,5s: tàu thứ hai đi thẳng Trung Quốc → Mỹ ở làn phía trước; 0–3,5s: tàu nhỏ Trung Quốc → Việt Nam; 3–4,5s: xe tải ra cảng; 4,5–9,8s: tàu container Việt Nam → Mỹ; 9,8–12s: xe giao hàng rời kho */
       const u1 = ease((t - .4) / 3); boat.position.x = -8.9 + 1.6 * u1; boat.position.y = by + Math.sin(t * 2.6) * .04;
       truck.position.x = -4.8 + 2.4 * ease((t - 3) / 1.5);
       const u2 = ease((t - 4.5) / 5.3); ship.position.x = 1.2 + 6 * u2; ship.position.y = sy + Math.sin(t * 2.2) * .05; ship.rotation.z = Math.sin(t * 1.6) * .012;
       const f = t > T - 1 ? 1 - ease((t - (T - 1)) / .9) : ease(t / .8);
-      for (const o of [ship, boat]) o.traverse((m) => { if (m.isMesh) m.material.opacity = f; });
+      ship2.position.x = -8.6 + 15.6 * ease((t - 1) / 9.5); ship2.position.y = s2y + Math.sin(t * 2 + 1) * .05;
+      for (const o of [ship, boat, ship2]) o.traverse((m) => { if (m.isMesh) m.material.opacity = f; });
       van.position.x = 10.6 + 5 * ease((t - 9.8) / 2.2); van.visible = t < 12.1;
-      r1.material.dashOffset = -t * .6; r2.material.dashOffset = -t * .6;
+      r1.material.dashOffset = -t * .6; r2.material.dashOffset = -t * .6; r3.material.dashOffset = -t * .6;
     } };
 }
+
+/* thẻ logo sàn: nền trắng bo góc để logo màu gốc đọc được trên nền tối */
+function logoChip(src) {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 128; const x = c.getContext('2d');
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+  const draw = (im) => { x.clearRect(0, 0, 256, 128); rr(x, 4, 4, 248, 120, 30, '#ffffff');
+    if (im) { const iw = im.naturalWidth || 300, ih = im.naturalHeight || 100, s = Math.min(192 / iw, 78 / ih); x.drawImage(im, (256 - iw * s) / 2, (128 - ih * s) / 2, iw * s, ih * s); } tex.needsUpdate = true; };
+  draw(); const im = new Image(); im.onload = () => draw(im); im.src = src;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, toneMapped: false })); sp.scale.set(1.9, .95, 1); return sp;
+}
+const SAN = ['shopee.png', 'amazon.png', 'tiktokshop.png', 'walmart.svg', 'lazada.svg', 'ebay.svg', 'shopify.png', 'etsy.png'];
 
 /* ================= E-COMMERCE ================= */
 async function ecommerce() {
@@ -131,6 +150,7 @@ async function ecommerce() {
   }, 320, 600);
   scr.position.z = .18; phone.add(scr);
   phone.position.set(-6.9, TOP + 3.25, -.6); phone.rotation.set(-.12, .5, 0); root.add(phone);
+  const chips = SAN.map((f) => { const sp = logoChip('/assets/san/' + f); root.add(sp); return sp; });
   const stand = box(1.6, .3, 1.2, M.gold); stand.position.set(-6.9, TOP + .15, -.9); root.add(stand);
   /* băng chuyền */
   const belt = box(9.2, .5, 1.5, M.ink); belt.position.set(.2, TOP + .55, 1.2); root.add(belt);
@@ -141,12 +161,13 @@ async function ecommerce() {
   put(root, prep(b2, 1.2), -4.6, TOP, 3.2, .4); put(root, prep(pile, 2.4), -2.2, TOP, -2.6); put(root, prep(c1, 2.6), 2.2, TOP, -2.8, Math.PI / 2);
   put(root, prep(van, 3.4), 7.4, TOP, 1.2, Math.PI / 2);
   const vx = van.position.x, by = boxes[0].position.y, T = 12;
-  return { root, T, cam: [9.4, 20.8, 3.3], labels: [[['Gian hàng trên sàn', 'Marketplace store'], -6.9, 8.4, -.6], [['Đóng gói, giao đơn', 'Packing and delivery'], 2.4, 4.2, 1.2]],
+  return { root, T, cam: [9.9, 22.6, 3.3], labels: [[['Gian hàng trên sàn', 'Marketplace store'], -6.9, 8.4, -.6], [['Đóng gói, giao đơn', 'Packing and delivery'], 2.4, 4.2, 1.2]],
     update(t) {
       scr.userData.draw(t);
       boxes.forEach((o, k) => { const u = ((t / 6) + k / 4) % 1; o.position.x = -4.2 + 9.2 * u; const s = Math.min(1, u * 8, (1 - u) * 8); o.scale.setScalar(b1.scale.x * Math.max(.01, s)); o.position.y = by; o.rotation.y = k * .7; });
       van.position.x = vx + (t > 9.6 ? 5.5 * ease((t - 9.6) / 1.6) : 0) - (t < 1 ? 5.5 * (1 - ease(t / 1)) : 0); van.position.y = TOP - van.userData.min + Math.abs(Math.sin(t * 6)) * .012;
       phone.position.y = TOP + 3.25 + Math.sin(t * 1.4) * .06;
+      chips.forEach((sp, k) => { const a = Math.PI * 2 * (t / T + k / chips.length); sp.position.set(-6.1 + 2.7 * Math.cos(a), TOP + 3.7 + 1.8 * Math.sin(a + 1.1), .1 + 2.3 * Math.sin(a)); });
     } };
 }
 
@@ -156,19 +177,14 @@ async function technology() {
   platform(root, 20, 10);
   /* màn hình dashboard lớn: phân tích dữ liệu */
   const dash = new THREE.Group(); dash.add(box(6.6, 4, .3, M.ink)); const dr = box(6.75, 4.15, .18, M.gold); dr.castShadow = false; dash.add(dr);
-  const ds = screen(6.2, 3.6, (x, w, h, t) => {
-    x.fillStyle = '#14120e'; x.fillRect(0, 0, w, h);
-    for (let i = 0; i < 3; i++) { rr(x, 18 + i * 162, 16, 148, 58, 8, '#231f17'); rr(x, 30 + i * 162, 28, 60, 8, 4, '#6b5f48'); rr(x, 30 + i * 162, 44, 90 + 20 * Math.sin(t * .8 + i), 16, 4, '#d4a862'); }
-    for (let i = 0; i < 9; i++) { const bh = 40 + 110 * (.5 + .5 * Math.sin(t * 1.1 + i * .7)) * (.5 + i / 16); rr(x, 26 + i * 52, h - 22 - bh, 30, bh, 4, i % 3 === 2 ? '#d4a862' : '#5a4a2a'); }
-    x.beginPath(); for (let i = 0; i <= 40; i++) { const px = 20 + i * (w - 40) / 40, py = 150 - 34 * Math.sin(t * .9 + i * .32) - i * 1.2; i ? x.lineTo(px, py) : x.moveTo(px, py); } x.lineWidth = 4; x.strokeStyle = '#f0e2c4'; x.stroke();
-  });
+  const ds = screen(6.2, 3.6, shot(BASE + 'scr/dashboard.webp', '#f4f2ec'), 1240, 720);
   ds.position.z = .16; dash.add(ds); dash.position.set(0, TOP + 3.6, -3.4); root.add(dash);
   const pole = box(.4, 1.6, .4, M.dark); pole.position.set(0, TOP + .8, -3.5); root.add(pole);
   /* bàn làm việc: website */
   const [desk, chair, kb, lap, bopen] = await Promise.all([obj('desk'), obj('chairDesk'), obj('computerKeyboard'), obj('laptop'), obj('cardboardBoxOpen')]);
   put(root, prep(desk, 3.4), -6.6, TOP, .4, .35); const dh = desk.userData.h;
   put(root, prep(lap, 1.3), -6.5, TOP + dh, .3, .35); put(root, prep(chair, 1.9), -5.6, TOP, 2.4, Math.PI + .5);
-  const site = screen(2.6, 1.7, (x, w, h) => { x.fillStyle = '#f2efe8'; x.fillRect(0, 0, w, h); rr(x, 0, 0, w, 40, 0, '#14120e'); rr(x, 20, 12, 70, 16, 4, '#d4a862'); rr(x, 26, 70, 250, 26, 6, '#14120e'); rr(x, 26, 108, 180, 12, 5, '#a39e93'); rr(x, 26, 140, 110, 34, 6, '#d4a862'); for (let i = 0; i < 3; i++) rr(x, 26 + i * 158, 204, 144, 92, 8, ['#e9dcc0', '#dce3ee', '#d6e8db'][i]); });
+  const site = screen(2.6, 1.7, shot(BASE + 'scr/website.webp', '#0e0e0e'), 780, 510);
   const sf = new THREE.Group(); sf.add(box(2.8, 1.9, .14, M.ink)); site.position.z = .08; sf.add(site); sf.position.set(-7.4, TOP + dh + 1.75, -.9); sf.rotation.y = .35; root.add(sf);
   const sp = box(.2, .9, .2, M.dark); sp.position.set(-7.4, TOP + dh + .45, -1); root.add(sp);
   put(root, prep(kb, .9), -6, TOP + dh, 1.1, .35);
@@ -194,7 +210,7 @@ async function technology() {
   const T = 12;
   return { root, T, cam: [9.6, 20.6, 3.2], labels: [[['Website', 'Websites'], -7.2, 5.7, -.9], [['Phân tích dữ liệu', 'Data analysis'], 0, 7.7, -3.4], [['Nghiên cứu sản phẩm', 'Product research'], 6.6, 4.9, .6], [['AI agents', 'AI agents'], 1.4, 5.2, 2.2]],
     update(t) {
-      ds.userData.draw(t);
+      ds.userData.draw(t); site.userData.draw(t);
       ring.position.set(6.6, TOP + 1.3 + .8 * Math.sin(t * 1.6), .6);
       bot.position.y = TOP + Math.sin(t * 2.4) * .06; bot.rotation.y = Math.sin(t * .5) * .35;
       drones.forEach((d, k) => { const u = ((t / 6) + k / 3) % 1, w = ease(1 - Math.abs(2 * u - 1)); d.g.position.copy(d.cv.getPoint(w)); d.g.rotation.y = t * 2; });
@@ -220,7 +236,7 @@ export function mount(host, opt = {}) {
   const ctl = new OrbitControls(cam, renderer.domElement); ctl.target.set(0, 2.2, 0); ctl.enableZoom = false; ctl.enablePan = false; ctl.enableDamping = true;
   if (touch) { ctl.enabled = false; renderer.domElement.style.touchAction = 'auto'; }
   ctl.minPolarAngle = .8; ctl.maxPolarAngle = 1.35; ctl.minAzimuthAngle = -.6; ctl.maxAzimuthAngle = .6;
-  const size = () => { const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); cam.aspect = w / h; cam.fov = 30 * Math.max(1, 1.34 / cam.aspect); cam.updateProjectionMatrix(); };
+  const size = () => { const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); cam.aspect = w / h; cam.fov = 30 * Math.max(1, (w < 600 ? 1.9 : 1.34) / cam.aspect); cam.updateProjectionMatrix(); };
   size(); addEventListener('resize', size); if (window.ResizeObserver) new ResizeObserver(size).observe(host);
 
   const scenes = {}, lbs = [], v3 = new THREE.Vector3();

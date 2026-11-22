@@ -101,9 +101,9 @@ CARDS = [
 
 PILLARS = [
     {'id': 'logistics', 'name': 'Logistics',
-     'h': ('Từ nhà máy đến kho tại Mỹ', 'From the factory to a US warehouse'),
-     'd': ('Hàng đi theo hai chặng: nhập từ Trung Quốc về Việt Nam, rồi từ Việt Nam sang kho tại Mỹ. TIMUS lo nhà máy, bao bì, giấy tờ và vận chuyển.',
-           'Goods move in two legs: from China into Vietnam, then from Vietnam to a US warehouse. TIMUS handles factories, packaging, paperwork and shipping.'),
+     'h': ('Vận chuyển ba tuyến: Trung Quốc, Việt Nam, Mỹ', 'Three shipping routes: China, Vietnam, United States'),
+     'd': ('TIMUS vận chuyển hàng theo ba tuyến: Trung Quốc về Việt Nam, Trung Quốc sang Mỹ và Việt Nam sang Mỹ. Kèm tìm nhà máy, bao bì, giấy tờ xuất nhập khẩu và kho tại Mỹ.',
+           'TIMUS ships goods on three routes: China to Vietnam, China to the US, and Vietnam to the US. With factory sourcing, packaging, export and import paperwork and a US warehouse.'),
      'items': ['nguon-hang', 'hau-can']},
     {'id': 'thuong-mai-dien-tu', 'name': 'E-commerce',
      'h': ('Vận hành gian hàng tại Việt Nam và Mỹ', 'Running stores in Vietnam and the US'),

@@ -12,10 +12,11 @@ import json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import home_parts
 import home_more
+import home_tail
 
 SITE = 'https://timusco.com'
-CSS_V = '20'
-JS_V = '12'
+CSS_V = '22'
+JS_V = '13'
 ZALO = 'https://zalo.me/0796796492'
 MAIL = 'info@timusco.com'
 
@@ -657,18 +658,21 @@ def page(p):
 
 <a class="fab" href="{ZALO}" target="_blank" rel="noopener" aria-label="Zalo">Zalo</a>
 
-<footer class="foot">
-  <div class="wrap foot-in">
-    <span>© 2026 TIMUS CO., LTD</span>
-    {L(('Hệ sinh thái dịch vụ Logistics, E-Commerce &amp; Technology', 'Logistics, E-Commerce &amp; Technology services'))}
-  </div>
-</footer>
+{FOOT()}
 
 <script src="/assets/site.js?v={JS_V}"></script>
 </body>
 </html>
 ''')
     return ''.join(out)
+
+
+ORDER = ['nguon-hang', 'hau-can', 'ban-hang-tai-viet-nam', 'ban-hang-tai-my', 'nghien-cuu-san-pham', 'dashboard-ket-noi-website', 'tro-ly-ai']
+
+
+def FOOT():
+    by = {p['slug']: p for p in PAGES}
+    return home_tail.footer([(s, by[s]['title']) for s in ORDER])
 
 
 def home_blocks():
@@ -688,6 +692,9 @@ def main():
     s = s[:a] + '<!-- HERO:START -->\n' + home_parts.hero() + '\n' + s[b:]
     a, b = s.index('<!-- PROC:START -->'), s.index('<!-- PROC:END -->')
     s = s[:a] + '<!-- PROC:START -->\n' + home_more.process() + s[b:]
+    for tag, html in (('ABOUT', home_tail.about()), ('FAQC', home_tail.faq() + '\n' + home_tail.contact()), ('FOOT', FOOT() + '\n')):
+        a, b = s.index(f'<!-- {tag}:START -->'), s.index(f'<!-- {tag}:END -->')
+        s = s[:a] + f'<!-- {tag}:START -->\n' + html + s[b:]
     h1, h2 = s.index('<header class="top">'), s.index('</header>') + len('</header>')
     s = s[:h1] + header(home=True) + s[h2:]
     open('index.html', 'w').write(s)

@@ -27,9 +27,8 @@ COST = [
 
 
 def included():
-    tiles = ''.join(f'<li>{ic}<b>{L(t)}</b><span>{L(d)}</span></li>' for ic, t, d in TRACK)
+    items = ''.join(f'<div><dt>{L(t)}</dt><dd>{L(d)}</dd></div>' for _ic_, t, d in TRACK)
     cost = ''.join(f'<li>{L(c)}</li>' for c in COST)
-    cal = _ic('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')
     return f'''
 <section class="sec sec-alt light">
   <div class="wrap">
@@ -37,13 +36,13 @@ def included():
       <div class="inc-l">
         <p class="eyebrow">{L(('Gồm trong mọi gói vận hành', 'Included with every operations plan'))}</p>
         <h2>{L(('Trang theo dõi riêng cho từng doanh nghiệp', 'A private dashboard for each brand'))}</h2>
-        <ul class="inc-g">{tiles}</ul>
-        <p class="inc-n">{cal}<span>{L(('Báo cáo và đối soát gửi hằng tháng trước ngày 05.', 'Monthly report and reconciliation before the 5th.'))}</span></p>
+        <dl class="inc-d">{items}</dl>
+        <p class="inc-n">{L(('Báo cáo và đối soát gửi hằng tháng trước ngày 05.', 'Monthly report and reconciliation before the 5th.'))}</p>
       </div>
-      <div class="inc-c">
+      <div class="inc-p">
         <h3>{L(('Chi phí', 'Pricing'))}</h3>
         <ul>{cost}</ul>
-        <a class="btn btn-gold" href="#lien-he">{L(('Liên hệ báo giá', 'Get a quote'))}</a>
+        <a class="link" href="#lien-he">{L(('Liên hệ báo giá', 'Get a quote'))} →</a>
       </div>
     </div>
   </div>
@@ -96,19 +95,20 @@ AI = [
 ]
 
 
-def _steps(items, cls):
-    out = []
-    for s in items:
-        ms = f'<em class="ms">{L(s["ms"])}</em>' if s.get('ms') else ''
-        cols = ''.join(f'<div class="sd-c"><i>{L(h)}</i><p>{L(c)}</p></div>' for h, c in zip(COLS, s['c']))
-        out.append(f'''          <li>
-            <b>{L(s['t'])}</b>{ms}
-            <div class="sd">{cols}</div>
-          </li>''')
-    return f'''        <ol class="steps {cls}hov tl">
-{chr(10).join(out)}
-        </ol>
-        <div class="step-desc" aria-live="polite"></div>'''
+def _steps(items):
+    head = ''.join(f'<span>{L(h)}</span>' for h in [('Bước', 'Step')] + COLS)
+    rows = []
+    for i, st in enumerate(items, 1):
+        ms = f'<em>{L(st["ms"])}</em>' if st.get('ms') else ''
+        cols = ''.join(f'<p><span class="pt-k">{L(h)}</span>{L(c)}</p>' for h, c in zip(COLS, st['c']))
+        rows.append(f'''          <div class="pt-r">
+            <div class="pt-s"><i>0{i}</i><b>{L(st['t'])}</b>{ms}</div>
+            {cols}
+          </div>''')
+    return f'''        <div class="pt">
+          <div class="pt-h">{head}</div>
+{chr(10).join(rows)}
+        </div>'''
 
 
 def process():
@@ -116,17 +116,17 @@ def process():
   <div class="wrap">
     <p class="eyebrow">{L(('Quy trình', 'Process'))}</p>
     <h2>{L(('Cách TIMUS làm việc', 'How we work'))}</h2>
-    <p class="sub">{L(('Mỗi bước ghi rõ TIMUS làm gì, doanh nghiệp cần chuẩn bị gì và nhận lại gì. Bấm vào từng bước để xem.', 'Each step states what TIMUS does, what you prepare and what you get. Select a step to see the details.'))}</p>
+    <p class="sub">{L(('Mỗi bước ghi rõ TIMUS làm gì, doanh nghiệp cần chuẩn bị gì và nhận lại gì.', 'Each step states what TIMUS does, what you prepare and what you get.'))}</p>
     <div class="tabs" data-tabs id="procTabs">
-      <div class="tab-row" role="tablist">
+      <div class="tab-row pt-tabs" role="tablist">
         <button type="button" class="tab on" data-tab="ops" role="tab" aria-selected="true">{L(('Vận hành sàn', 'Marketplace operations'))}</button>
         <button type="button" class="tab" data-tab="ai" role="tab" aria-selected="false">{L(('Trợ lý AI', 'AI assistants'))}</button>
       </div>
-      <div class="tab-p on" data-panel="ops" role="tabpanel" data-steps>
-{_steps(OPS, '')}
+      <div class="tab-p on" data-panel="ops" role="tabpanel">
+{_steps(OPS)}
       </div>
-      <div class="tab-p" data-panel="ai" role="tabpanel" data-steps>
-{_steps(AI, 'five ')}
+      <div class="tab-p" data-panel="ai" role="tabpanel">
+{_steps(AI)}
       </div>
     </div>
     <div class="proc-cta">
