@@ -11,10 +11,11 @@ Mỗi câu là một cặp (tiếng Việt, tiếng Anh).
 import json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import home_parts
+import home_more
 
 SITE = 'https://timusco.com'
-CSS_V = '19'
-JS_V = '11'
+CSS_V = '20'
+JS_V = '12'
 ZALO = 'https://zalo.me/0796796492'
 MAIL = 'info@timusco.com'
 
@@ -672,23 +673,7 @@ def page(p):
 
 def home_blocks():
     by = {p['slug']: p for p in PAGES}
-    return home_parts.services(by, P) + f'''
-<section class="sec sec-alt light">
-  <div class="wrap">
-    <div class="included reveal" style="margin-top:0">
-      <div>
-        <h3>{L(('Gồm trong mọi gói vận hành', 'Included with every operations plan'))}</h3>
-        {P(('Trang theo dõi riêng cho từng doanh nghiệp: doanh thu, lời lãi, tồn kho, thị trường. Báo cáo và đối soát gửi hằng tháng trước ngày 05.', 'A private dashboard for each brand: revenue, margin, inventory and market data. Monthly report and reconciliation before the 5th.'))}
-      </div>
-      <div>
-        <h3>{L(('Chi phí', 'Pricing'))}</h3>
-        {P(('Báo giá theo phạm vi từng doanh nghiệp, gửi sau buổi trao đổi đầu. Chi phí bên thứ ba (vận chuyển, kho, thuế, phí sàn, quảng cáo, hàng mẫu) doanh nghiệp trả theo thực tế, TIMUS không cộng phí.', 'Quoted per scope after a first call. Third party costs (shipping, warehousing, duties, marketplace fees, ads, samples) are paid at actual cost with no markup from TIMUS.'))}
-        <a class="link" href="#lien-he">{L(('Liên hệ báo giá', 'Get a quote'))} →</a>
-      </div>
-    </div>
-  </div>
-</section>
-'''
+    return home_parts.services(by, P) + home_more.included()
 
 
 def main():
@@ -701,6 +686,8 @@ def main():
     s = s[:a] + '<!-- SVC:START -->\n' + home_blocks() + s[b:]
     a, b = s.index('<!-- HERO:START -->'), s.index('<!-- HERO:END -->')
     s = s[:a] + '<!-- HERO:START -->\n' + home_parts.hero() + '\n' + s[b:]
+    a, b = s.index('<!-- PROC:START -->'), s.index('<!-- PROC:END -->')
+    s = s[:a] + '<!-- PROC:START -->\n' + home_more.process() + s[b:]
     h1, h2 = s.index('<header class="top">'), s.index('</header>') + len('</header>')
     s = s[:h1] + header(home=True) + s[h2:]
     open('index.html', 'w').write(s)

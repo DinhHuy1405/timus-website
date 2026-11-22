@@ -51,7 +51,8 @@
     function act(li) {
       lis.forEach(function (x) { x.classList.toggle('on', x === li); });
       d.innerHTML = '';
-      all('p', li).forEach(function (p) { d.appendChild(p.cloneNode(true)); });
+      var sd = li.querySelector('.sd');
+      if (sd) d.appendChild(sd.cloneNode(true)); else all('p', li).forEach(function (p) { d.appendChild(p.cloneNode(true)); });
     }
     lis.forEach(function (li) {
       li.tabIndex = 0;
@@ -74,7 +75,7 @@
         if (!e.isIntersecting || ran || !w.classList.contains('on') && w.hasAttribute('data-panel')) return;
         ran = true; io2.disconnect();
         w._lis.forEach(function (li, i) {
-          setTimeout(function () { li.classList.add('done'); if (!touched) w._act(li); }, 400 + i * 1500);
+          setTimeout(function () { li.classList.add('done'); if (!touched) w._act(li); }, 400 + i * 2200);
         });
       });
     }, { threshold: .5 });
