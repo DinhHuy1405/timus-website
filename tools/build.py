@@ -15,8 +15,8 @@ import home_more
 import home_tail
 
 SITE = 'https://timusco.com'
-CSS_V = '22'
-JS_V = '14'
+CSS_V = '23'
+JS_V = '15'
 ZALO = 'https://zalo.me/0796796492'
 MAIL = 'info@timusco.com'
 

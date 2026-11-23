@@ -70,7 +70,7 @@ function dashed(parent, pts) {
 /* màn hình hiện một ảnh chụp: vẽ nền chờ, khi ảnh tải xong thì vẽ đúng một lần */
 function shot(src, bg) {
   const im = new Image(); let done = false; im.src = src;
-  return (x, w, h) => { if (done) return false; x.fillStyle = bg; x.fillRect(0, 0, w, h); if (im.complete && im.naturalWidth) { x.drawImage(im, 0, 0, w, h); done = true; } };
+  return (x, w, h) => { if (done) return false; x.fillStyle = bg; x.fillRect(0, 0, w, h); if (im.complete && im.naturalWidth) { const k = Math.max(w / im.naturalWidth, h / im.naturalHeight), sw = w / k, sh = h / k; x.drawImage(im, (im.naturalWidth - sw) / 2, 0, sw, sh, 0, 0, w, h); done = true; } };
 }
 function screen(w, h, draw, cw = 512, ch = 320) {     /* màn hình tự phát sáng, vẽ bằng canvas */
   const c = document.createElement('canvas'); c.width = cw; c.height = ch; const x = c.getContext('2d');
@@ -174,46 +174,40 @@ async function ecommerce() {
 /* ================= TECHNOLOGY ================= */
 async function technology() {
   const root = new THREE.Group();
-  platform(root, 20, 10);
-  /* màn hình dashboard lớn: phân tích dữ liệu */
-  const dash = new THREE.Group(); dash.add(box(6.6, 4, .3, M.ink)); const dr = box(6.75, 4.15, .18, M.gold); dr.castShadow = false; dash.add(dr);
-  const ds = screen(6.2, 3.6, shot(BASE + 'scr/dashboard.webp', '#f4f2ec'), 1240, 720);
-  ds.position.z = .16; dash.add(ds); dash.position.set(0, TOP + 3.6, -3.4); root.add(dash);
-  const pole = box(.4, 1.6, .4, M.dark); pole.position.set(0, TOP + .8, -3.5); root.add(pole);
-  /* bàn làm việc: website */
-  const [desk, chair, kb, lap, bopen] = await Promise.all([obj('desk'), obj('chairDesk'), obj('computerKeyboard'), obj('laptop'), obj('cardboardBoxOpen')]);
-  put(root, prep(desk, 3.4), -6.6, TOP, .4, .35); const dh = desk.userData.h;
-  put(root, prep(lap, 1.3), -6.5, TOP + dh, .3, .35); put(root, prep(chair, 1.9), -5.6, TOP, 2.4, Math.PI + .5);
-  const site = screen(2.6, 1.7, shot(BASE + 'scr/website.webp', '#0e0e0e'), 780, 510);
-  const sf = new THREE.Group(); sf.add(box(2.8, 1.9, .14, M.ink)); site.position.z = .08; sf.add(site); sf.position.set(-7.4, TOP + dh + 1.75, -.9); sf.rotation.y = .35; root.add(sf);
-  const sp = box(.2, .9, .2, M.dark); sp.position.set(-7.4, TOP + dh + .45, -1); root.add(sp);
-  put(root, prep(kb, .9), -6, TOP + dh, 1.1, .35);
-  /* nghiên cứu sản phẩm: sản phẩm trên bệ, vòng quét */
-  const ped = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.35, .7, 28), M.ink); ped.position.set(6.6, TOP + .35, .6); ped.castShadow = true; root.add(ped);
-  put(root, prep(bopen, 1.3), 6.6, TOP + .7, .6, .5);
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(1.35, .05, 10, 48), M.glow); ring.rotation.x = Math.PI / 2; root.add(ring);
-  /* robot: AI agents */
-  const bot = new THREE.Group();
-  const bb = box(1.3, 1.4, 1, M.cream); bb.position.y = 1.1; bot.add(bb); const hd = box(1.1, .85, .9, M.cream); hd.position.y = 2.35; bot.add(hd);
-  for (const ex of [-.26, .26]) { const e = box(.2, .2, .06, M.glow); e.position.set(ex, 2.4, .47); bot.add(e); }
-  const an = box(.07, .45, .07, M.dark); an.position.y = 3; bot.add(an); const ab = new THREE.Mesh(new THREE.SphereGeometry(.13, 16, 12), M.glow); ab.position.y = 3.3; bot.add(ab);
-  for (const ax of [-.82, .82]) { const a = box(.26, .95, .3, M.gold); a.position.set(ax, 1.15, 0); bot.add(a); }
-  const ft = new THREE.Mesh(new THREE.CylinderGeometry(.8, .95, .4, 24), M.dark); ft.position.y = .2; ft.castShadow = true; bot.add(ft);
-  bot.position.set(1.4, TOP, 2.2); root.add(bot);
-  const targets = [new THREE.Vector3(-6.4, TOP + 2.6, .2), new THREE.Vector3(0, TOP + 3.4, -2.8), new THREE.Vector3(6.6, TOP + 2.6, .6)];
-  const home = new THREE.Vector3(1.4, TOP + 3.4, 2.2);
-  const drones = targets.map((tg) => {
-    const g = new THREE.Group(); g.add(box(.42, .22, .42, M.glow)); const p = box(.26, .2, .26, M.gold); p.position.y = -.24; g.add(p); root.add(g);
-    const mid = home.clone().lerp(tg, .5); mid.y += 1.6; const cv = new THREE.QuadraticBezierCurve3(home, mid, tg);
-    dashed(root, [new THREE.Vector3(1.4, TOP + .06, 2.2), new THREE.Vector3(tg.x, TOP + .06, tg.z)]); return { g, cv };
+  platform(root, 20, 8.6, 0, .5);
+  /* ba màn hình cùng cỡ, xếp vòng cung: website, dashboard số liệu, nghiên cứu sản phẩm */
+  const W = 5.5, H = 3.33, SY = TOP + 1.25 + H / 2;
+  const mk = (file, bg, x, z, ry) => {
+    const g = new THREE.Group(); g.add(box(W + .36, H + .36, .26, M.ink)); const r = box(W + .5, H + .5, .14, M.gold); r.castShadow = false; g.add(r);
+    const sc = screen(W, H, shot(BASE + 'scr/' + file, bg), 1240, 750); sc.position.z = .14; g.add(sc);
+    g.position.set(x, SY, z); g.rotation.y = ry; root.add(g);
+    const neck = box(.34, 1.3, .3, M.dark); neck.position.set(x, TOP + .65, z - .14); root.add(neck);
+    const foot = box(2, .12, 1.1, M.ink); foot.position.set(x, TOP + .06, z); foot.rotation.y = ry; root.add(foot);
+    return sc;
+  };
+  const scr = [mk('website.webp', '#0e0e0e', -6.25, -.3, .38), mk('dashboard.webp', '#f4f2ec', 0, -1.5, 0), mk('research.webp', '#f4f2ec', 6.25, -.3, -.38)];
+  /* AI agents: một nút trung tâm, các việc chạy từ đó tới từng màn hình rồi quay về */
+  const hub = new THREE.Group();
+  const hb = new THREE.Mesh(new THREE.CylinderGeometry(.75, .9, .3, 32), M.ink); hb.position.y = .15; hb.castShadow = true; hub.add(hb);
+  const hr = new THREE.Mesh(new THREE.TorusGeometry(.8, .04, 8, 48), M.glow); hr.rotation.x = Math.PI / 2; hr.position.y = .32; hub.add(hr);
+  const gem = new THREE.Mesh(new THREE.OctahedronGeometry(.5), M.gold); gem.position.y = 1.2; gem.castShadow = true; hub.add(gem);
+  const halo = new THREE.Mesh(new THREE.TorusGeometry(.78, .03, 8, 48), M.glow); halo.position.y = 1.2; hub.add(halo);
+  hub.position.set(0, TOP, 3); root.add(hub);
+  const from = new THREE.Vector3(0, TOP + 1.2, 3);
+  const jobs = [[['Xuất ảnh sản phẩm', 'Export product images'], new THREE.Vector3(-5.7, TOP + 1.7, .7)], [['Làm báo cáo', 'Build reports'], new THREE.Vector3(0, TOP + 1.6, -1.2)], [['Chép số liệu', 'Copy data across tools'], new THREE.Vector3(5.7, TOP + 1.7, .7)]].map(([txt, to]) => {
+    const mid = from.clone().lerp(to, .5); mid.y += 1.1; mid.z += .9; const cv = new THREE.QuadraticBezierCurve3(from, mid, to);
+    const line = new THREE.Mesh(new THREE.TubeGeometry(cv, 40, .02, 6), M.gold); line.castShadow = false; root.add(line);
+    const dot = new THREE.Mesh(new THREE.SphereGeometry(.13, 16, 12), M.glow); root.add(dot);
+    return { txt, cv, dot, at: new THREE.Vector3() };
   });
-  const T = 12;
-  return { root, T, cam: [9.6, 20.6, 3.2], labels: [[['Website', 'Websites'], -7.2, 5.7, -.9], [['Phân tích dữ liệu', 'Data analysis'], 0, 7.7, -3.4], [['Nghiên cứu sản phẩm', 'Product research'], 6.6, 4.9, .6], [['AI agents', 'AI agents'], 1.4, 5.2, 2.2]],
+  const T = 12, LY = SY + H / 2 + .6;
+  return { root, T, cam: [10, 23.4, 3.1],
+    labels: [[['Website', 'Websites'], -6.25, LY, -.3], [['Phân tích dữ liệu', 'Data analysis'], 0, LY, -1.5], [['Nghiên cứu sản phẩm', 'Product research'], 6.25, LY, -.3], [['AI agents', 'AI agents'], 0, TOP + .1, 4.2],
+      ...jobs.map((j) => [j.txt, 0, 0, 0, j.at, 'task'])],
     update(t) {
-      ds.userData.draw(t); site.userData.draw(t);
-      ring.position.set(6.6, TOP + 1.3 + .8 * Math.sin(t * 1.6), .6);
-      bot.position.y = TOP + Math.sin(t * 2.4) * .06; bot.rotation.y = Math.sin(t * .5) * .35;
-      drones.forEach((d, k) => { const u = ((t / 6) + k / 3) % 1, w = ease(1 - Math.abs(2 * u - 1)); d.g.position.copy(d.cv.getPoint(w)); d.g.rotation.y = t * 2; });
+      scr.forEach((x) => x.userData.draw(t));
+      gem.rotation.y = t * .9; gem.position.y = 1.2 + Math.sin(t * 1.6) * .06; halo.rotation.set(Math.PI / 2 + Math.sin(t * .8) * .5, t * .7, 0);
+      jobs.forEach((j, k) => { const u = ((t / 6) + k / 3) % 1, w = ease(1 - Math.abs(2 * u - 1)); j.dot.position.copy(j.cv.getPoint(w)); j.at.copy(j.dot.position); j.at.y += .3; });
     } };
 }
 
@@ -244,7 +238,7 @@ export function mount(host, opt = {}) {
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   function labels(list) {
     lbs.forEach((l) => l.el.remove()); lbs.length = 0;
-    (list || []).forEach(([txt, x, y, z]) => { const el = document.createElement('div'); el.className = 'hx-lb'; el.innerHTML = '<span data-l="vi">' + txt[0] + '</span><span data-l="en">' + txt[1] + '</span>'; host.appendChild(el); lbs.push({ el, x, y, z }); });
+    (list || []).forEach(([txt, x, y, z, v, cls]) => { const el = document.createElement('div'); el.className = 'hx-lb' + (cls ? ' ' + cls : ''); el.innerHTML = '<span data-l="vi">' + txt[0] + '</span><span data-l="en">' + txt[1] + '</span>'; host.appendChild(el); lbs.push({ el, x, y, z, v }); });
   }
   async function show(id) {
     want = id;
@@ -262,7 +256,7 @@ export function mount(host, opt = {}) {
     const t = still ? cur.T * .5 : ((performance.now() - t0) / 1000) % cur.T;
     cur.update(t); ctl.update(); renderer.render(scene, cam);
     const w = host.clientWidth, h = host.clientHeight;
-    lbs.forEach((l) => { v3.set(l.x, l.y, l.z).project(cam); const lw = (l.w || (l.w = l.el.offsetWidth)) / 2 + 4; l.el.style.transform = 'translate(-50%,-100%) translate(' + Math.min(w - lw, Math.max(lw, (v3.x * .5 + .5) * w)).toFixed(1) + 'px,' + ((-v3.y * .5 + .5) * h).toFixed(1) + 'px)'; });
+    lbs.forEach((l) => { (l.v ? v3.copy(l.v) : v3.set(l.x, l.y, l.z)).project(cam); const lw = (l.w || (l.w = l.el.offsetWidth)) / 2 + 4; l.el.style.transform = 'translate(-50%,-100%) translate(' + Math.min(w - lw, Math.max(lw, (v3.x * .5 + .5) * w)).toFixed(1) + 'px,' + ((-v3.y * .5 + .5) * h).toFixed(1) + 'px)'; });
   })();
   /* dựng sẵn cả ba cảnh ở nền để lúc chuyển tab không phải chờ */
   if (!opt.only) (async () => { for (const id of Object.keys(BUILD)) if (!scenes[id]) { try { scenes[id] = await BUILD[id](); } catch (e) { scenes[id] = null; } } })();

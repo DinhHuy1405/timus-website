@@ -217,8 +217,8 @@
     if (!window.WebGLRenderingContext) no3d();
     else {
       var go3d = function (m) { sts.forEach(function (el) { var s = m.mount(el, { only: true }); if (s) s.show(el.getAttribute('data-3d')); else el.classList.add('fail'); }); };
-      import('/assets/scene3d.js?v=8').then(go3d).catch(function () {
-        setTimeout(function () { import('/assets/scene3d.js?v=8&r=1').then(go3d).catch(no3d); }, 1500);
+      import('/assets/scene3d.js?v=9').then(go3d).catch(function () {
+        setTimeout(function () { import('/assets/scene3d.js?v=9&r=1').then(go3d).catch(no3d); }, 1500);
       });
     }
   }
