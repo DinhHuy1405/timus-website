@@ -157,14 +157,14 @@ async function ecommerce() {
   for (const z of [.42, 1.98]) { const r = box(9.3, .16, .1, M.gold); r.position.set(.2, TOP + .86, z); r.castShadow = false; root.add(r); }
   for (const x of [-3.8, .2, 4.2]) { const l = box(.3, .5, 1.3, M.dark); l.position.set(x, TOP + .15, 1.2); root.add(l); }
   const [b1, b2, pile, van, c1] = await Promise.all([obj('cardboardBoxClosed'), obj('cardboardBoxOpen'), glb('water/cargo-pile-a'), glb('car/delivery'), glb('city/shipping-container-a')]);
-  prep(b1, .95); const boxes = [0, 1, 2, 3].map((k) => { const o = k ? b1.clone() : b1; o.userData = b1.userData; put(root, o, 0, TOP + .8, 1.2); return o; });
+  prep(b1, 1.15); const bs = b1.scale.x; const boxes = [0, 1, 2, 3].map((k) => { const o = k ? b1.clone() : b1; o.userData = b1.userData; put(root, o, 0, TOP + .86, 1.2); return o; });
   put(root, prep(b2, 1.2), -4.6, TOP, 3.2, .4); put(root, prep(pile, 2.4), -2.2, TOP, -2.6); put(root, prep(c1, 2.6), 2.2, TOP, -2.8, Math.PI / 2);
   put(root, prep(van, 3.4), 7.4, TOP, 1.2, Math.PI / 2);
   const vx = van.position.x, by = boxes[0].position.y, T = 12;
   return { root, T, cam: [9.9, 22.6, 3.3], labels: [[['Gian hàng trên sàn', 'Marketplace store'], -6.9, 8.4, -.6], [['Đóng gói, giao đơn', 'Packing and delivery'], 2.4, 4.2, 1.2]],
     update(t) {
       scr.userData.draw(t);
-      boxes.forEach((o, k) => { const u = ((t / 6) + k / 4) % 1; o.position.x = -4.2 + 9.2 * u; const s = Math.min(1, u * 8, (1 - u) * 8); o.scale.setScalar(b1.scale.x * Math.max(.01, s)); o.position.y = by; o.rotation.y = k * .7; });
+      boxes.forEach((o, k) => { const u = ((t / 6) + k / 4) % 1; o.position.x = -4.2 + 9.2 * u; const s = Math.min(1, u * 8, (1 - u) * 8); o.scale.setScalar(bs * Math.max(.01, s)); o.position.y = by; o.rotation.y = k * .7; });
       van.position.x = vx + (t > 9.6 ? 5.5 * ease((t - 9.6) / 1.6) : 0) - (t < 1 ? 5.5 * (1 - ease(t / 1)) : 0); van.position.y = TOP - van.userData.min + Math.abs(Math.sin(t * 6)) * .012;
       phone.position.y = TOP + 3.25 + Math.sin(t * 1.4) * .06;
       chips.forEach((sp, k) => { const a = Math.PI * 2 * (t / T + k / chips.length); sp.position.set(-6.1 + 2.7 * Math.cos(a), TOP + 3.7 + 1.8 * Math.sin(a + 1.1), .1 + 2.3 * Math.sin(a)); });
